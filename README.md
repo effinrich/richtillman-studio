@@ -63,19 +63,18 @@ Root `package.json` only delegates to Turbo. Run from the repo root:
 
 UI Storybook lives with the primitives **and screens** at `packages/ui/.storybook` (isolated Vite — no TanStack Start / Nitro / Vercel app config). Root scripts only `turbo run`. Chromatic CLI lives in `@richtillman/ui`, never at the repo root.
 
-Chromatic’s CLI appends a temp `--output-dir` to `build-storybook` ([Unknown argument / Angular](https://www.chromatic.com/docs/cli/)). Turbo rejects that the same way `ng` does. The documented fix is to **prebuild** Storybook, then pass `--storybook-build-dir` so Chromatic never invokes Turbo:
+Chromatic’s CLI appends `--output-dir` and `--webpack-stats-json` to `build-storybook`. That is fine when the script is `storybook build` in `packages/ui`. Root `turbo run` rejects those extra flags, so CI must not let Chromatic invoke Turbo.
 
 ```bash
 bun run storybook          # http://localhost:6006  (packages/ui)
-bun run build-storybook    # turbo → packages/ui `storybook build` (no extra flags)
-bun run chromatic          # CI uses GitHub secret CHROMATIC_PROJECT_TOKEN
+bun run chromatic          # turbo → packages/ui `chromatic` → `storybook build`
 ```
 
-`bun run chromatic` is `turbo run chromatic --filter=@richtillman/ui`. That task `dependsOn: ["build-storybook"]`, then runs `chromatic --storybook-build-dir=storybook-static`. Do **not** `bunx chromatic` from the repo root.
+`bun run chromatic` is `turbo run chromatic --filter=@richtillman/ui`, which runs the UI package’s `chromatic` CLI. Chromatic then calls `build-storybook` (`storybook build -c .storybook --stats-json`) and writes `preview-stats.json` for TurboSnap. Do **not** `bunx chromatic` from the repo root.
 
 CI reads `CHROMATIC_PROJECT_TOKEN` from the GitHub secret. Never commit the real token.
 
-Turbo does not cache `chromatic`. PR workflow is a required check (`exitZeroOnChanges: false`). `main` auto-accepts the baseline. Checkouts use `fetch-depth: 0` for TurboSnap. CI builds Storybook with Turbo, then Chromatic uploads `packages/ui/storybook-static`.
+Turbo does not cache `chromatic`. PR workflow is a required check (`exitZeroOnChanges: false`). `main` auto-accepts the baseline. Checkouts use `fetch-depth: 0` for TurboSnap. CI installs at the repo root, then `chromaui/action` uses `workingDir: packages/ui` so Chromatic builds Storybook itself.
 
 ## Storybook MCP
 

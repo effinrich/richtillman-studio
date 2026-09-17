@@ -15,8 +15,8 @@
     "test": "vitest run --project=unit --config vitest.config.ts",
     "test:storybook": "vitest run --project=storybook --config vitest.config.ts",
     "storybook": "storybook dev -p 6006 -c .storybook",
-    "build-storybook": "storybook build -c .storybook",
-    "chromatic": "chromatic --storybook-build-dir=storybook-static"
+    "build-storybook": "storybook build -c .storybook --stats-json",
+    "chromatic": "chromatic"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

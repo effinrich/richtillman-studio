@@ -2,7 +2,6 @@
   "extends": ["//"],
   "tasks": {
     "chromatic": {
-      "dependsOn": ["build-storybook"],
       "cache": false
     }
   }
