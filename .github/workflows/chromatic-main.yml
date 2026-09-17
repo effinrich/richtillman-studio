@@ -32,5 +32,8 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           workingDir: packages/ui
+          onlyChanged: true
           autoAcceptChanges: true
           zip: true
+        env:
+          CHROMATIC_RETRIES: 5
