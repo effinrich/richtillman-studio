@@ -1,8 +1,16 @@
 import type { Preview } from "@storybook/tanstack-react"
-import "../src/styles/app.css"
+import "@richtillman/ui/styles.css"
 
 const preview: Preview = {
   parameters: {
+    tanstack: {
+      router: {
+        // @storybook/tanstack-react interpolates this into createMemoryHistory.
+        // Without a string path, leaf.fullPath is not a string and every story
+        // throws `path.endsWith is not a function`.
+        path: "/",
+      },
+    },
     backgrounds: {
       default: "dark",
       values: [{ name: "dark", value: "#000000" }],
