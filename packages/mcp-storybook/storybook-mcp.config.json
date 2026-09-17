@@ -1,0 +1,13 @@
+{
+  "framework": "shadcn",
+  "storyFilePattern": "**/*.stories.{ts,tsx}",
+  "componentPatterns": ["src/**/*.tsx", "!**/*.stories.tsx", "!**/*.test.tsx"],
+  "excludePatterns": ["**/node_modules/**", "**/dist/**", "**/.storybook/**"],
+  "libraries": [
+    {
+      "name": "ui",
+      "path": "packages/ui",
+      "storyTitlePrefix": "UI"
+    }
+  ]
+}

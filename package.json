@@ -1,0 +1,29 @@
+{
+  "name": "richtillman-studio",
+  "private": true,
+  "packageManager": "bun@1.4.2",
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "format": "turbo run format",
+    "test": "turbo run test",
+    "storybook": "turbo run storybook",
+    "build-storybook": "turbo run build-storybook",
+    "chromatic": "turbo run chromatic",
+    "deploy": "turbo run deploy",
+    "start": "turbo run start",
+    "boundaries": "turbo boundaries",
+    "postinstall": "lefthook install || true"
+  },
+  "devDependencies": {
+    "lefthook": "^2.1.10",
+    "oxfmt": "^0.59.0",
+    "oxlint": "^1.74.0",
+    "turbo": "^2.5.8",
+    "typescript": "^6.0.2"
+  }
+}

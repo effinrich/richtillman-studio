@@ -1,0 +1,40 @@
+{
+  "name": "@richtillman/mcp-storybook",
+  "version": "0.1.0",
+  "private": true,
+  "description": "MCP server that generates Storybook stories for @richtillman/ui",
+  "type": "module",
+  "bin": {
+    "mcp-storybook": "./dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "start": "node dist/cli.js",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "oxlint src",
+    "lint:fix": "oxlint src --fix",
+    "format": "oxfmt src",
+    "test": "vitest run --config vitest.config.ts",
+    "prepublishOnly": "tsc --project tsconfig.build.json"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.26.0",
+    "fast-glob": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^6.0.2",
+    "vitest": "^4.1.5"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "keywords": ["storybook", "mcp", "model-context-protocol"]
+}

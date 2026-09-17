@@ -1,0 +1,37 @@
+# Lefthook — https://lefthook.dev
+# bun-only. Don't reintroduce an npx fallback.
+
+pre-commit:
+  parallel: true
+  jobs:
+    - name: oxlint
+      run: bunx oxlint --no-error-on-unmatched-pattern --fix {staged_files}
+      glob:
+        - "*.ts"
+        - "*.tsx"
+        - "*.js"
+        - "*.jsx"
+      stage_fixed: true
+
+    - name: oxfmt
+      run: bunx oxfmt --no-error-on-unmatched-pattern {staged_files}
+      glob:
+        - "*.ts"
+        - "*.tsx"
+        - "*.js"
+        - "*.jsx"
+        - "*.json"
+        - "*.css"
+        - "*.md"
+      stage_fixed: true
+
+    - name: typecheck
+      run: bun run typecheck
+      glob:
+        - "*.ts"
+        - "*.tsx"
+
+pre-push:
+  jobs:
+    - name: typecheck
+      run: bun run typecheck

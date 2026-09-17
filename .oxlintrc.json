@@ -1,0 +1,46 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "import", "jsx-a11y"],
+  "categories": {
+    "correctness": "error",
+    "perf": "warn",
+    "suspicious": "warn",
+    "pedantic": "off",
+    "style": "off"
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2024": true
+  },
+  "rules": {
+    "no-console": "off",
+    "no-unused-vars": "warn",
+    "typescript/no-unused-vars": "warn",
+    "typescript/no-explicit-any": "error",
+    "react/jsx-key": "error",
+    "react/no-array-index-key": "off",
+    "react/react-in-jsx-scope": "off",
+    "import/no-unassigned-import": "off",
+    "unicorn/filename-case": [
+      "error",
+      {
+        "case": "kebabCase",
+        "ignore": "^(AGENTS\\.md|README\\.md|CHANGELOG\\.md|LICENSE|__root\\.tsx|routeTree\\.gen\\.ts|\\d{14}_[a-f0-9-]+\\.sql)$"
+      }
+    ]
+  },
+  "ignorePatterns": [
+    "node_modules",
+    "dist",
+    "dist-ssr",
+    ".output",
+    ".vinxi",
+    ".tanstack/**",
+    ".nitro",
+    ".vercel/",
+    ".wrangler/",
+    "storybook-static/**",
+    "apps/web/src/routeTree.gen.ts"
+  ]
+}

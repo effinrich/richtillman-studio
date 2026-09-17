@@ -1,0 +1,61 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "transit": {
+      "dependsOn": ["^transit"]
+    },
+    "typecheck": {
+      "dependsOn": ["transit"]
+    },
+    "lint": {
+      "dependsOn": ["transit"]
+    },
+    "lint:fix": {
+      "dependsOn": ["transit"],
+      "cache": false
+    },
+    "format": {
+      "cache": false
+    },
+    "test": {
+      "dependsOn": ["transit"],
+      "outputs": ["coverage/**"]
+    },
+    "build": {
+      "dependsOn": ["^build"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": false
+    },
+    "storybook": {
+      "cache": false,
+      "persistent": true
+    },
+    "build-storybook": {
+      "cache": false,
+      "outputs": ["storybook-static/**"]
+    },
+    "chromatic": {
+      "cache": false,
+      "env": ["CHROMATIC_PROJECT_TOKEN"]
+    },
+    "deploy": {
+      "cache": false,
+      "dependsOn": ["build"]
+    },
+    "start": {
+      "cache": false,
+      "persistent": true
+    }
+  },
+  "boundaries": {
+    "tags": {
+      "library": {
+        "dependencies": {
+          "deny": ["tooling"]
+        }
+      }
+    }
+  }
+}

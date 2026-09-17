@@ -1,0 +1,7 @@
+{
+  "projectId": "richtillman-studio",
+  "onlyChanged": true,
+  "zip": true,
+  "storybookConfigDir": "apps/web/.storybook",
+  "storybookBaseDir": "."
+}

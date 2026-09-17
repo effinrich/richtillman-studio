@@ -1,0 +1,17 @@
+{
+  "extends": ["//"],
+  "tags": ["tooling"],
+  "tasks": {
+    "build": {
+      "outputs": ["dist/**"]
+    },
+    "start": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["build"]
+    },
+    "test": {
+      "outputs": []
+    }
+  }
+}

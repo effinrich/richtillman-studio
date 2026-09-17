@@ -1,0 +1,36 @@
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
+.env
+.env.*
+!.env.example
+.nitro
+.tanstack
+.wrangler
+.output
+.vercel
+.vinxi
+__unconfig*
+todos.json
+storybook-static
+coverage
+*.log
+.turbo
+
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+ms-playwright/
+playwright-browsers/
+
+# Local agent / editor state
+.cursor/
+.omc/
+.qodo/
+ContextPool/
+.defract-worktrees
+.defract/

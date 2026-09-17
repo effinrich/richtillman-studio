@@ -1,0 +1,19 @@
+{
+  "extends": ["//"],
+  "tags": ["app"],
+  "tasks": {
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "build": {
+      "outputs": [".output/**", ".vercel/output/**", "dist/**"],
+      "env": ["VITE_SUPABASE_URL", "VITE_SUPABASE_ANON_KEY"],
+      "inputs": ["$TURBO_DEFAULT$", ".env", ".env.*"]
+    },
+    "deploy": {
+      "cache": false,
+      "dependsOn": ["build"]
+    }
+  }
+}
