@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/tanstack-react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 import { expect, within } from "storybook/test"
 import { Badge } from "./badge"
 
@@ -14,7 +14,7 @@ export default meta
 type Story = StoryObj<typeof Badge>
 
 export const Gold: Story = {
-  args: { children: "Featured Analysis", variant: "gold" },
+  args: { children: "Featured Analysis", variant: "cyan" },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     await expect(canvas.getByText("Featured Analysis")).toBeInTheDocument()

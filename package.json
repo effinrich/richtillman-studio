@@ -15,7 +15,7 @@
     "test": "turbo run test",
     "storybook": "turbo run storybook",
     "build-storybook": "turbo run build-storybook",
-    "chromatic": "turbo run chromatic --filter=@richtillman/ui",
+    "chromatic": "bun run --cwd packages/ui chromatic",
     "deploy": "turbo run deploy",
     "start": "turbo run start",
     "boundaries": "turbo boundaries",

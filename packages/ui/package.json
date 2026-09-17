@@ -15,8 +15,9 @@
     "test": "vitest run --project=unit --config vitest.config.ts",
     "test:storybook": "vitest run --project=storybook --config vitest.config.ts",
     "storybook": "storybook dev -p 6006 -c .storybook",
-    "build-storybook": "storybook build -c .storybook --stats-json",
-    "chromatic": "chromatic"
+    "build-storybook": "storybook build",
+    "chromatic-build": "storybook build",
+    "chromatic": "chromatic --config-file ../../chromatic.config.json"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
@@ -27,10 +28,10 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.2.1",
-    "@storybook/addon-a11y": "^10.5.0",
-    "@storybook/addon-docs": "^10.5.0",
-    "@storybook/addon-vitest": "^10.5.0",
-    "@storybook/tanstack-react": "^10.5.2",
+    "@storybook/addon-a11y": "10.6.0",
+    "@storybook/addon-docs": "10.6.0",
+    "@storybook/addon-vitest": "10.6.0",
+    "@storybook/react-vite": "10.6.0",
     "@tailwindcss/vite": "^4.1.18",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
@@ -40,7 +41,7 @@
     "chromatic": "^18.0.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "storybook": "^10.5.0",
+    "storybook": "10.6.0",
     "tailwindcss": "^4.1.18",
     "typescript": "^6.0.2",
     "vite": "^8.0.0",

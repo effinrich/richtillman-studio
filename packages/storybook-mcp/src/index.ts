@@ -12,7 +12,7 @@ export async function startStorybookMcp(metaUrl: string): Promise<void> {
   const tools = createTools({ repoRoot, config })
   const server = new Server(
     {
-      name: "@richtillman/mcp-storybook",
+      name: "@richtillman/storybook-mcp",
       version: "0.1.0",
     },
     {

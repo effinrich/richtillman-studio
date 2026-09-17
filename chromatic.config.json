@@ -3,5 +3,6 @@
   "onlyChanged": true,
   "zip": true,
   "storybookBaseDir": "packages/ui",
-  "storybookConfigDir": ".storybook"
+  "storybookConfigDir": ".storybook",
+  "buildScriptName": "chromatic-build"
 }

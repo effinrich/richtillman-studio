@@ -1,4 +1,4 @@
-import type { StorybookConfig } from "@storybook/tanstack-react"
+import type { StorybookConfig } from "@storybook/react-vite"
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.stories.@(ts|tsx)"],
@@ -9,7 +9,7 @@ const config: StorybookConfig = {
     "@storybook/addon-vitest",
   ],
   framework: {
-    name: "@storybook/tanstack-react",
+    name: "@storybook/react-vite",
     options: {
       builder: {
         viteConfigPath: ".storybook/vite.config.ts",
