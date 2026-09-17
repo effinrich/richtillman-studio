@@ -1,22 +1,10 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest"
 import { render, screen, fireEvent, cleanup } from "@testing-library/react"
 import React from "react"
-import { isValidEmail, isNonEmpty, validateField, ContactPage } from "./contact-page"
+import { ContactPage } from "./contact-page"
+import { isValidEmail, isNonEmpty, validateField } from "@richtillman/ui"
 
-// Use vi.hoisted to define mocks before they're referenced
-const { mockSubmitContactForm } = vi.hoisted(() => ({
-  mockSubmitContactForm: vi.fn(),
-}))
-
-// Mock dependencies before importing ContactPage
-vi.mock("#/features/layout/portfolio-layout", () => ({
-  PortfolioLayout: ({ children }: { children: React.ReactNode }) =>
-    React.createElement("div", null, children),
-}))
-
-vi.mock("#/features/content/queries", () => ({
-  submitContactForm: mockSubmitContactForm,
-}))
+const mockSubmitContactForm = vi.fn()
 
 describe("contact form validation", () => {
   describe("isValidEmail", () => {
@@ -139,8 +127,12 @@ describe("ContactPage form submission", () => {
     cleanup()
   })
 
+  function renderPage() {
+    render(React.createElement(ContactPage, { submitContactForm: mockSubmitContactForm }))
+  }
+
   it("prevents form submission when name is empty", () => {
-    render(React.createElement(ContactPage))
+    renderPage()
 
     const emailInput = screen.getByPlaceholderText("you@company.com")
     const messageTextarea = screen.getByPlaceholderText("Tell me about your project...")
@@ -154,7 +146,7 @@ describe("ContactPage form submission", () => {
   })
 
   it("prevents form submission when email is invalid", () => {
-    render(React.createElement(ContactPage))
+    renderPage()
 
     const nameInput = screen.getByPlaceholderText("Your name")
     const emailInput = screen.getByPlaceholderText("you@company.com")
@@ -170,7 +162,7 @@ describe("ContactPage form submission", () => {
   })
 
   it("prevents form submission when message is empty", () => {
-    render(React.createElement(ContactPage))
+    renderPage()
 
     const nameInput = screen.getByPlaceholderText("Your name")
     const emailInput = screen.getByPlaceholderText("you@company.com")
@@ -184,7 +176,7 @@ describe("ContactPage form submission", () => {
   })
 
   it("allows form submission when all fields are valid", () => {
-    render(React.createElement(ContactPage))
+    renderPage()
 
     const nameInput = screen.getByPlaceholderText("Your name")
     const emailInput = screen.getByPlaceholderText("you@company.com")

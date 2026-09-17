@@ -1,8 +1,10 @@
 {
   "name": "richtillman-studio",
   "private": true,
-  "packageManager": "bun@1.4.2",
-  "workspaces": ["apps/*", "packages/*"],
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
@@ -13,7 +15,7 @@
     "test": "turbo run test",
     "storybook": "turbo run storybook",
     "build-storybook": "turbo run build-storybook",
-    "chromatic": "turbo run chromatic",
+    "chromatic": "turbo run chromatic --filter=@richtillman/ui",
     "deploy": "turbo run deploy",
     "start": "turbo run start",
     "boundaries": "turbo boundaries",
@@ -25,5 +27,6 @@
     "oxlint": "^1.74.0",
     "turbo": "^2.5.8",
     "typescript": "^6.0.2"
-  }
+  },
+  "packageManager": "bun@1.4.2"
 }

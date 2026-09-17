@@ -11,15 +11,15 @@ Turborepo for the live portfolio at **richtillman.xyz**. Three packages: the Tan
 - **UI:** `@richtillman/ui` — JIT source exports, shadcn new-york API (CVA + Slot), OLED/gold tokens
 - **MCP:** `@richtillman/mcp-storybook` — compiled `bin` → `dist` stdio server (not JIT)
 - **Data:** Supabase with local seed fallback
-- **Visual QA:** Storybook 10 + Chromatic (primitives and page stories)
+- **Visual QA:** Storybook 10 + Chromatic (primitives and screens in `packages/ui`)
 - **Tooling:** oxlint, oxfmt, lefthook
 
 ## Packages
 
 ```
 richtillman-studio/
-  apps/web/                    # @richtillman/web — routes, features, Storybook, Vercel
-  packages/ui/                 # @richtillman/ui — primitives, tokens CSS, primitive stories
+  apps/web/                    # @richtillman/web — thin route wrappers, loaders, Vercel
+  packages/ui/                 # @richtillman/ui — primitives, screens, Storybook
   packages/mcp-storybook/      # @richtillman/mcp-storybook — compiled Storybook MCP
 ```
 
@@ -46,35 +46,36 @@ bun run dev
 
 Root `package.json` only delegates to Turbo. Run from the repo root:
 
-| Task | Command |
-|------|---------|
-| Dev | `bun run dev` (`turbo run dev`) |
-| Typecheck | `bun run typecheck` |
-| Lint | `bun run lint` |
-| Test | `bun run test` |
-| Build | `bun run build` (web + compiled MCP; UI is JIT and has no `build`) |
-| Storybook | `bun run storybook` |
-| Chromatic | `bun run chromatic` |
-| Deploy | `bun run deploy` (`turbo run deploy` → `vercel deploy` in apps/web) |
-| MCP stdio | `bun run start` (`turbo run start` → MCP `dist/cli.js`, depends on MCP `build`) |
-| Boundaries | `bun run boundaries` (`turbo boundaries`) |
+| Task       | Command                                                                         |
+| ---------- | ------------------------------------------------------------------------------- |
+| Dev        | `bun run dev` (`turbo run dev`)                                                 |
+| Typecheck  | `bun run typecheck`                                                             |
+| Lint       | `bun run lint`                                                                  |
+| Test       | `bun run test`                                                                  |
+| Build      | `bun run build` (web + compiled MCP; UI is JIT and has no `build`)              |
+| Storybook  | `bun run storybook`                                                             |
+| Chromatic  | `bun run chromatic` (`turbo run chromatic --filter=@richtillman/ui`)            |
+| Deploy     | `bun run deploy` (`turbo run deploy` → `vercel deploy` in apps/web)             |
+| MCP stdio  | `bun run start` (`turbo run start` → MCP `dist/cli.js`, depends on MCP `build`) |
+| Boundaries | `bun run boundaries` (`turbo boundaries`)                                       |
 
 ## Storybook + Chromatic
 
-One Storybook, isolated Vite (no TanStack Start / Nitro in the Storybook config). Dual glob:
+UI Storybook lives with the primitives **and screens** at `packages/ui/.storybook` (isolated Vite — no TanStack Start / Nitro / Vercel app config). Root scripts only `turbo run`. Chromatic CLI lives in `@richtillman/ui`, never at the repo root.
 
-- `packages/ui/src/**/*.stories.tsx` — primitives
-- `apps/web/src/**/*.stories.tsx` — page and layout stories
+Chromatic’s CLI appends a temp `--output-dir` to `build-storybook` ([Unknown argument / Angular](https://www.chromatic.com/docs/cli/)). Turbo rejects that the same way `ng` does. The documented fix is to **prebuild** Storybook, then pass `--storybook-build-dir` so Chromatic never invokes Turbo:
 
 ```bash
-bun run storybook          # http://localhost:6006
-bun run build-storybook
-CHROMATIC_PROJECT_TOKEN=... bun run chromatic
+bun run storybook          # http://localhost:6006  (packages/ui)
+bun run build-storybook    # turbo → packages/ui `storybook build` (no extra flags)
+bun run chromatic          # CI uses GitHub secret CHROMATIC_PROJECT_TOKEN
 ```
 
-Create a **new Chromatic project** for this repo (do not reuse the v2 token). Add the token as GitHub secret `CHROMATIC_PROJECT_TOKEN`. Never commit the real token.
+`bun run chromatic` is `turbo run chromatic --filter=@richtillman/ui`. That task `dependsOn: ["build-storybook"]`, then runs `chromatic --storybook-build-dir=storybook-static`. Do **not** `bunx chromatic` from the repo root.
 
-Turbo does not cache `chromatic` or `build-storybook`. PR workflow is a required check (`exitZeroOnChanges: false`). `main` auto-accepts the baseline. Checkouts use `fetch-depth: 0` for TurboSnap.
+CI reads `CHROMATIC_PROJECT_TOKEN` from the GitHub secret. Never commit the real token.
+
+Turbo does not cache `chromatic`. PR workflow is a required check (`exitZeroOnChanges: false`). `main` auto-accepts the baseline. Checkouts use `fetch-depth: 0` for TurboSnap. CI builds Storybook with Turbo, then Chromatic uploads `packages/ui/storybook-static`.
 
 ## Storybook MCP
 
@@ -147,7 +148,6 @@ supabase db seed
 
 ## Remaining gaps
 
-- Create the Chromatic project and set `CHROMATIC_PROJECT_TOKEN`
 - `vercel login` / `vercel link` (not done in this scaffold)
 - DNS for richtillman.xyz after the Vercel project exists
 - Figma Code Connect later
