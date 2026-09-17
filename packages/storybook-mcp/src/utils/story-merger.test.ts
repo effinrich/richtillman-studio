@@ -6,7 +6,7 @@ import {
   parseStoryExports,
 } from "./story-merger.js"
 
-const existing = `import type { Meta, StoryObj } from "@storybook/tanstack-react"
+const existing = `import type { Meta, StoryObj } from "@storybook/react-vite"
 import { Button } from "@richtillman/ui"
 
 const meta = {
@@ -34,7 +34,7 @@ describe("parseStoryExports", () => {
 
 describe("extractStoryBlock", () => {
   it("returns one export block", () => {
-    expect(extractStoryBlock(existing, "Gold")).toContain("variant: \"gold\"")
+    expect(extractStoryBlock(existing, "Gold")).toContain('variant: "gold"')
   })
 })
 

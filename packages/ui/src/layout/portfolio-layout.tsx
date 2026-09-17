@@ -18,7 +18,7 @@ export function PortfolioLayout({
 }: PortfolioLayoutProps) {
   return (
     <div className="relative min-h-screen">
-      <CanvasBackground />
+      <CanvasBackground intensity={activeItem === "design-system" ? "recessed" : "ambient"} />
       <div className="relative z-10 flex min-h-screen flex-col">
         <NavigationBar activeItem={activeItem} />
         <div className="flex-1">{children}</div>

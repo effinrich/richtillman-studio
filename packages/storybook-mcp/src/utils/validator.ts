@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from "node:fs"
 import type { ComponentInfo, StorybookMcpConfig, ValidationResult } from "../types.js"
 
-const STORYBOOK_IMPORT = "@storybook/tanstack-react"
+const STORYBOOK_IMPORT = "@storybook/react-vite"
 
 export class StoryValidator {
   constructor(private readonly config: StorybookMcpConfig) {}
@@ -29,14 +29,16 @@ export class StoryValidator {
     if (!source.includes("satisfies Meta") && !source.includes("const meta")) {
       errors.push("Missing CSF meta export")
     }
-    if (!source.includes(`from "${STORYBOOK_IMPORT}"`) && !source.includes(`from '${STORYBOOK_IMPORT}'`)) {
+    if (
+      !source.includes(`from "${STORYBOOK_IMPORT}"`) &&
+      !source.includes(`from '${STORYBOOK_IMPORT}'`)
+    ) {
       errors.push(`Stories must import types from ${STORYBOOK_IMPORT}`)
     }
-    if (
-      !source.includes('from "@richtillman/ui"') &&
-      !source.includes("from '@richtillman/ui'")
-    ) {
-      errors.push("Stories must import the component from @richtillman/ui, not a relative internals path")
+    if (!source.includes('from "@richtillman/ui"') && !source.includes("from '@richtillman/ui'")) {
+      errors.push(
+        "Stories must import the component from @richtillman/ui, not a relative internals path",
+      )
     }
     if (source.includes("../") && source.includes("packages/ui")) {
       errors.push("Do not import UI internals with relative paths")

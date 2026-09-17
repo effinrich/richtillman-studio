@@ -9,14 +9,16 @@
     "dev": "vite dev --port 3000",
     "build": "vite build",
     "preview": "vite preview",
+    "preview:worker": "wrangler dev",
     "lint": "oxlint src",
     "lint:fix": "oxlint src --fix",
     "format": "oxfmt src",
     "test": "vitest run --config vitest.config.ts",
-    "deploy": "vercel deploy",
+    "deploy": "wrangler deploy",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@cloudflare/vite-plugin": "^1.26.0",
     "@richtillman/ui": "workspace:*",
     "@supabase/supabase-js": "^2.110.6",
     "@tailwindcss/vite": "^4.1.18",
@@ -29,7 +31,6 @@
     "@tanstack/router-plugin": "^1.132.0",
     "framer-motion": "^12.42.2",
     "lucide-react": "^0.545.0",
-    "nitro": "latest",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "tailwindcss": "^4.1.18"
@@ -47,8 +48,8 @@
     "@vitest/coverage-v8": "^4.1.5",
     "jsdom": "^28.1.0",
     "typescript": "^6.0.2",
-    "vercel": "^48.0.0",
     "vite": "^8.0.0",
-    "vitest": "^4.1.5"
+    "vitest": "^4.1.5",
+    "wrangler": "^4.111.0"
   }
 }

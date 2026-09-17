@@ -1,6 +1,6 @@
 import type { ComponentInfo, StoryGenerationOptions } from "./types.js"
 
-const STORYBOOK_IMPORT = "@storybook/tanstack-react"
+const STORYBOOK_IMPORT = "@storybook/react-vite"
 
 function storyTitle(component: ComponentInfo): string {
   return `UI/${component.name}`
@@ -26,12 +26,11 @@ function defaultArgs(component: ComponentInfo): string {
 function argTypesBlock(component: ComponentInfo): string {
   if (component.props.length === 0) return ""
   const lines = component.props.map((prop) => {
-    const control =
-      prop.type.includes("boolean")
-        ? "boolean"
-        : prop.type.includes("number")
-          ? "number"
-          : "text"
+    const control = prop.type.includes("boolean")
+      ? "boolean"
+      : prop.type.includes("number")
+        ? "number"
+        : "text"
     return `    ${prop.name}: { control: "${control}" },`
   })
   return `\n  argTypes: {\n${lines.join("\n")}\n  },`
@@ -188,12 +187,8 @@ export const Filled: Story = {
 export function getTemplateSource(name: string): string {
   const samples: Record<string, string> = {
     basic: escapeForTemplate(generateBasicTemplate(SAMPLE, SAMPLE_OPTIONS)),
-    "with-controls": escapeForTemplate(
-      generateWithControlsTemplate(SAMPLE, SAMPLE_OPTIONS),
-    ),
-    "with-variants": escapeForTemplate(
-      generateWithVariantsTemplate(SAMPLE, SAMPLE_OPTIONS),
-    ),
+    "with-controls": escapeForTemplate(generateWithControlsTemplate(SAMPLE, SAMPLE_OPTIONS)),
+    "with-variants": escapeForTemplate(generateWithVariantsTemplate(SAMPLE, SAMPLE_OPTIONS)),
     interactive: escapeForTemplate(
       generateInteractiveTemplate(SAMPLE, {
         ...SAMPLE_OPTIONS,

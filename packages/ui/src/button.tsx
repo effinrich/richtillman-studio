@@ -5,7 +5,7 @@ import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from "react"
 import { cn } from "./cn"
 
 const GOLD =
-  "min-h-11 rounded-full bg-gold px-6 py-3 font-semibold text-black shadow-[0_0_20px_rgba(255,215,0,0.3)] hover:bg-[#ffe54c] hover:shadow-[0_0_30px_rgba(255,215,0,0.5)] motion-safe:hover:scale-105"
+  "min-h-11 rounded bg-gold px-6 py-3 font-semibold text-black shadow-[0_0_20px_rgba(255,215,0,0.3)] hover:bg-[#ffe54c] hover:shadow-[0_0_30px_rgba(255,215,0,0.5)] motion-safe:hover:scale-105"
 
 export const buttonVariants = cva(
   "inline-flex cursor-pointer items-center justify-center gap-2 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
@@ -15,10 +15,11 @@ export const buttonVariants = cva(
         primary: GOLD,
         gold: GOLD,
         glass:
-          "glass-panel min-h-11 rounded-full px-6 py-3 font-medium text-white hover:bg-white/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] motion-safe:hover:scale-105",
+          "glass-panel min-h-11 rounded px-6 py-3 font-medium text-white hover:bg-white/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] motion-safe:hover:scale-105",
         outline:
-          "min-h-11 rounded-full border border-gold/30 bg-transparent px-6 py-3 font-medium text-gold hover:bg-gold/10",
-        ghost: "min-h-11 rounded-lg bg-transparent px-1 py-2 font-medium text-gold hover:text-[#ffe54c]",
+          "min-h-11 rounded border border-gold/30 bg-transparent px-6 py-3 font-medium text-gold hover:bg-gold/10",
+        ghost:
+          "min-h-11 rounded-lg bg-transparent px-1 py-2 font-medium text-gold hover:text-[#ffe54c]",
         muted:
           "min-h-11 rounded-lg bg-transparent px-4 py-3 text-sm font-medium text-white/50 hover:text-white",
       },

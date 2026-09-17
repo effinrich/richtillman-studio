@@ -52,10 +52,10 @@ export function NavigationBar({ activeItem = "home", isAvailable = true }: Navig
         into a full-viewport frost layer once content scrolls behind the nav.
       */}
       <nav
-        className="fixed top-0 left-0 z-40 w-full border-b border-white/10 bg-[rgba(12,12,12,0.94)] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]"
+        className="fixed top-0 left-0 z-40 w-full bg-black shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05),0_1px_0_0_rgba(255,255,255,0.1)]"
         aria-label="Primary"
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4">
+        <div className="mx-auto flex h-[var(--site-header-height)] max-w-7xl items-center justify-between gap-3 px-4 sm:px-6">
           <a
             href="/"
             className="flex min-h-11 min-w-0 items-center gap-3 sm:gap-4"

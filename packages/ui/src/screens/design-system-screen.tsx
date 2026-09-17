@@ -7,6 +7,7 @@ import { ProjectCard } from "../composites/project-card"
 import { TokenSwatch } from "../composites/token-swatch"
 import { Field, Input, Select, Textarea } from "../field"
 import { GlassPanel } from "../glass-panel"
+import { InPageTabs } from "../in-page-tabs"
 import { PortfolioLayout } from "../layout/portfolio-layout"
 import type { ProjectCardModel } from "../models"
 import { SectionHeader } from "../section-header"
@@ -35,7 +36,7 @@ function DocsSection({
   children: ReactNode
 }) {
   return (
-    <section id={id} className="scroll-mt-52">
+    <section id={id} className="scroll-mt-[var(--ds-scroll-margin)]">
       <div className="mb-10">
         <div className="mb-4 flex items-center gap-3">
           <div className="h-px w-10 bg-gold/40" />
@@ -79,20 +80,7 @@ export function DesignSystemScreen({ specimenProject, actions }: DesignSystemScr
           description="Tokens and components imported from the same modules as Work, Contact, and Home. Not a parallel library."
         />
 
-        <nav
-          aria-label="On this page"
-          className="sticky top-20 z-30 -mx-6 mb-20 border-b border-white/5 bg-black/95 px-6 py-3"
-        >
-          <div className="overflow-x-auto">
-            <GlassPanel className="inline-flex w-max gap-2 rounded-full p-2">
-              {JUMP_LINKS.map((link) => (
-                <a key={link.href} href={link.href}>
-                  <Chip>{link.label}</Chip>
-                </a>
-              ))}
-            </GlassPanel>
-          </div>
-        </nav>
+        <InPageTabs items={JUMP_LINKS} />
 
         <div className="space-y-28">
           <DocsSection

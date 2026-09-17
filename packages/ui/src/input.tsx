@@ -12,7 +12,7 @@ export function Input({ id, error, className, ...props }: InputProps) {
       aria-invalid={error ? true : undefined}
       aria-describedby={error && id ? `${id}-error` : undefined}
       className={cn(
-        "glass-input min-h-11 w-full rounded-xl px-4 py-3 text-white placeholder:text-white/30",
+        "glass-input min-h-11 w-full rounded px-4 py-3 text-white placeholder:text-white/30",
         className,
       )}
       {...props}

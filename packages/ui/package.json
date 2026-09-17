@@ -12,11 +12,9 @@
     "lint": "oxlint src .storybook",
     "lint:fix": "oxlint src .storybook --fix",
     "format": "oxfmt src .storybook",
-    "test": "vitest run --project=unit --config vitest.config.ts",
-    "test:storybook": "vitest run --project=storybook --config vitest.config.ts",
     "storybook": "storybook dev -p 6006 -c .storybook",
-    "build-storybook": "storybook build",
-    "chromatic-build": "storybook build",
+    "build-storybook": "storybook build --stats-json",
+    "chromatic-build": "storybook build --stats-json",
     "chromatic": "chromatic --config-file ../../chromatic.config.json"
   },
   "dependencies": {
@@ -30,22 +28,18 @@
     "@chromatic-com/storybook": "^5.2.1",
     "@storybook/addon-a11y": "10.6.0",
     "@storybook/addon-docs": "10.6.0",
-    "@storybook/addon-vitest": "10.6.0",
     "@storybook/react-vite": "10.6.0",
     "@tailwindcss/vite": "^4.1.18",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^6.0.1",
-    "@vitest/browser": "^4.1.5",
-    "@vitest/browser-playwright": "^4.1.5",
     "chromatic": "^18.0.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "storybook": "10.6.0",
     "tailwindcss": "^4.1.18",
     "typescript": "^6.0.2",
-    "vite": "^8.0.0",
-    "vitest": "^4.1.5"
+    "vite": "^8.0.0"
   },
   "peerDependencies": {
     "react": "^19.2.0",

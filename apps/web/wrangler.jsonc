@@ -1,0 +1,12 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "richtillman-studio",
+  "main": "@tanstack/react-start/server-entry",
+  "compatibility_date": "2026-09-17",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Workers Logs — same as portfolio-1. Secrets via `wrangler secret put`, never here.
+  "observability": {
+    "enabled": true,
+  },
+}

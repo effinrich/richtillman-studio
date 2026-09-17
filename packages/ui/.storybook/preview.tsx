@@ -8,6 +8,9 @@ const preview: Preview = {
       values: [{ name: "dark", value: "#000000" }],
     },
     layout: "centered",
+    a11y: {
+      test: "error",
+    },
     chromatic: {
       pauseAnimationAtEnd: true,
       diffThreshold: 0.2,

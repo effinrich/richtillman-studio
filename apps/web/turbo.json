@@ -7,7 +7,7 @@
       "persistent": true
     },
     "build": {
-      "outputs": [".output/**", ".vercel/output/**", "dist/**"],
+      "outputs": [".output/**", "dist/**"],
       "env": ["VITE_SUPABASE_URL", "VITE_SUPABASE_ANON_KEY"],
       "inputs": ["$TURBO_DEFAULT$", ".env", ".env.*"]
     },

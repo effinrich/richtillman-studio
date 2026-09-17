@@ -8,7 +8,7 @@ const dirname = path.dirname(fileURLToPath(import.meta.url))
 const uiSrc = path.resolve(dirname, "../src")
 
 // Isolated Storybook Vite config — do not merge apps/web vite.config.ts
-// (TanStack Start / Nitro / Vercel). Those plugins expect a single app entry.
+// (TanStack Start / Cloudflare Worker). Those plugins expect a single app entry.
 export default defineConfig({
   resolve: {
     tsconfigPaths: true,
