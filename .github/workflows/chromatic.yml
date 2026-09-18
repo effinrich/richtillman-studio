@@ -17,7 +17,11 @@ jobs:
 
     steps:
       - name: Check out source
-        # uses: actions/checkout@v4
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
           fetch-depth: 0
