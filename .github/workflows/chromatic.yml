@@ -24,7 +24,7 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
-          fetch-depth: 0
+          no-cache: true
 
       - name: Checkout code
         uses: actions/checkout@v7
