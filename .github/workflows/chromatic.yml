@@ -51,5 +51,4 @@ jobs:
           storybookBaseDir: packages/ui
           storybookConfigDir: .storybook
           storybookStaticDir: storybook-static
-          storybookPublicDir: public
-          storybookBuildDir: dist
+          storybookBuildDir: storybook-static
