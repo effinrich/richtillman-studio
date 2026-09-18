@@ -31,7 +31,7 @@ export function SiteMapScreen({ sections }: SiteMapScreenProps) {
           {sections.map((section) => (
             <section key={section.id}>
               <h2
-                className={`relative mb-8 inline-block pb-2 font-mono text-xs font-bold tracking-[0.2em] uppercase text-white/40 after:absolute after:bottom-0 after:left-0 after:h-px after:w-16 ${underlineClass[section.accent]}`}
+                className={`relative mb-8 inline-block pb-2 font-mono text-xs font-bold tracking-[0.2em] uppercase text-white/50 after:absolute after:bottom-0 after:left-0 after:h-px after:w-16 ${underlineClass[section.accent]}`}
               >
                 {section.label}
               </h2>

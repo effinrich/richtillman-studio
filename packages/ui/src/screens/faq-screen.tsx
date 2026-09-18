@@ -42,9 +42,10 @@ export function FaqScreen({ items }: FaqScreenProps) {
                   <span className="pr-4 font-bold text-white">{item.question}</span>
                   <ChevronDown
                     className={cn(
-                      "h-5 w-5 shrink-0 text-white/40 transition-transform",
+                      "h-5 w-5 shrink-0 text-white/50 transition-transform",
                       isOpen && "rotate-180",
                     )}
+                    aria-hidden
                   />
                 </button>
                 {isOpen ? (

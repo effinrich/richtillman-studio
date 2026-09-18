@@ -33,9 +33,9 @@ export function ForgekitMcpScreen({ backHref = "/work" }: ForgekitMcpScreenProps
       <main className="relative z-10 mx-auto max-w-4xl px-6 pt-32 pb-24">
         <a
           href={backHref}
-          className="mb-8 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-white/40 transition-colors hover:text-gold"
+          className="mb-8 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-white/50 transition-colors hover:text-gold"
         >
-          <ArrowLeft className="h-4 w-4" />
+          <ArrowLeft className="h-4 w-4" aria-hidden />
           Back to Work
         </a>
 
@@ -59,7 +59,7 @@ export function ForgekitMcpScreen({ backHref = "/work" }: ForgekitMcpScreenProps
           ].map((metric) => (
             <GlassPanel key={metric.label} className="rounded-xl p-4 text-center">
               <p className="text-2xl font-bold text-gold">{metric.value}</p>
-              <p className="font-mono text-[10px] text-white/40">{metric.label}</p>
+              <p className="font-mono text-[10px] text-white/50">{metric.label}</p>
             </GlassPanel>
           ))}
         </div>
@@ -80,7 +80,7 @@ export function ForgekitMcpScreen({ backHref = "/work" }: ForgekitMcpScreenProps
         <div className="mb-12 grid gap-6 md:grid-cols-2">
           {PACKAGES.map((pkg) => (
             <GlassPanel key={pkg.name} className="rounded-2xl p-6">
-              <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-white/30">
+              <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-white/50">
                 npm package
               </p>
               <h2 className="mb-3 font-mono text-sm font-medium text-white md:text-base">
@@ -102,15 +102,15 @@ export function ForgekitMcpScreen({ backHref = "/work" }: ForgekitMcpScreenProps
                 className="inline-flex items-center gap-2 font-mono text-xs text-cyan transition-colors hover:text-white"
               >
                 npmjs.com
-                <ExternalLink className="h-3.5 w-3.5" />
+                <ExternalLink className="h-3.5 w-3.5" aria-hidden />
               </a>
             </GlassPanel>
           ))}
         </div>
 
         <GlassPanel className="rounded-2xl border-l-4 border-l-cyan p-8">
-          <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-white/30">Also</p>
-          <h3 className="mb-3 text-xl font-bold">ForgeKit Core CLI</h3>
+          <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-white/50">Also</p>
+          <h2 className="mb-3 text-xl font-bold">ForgeKit Core CLI</h2>
           <p className="mb-4 text-sm leading-relaxed text-white/60">
             Scaffolds production-ready Nx monorepos with React, Storybook, Vitest, Playwright, and
             CI/CD — Figma token sync baked in from day one. Targets Chakra UI, shadcn/ui, Tamagui,
@@ -123,7 +123,7 @@ export function ForgekitMcpScreen({ backHref = "/work" }: ForgekitMcpScreenProps
             className="inline-flex items-center gap-2 text-cyan transition-colors hover:text-white"
           >
             forgekit.cloud
-            <ExternalLink className="h-4 w-4" />
+            <ExternalLink className="h-4 w-4" aria-hidden />
           </a>
         </GlassPanel>
       </main>

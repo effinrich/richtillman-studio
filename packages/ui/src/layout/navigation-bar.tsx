@@ -67,7 +67,7 @@ export function NavigationBar({ activeItem = "home", isAvailable = true }: Navig
             </div>
             <span className="hidden min-w-0 truncate font-medium tracking-tight text-white/90 sm:inline-block">
               Rich Tillman
-              <span className="hidden font-normal text-white/40 lg:inline">
+              <span className="hidden font-normal text-white/50 lg:inline">
                 {" "}
                 / Principal Frontend Engineer
               </span>

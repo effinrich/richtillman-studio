@@ -7,8 +7,8 @@ export function ContactInfo() {
     <div className="contact-info-card space-y-6 lg:col-span-2">
       <GlassPanel className="rounded-2xl p-6">
         <div className="mb-4 flex items-center gap-3">
-          <Mail className="h-5 w-5 text-gold" />
-          <h3 className="font-bold text-white">Email</h3>
+          <Mail className="h-5 w-5 text-gold" aria-hidden />
+          <h2 className="font-bold text-white">Email</h2>
         </div>
         <a
           href="mailto:hello@richtillman.dev"
@@ -20,8 +20,8 @@ export function ContactInfo() {
 
       <GlassPanel className="rounded-2xl p-6">
         <div className="mb-4 flex items-center gap-3">
-          <MapPin className="h-5 w-5 text-cyan" />
-          <h3 className="font-bold text-white">Location</h3>
+          <MapPin className="h-5 w-5 text-cyan" aria-hidden />
+          <h2 className="font-bold text-white">Location</h2>
         </div>
         <p className="text-white/60">Remote · US Eastern Time</p>
       </GlassPanel>
@@ -32,7 +32,7 @@ export function ContactInfo() {
             Available for new projects
           </Chip>
         </div>
-        <p className="text-sm text-white/40">
+        <p className="text-sm text-white/50">
           Typical engagement: 3-6 month contracts for design systems, monorepo architecture, or MCP
           tooling.
         </p>

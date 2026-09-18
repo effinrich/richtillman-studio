@@ -5,18 +5,25 @@ import { DEFAULT_CONFIG, type StorybookMcpConfig } from "./types.js"
 
 const CONFIG_FILE = "storybook-mcp.config.json"
 
+function hasWorkspaces(pkg: unknown): boolean {
+  if (!pkg || typeof pkg !== "object" || Array.isArray(pkg)) return false
+  if (!("workspaces" in pkg)) return false
+  const workspaces = pkg.workspaces
+  return Array.isArray(workspaces) || (typeof workspaces === "object" && workspaces !== null)
+}
+
 export function findRepoRoot(startDir: string): string {
   let dir = startDir
+  let lastPackage = startDir
   while (true) {
-    const turbo = path.join(dir, "turbo.json")
-    const pkg = path.join(dir, "package.json")
-    if (existsSync(turbo) && existsSync(pkg)) {
-      return dir
+    const pkgPath = path.join(dir, "package.json")
+    if (existsSync(pkgPath)) {
+      lastPackage = dir
+      const parsed: unknown = JSON.parse(readFileSync(pkgPath, "utf8"))
+      if (hasWorkspaces(parsed)) return dir
     }
     const parent = path.dirname(dir)
-    if (parent === dir) {
-      return startDir
-    }
+    if (parent === dir) return lastPackage
     dir = parent
   }
 }

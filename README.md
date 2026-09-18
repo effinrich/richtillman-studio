@@ -27,7 +27,7 @@ Import UI by package name only:
 import { Button, GlassPanel } from "@richtillman/ui"
 ```
 
-`ButtonLink` stays in the app (`createLink` around `ButtonAnchor`). `ProjectCard` stays in the app (router + seed types). `packages/ui` must not depend on the MCP. The MCP does not import UI internals; it reads `packages/ui` from env/config and generated stories import `@richtillman/ui`.
+`ButtonLink` stays in the app (`createLink` around `ButtonAnchor`). `ProjectCard` stays in the app (router + seed types). `packages/ui` must not depend on the MCP. The MCP does not import UI internals; it reads `packages/ui` from env/config and generated stories import the colocated module.
 
 ## Getting started
 
@@ -38,6 +38,9 @@ cp apps/web/.env.example apps/web/.env.local
 
 bun run dev
 # turbo run dev → apps/web on http://localhost:3000
+
+bun run mcp:setup
+# writes .cursor/mcp.json — enable “storybook” in Cursor Settings → MCP
 ```
 
 ## Scripts
@@ -54,6 +57,7 @@ Root `package.json` delegates to Turbo except Chromatic, which cds into `package
 | Storybook  | `bun run storybook`                                                             |
 | Chromatic  | `bun run chromatic` (`bun run --cwd packages/ui chromatic`)                     |
 | Deploy     | `bun run deploy` (`turbo run deploy` → `wrangler deploy` in apps/web)           |
+| MCP setup  | `bun run mcp:setup` (writes `.cursor/mcp.json`; Cursor launches via Bun, no build) |
 | MCP stdio  | `bun run start` (`turbo run start` → MCP `dist/cli.js`, depends on MCP `build`) |
 | Boundaries | `bun run boundaries` (`turbo boundaries`)                                       |
 
@@ -76,38 +80,20 @@ One workflow (`.github/workflows/chromatic.yml`) covers both: PRs are a required
 
 ## Storybook MCP
 
-`@richtillman/storybook-mcp` (`packages/storybook-mcp`) is the Storybook MCP for this repo — a compiled stdio server. Official `@storybook/addon-mcp` is not installed. Storybook on `:6006` has no `/mcp` endpoint.
+`@richtillman/storybook-mcp` (`packages/storybook-mcp`) is the Storybook MCP for this repo — a stdio server. Official `@storybook/addon-mcp` is not installed. Storybook on `:6006` has no `/mcp` endpoint.
 
-The CLI has no `--help`; it speaks MCP over stdio only:
+Cursor launches it. Do **not** run the CLI in a terminal to attach it to chat:
 
 ```bash
-node packages/storybook-mcp/dist/cli.js
+bun install
+bun run mcp:setup
 ```
+
+Enable **storybook** in Cursor Settings → MCP. Local use is Bun on `packages/storybook-mcp/src/cli.ts` (no Turbo build). The command writes gitignored `.cursor/mcp.json` from `packages/storybook-mcp/mcp.json` and will not remove other MCP servers you already have.
 
 Nine tools: `list_components`, `analyze_component`, `generate_story`, `update_story`, `validate_story`, `get_story_template`, `list_templates`, `get_component_coverage`, `suggest_stories`. `generate_story` and `update_story` write files.
 
-Build first, then point Cursor at the bin. Do not auto-install an MCP server (Runlayer). Env belongs in `packages/storybook-mcp/.env.example`, not a root `.env`. Local Cursor config is `.cursor/mcp.json` (gitignored) and already uses this CLI.
-
-```bash
-bunx turbo run build --filter=@richtillman/storybook-mcp
-```
-
-```json
-{
-  "mcpServers": {
-    "storybook": {
-      "command": "node",
-      "args": ["packages/storybook-mcp/dist/cli.js"],
-      "env": {
-        "STORYBOOK_MCP_ROOT": "${workspaceFolder}",
-        "STORYBOOK_MCP_LIBRARY": "packages/ui"
-      }
-    }
-  }
-}
-```
-
-Details: `packages/storybook-mcp/README.md`.
+`dist/` is the publish/CI artifact (`bunx turbo run build --filter=@richtillman/storybook-mcp`). The compiled CLI has no `--help`. Details: `packages/storybook-mcp/README.md`.
 
 ## Deploy (Cloudflare Workers)
 

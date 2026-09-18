@@ -15,7 +15,7 @@ type Story = StoryObj<typeof GlassPanel>
 
 const content = (
   <div className="p-8 text-white">
-    <h3 className="mb-2 text-xl font-bold">Glass Panel</h3>
+    <p className="mb-2 text-xl font-bold">Glass Panel</p>
     <p className="text-white/50">Neon portfolio aesthetic component</p>
   </div>
 )

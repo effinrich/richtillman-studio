@@ -53,7 +53,7 @@ function DocsSection({
 function Specimen({ title, children }: { title: string; children: ReactNode }) {
   return (
     <GlassPanel className="rounded-2xl p-6 md:p-8">
-      <h3 className="mb-6 font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
+      <h3 className="mb-6 font-mono text-[10px] uppercase tracking-[0.2em] text-white/50">
         {title}
       </h3>
       {children}
@@ -89,7 +89,7 @@ export function DesignSystemScreen({ specimenProject, actions }: DesignSystemScr
             title="Color"
             description="Named in @theme. Gold is the only primary action color. Cyan and magenta are accents — never the only way to tell two things apart."
           >
-            <h3 className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
+            <h3 className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-white/50">
               Brand
             </h3>
             <div className="mb-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -97,7 +97,7 @@ export function DesignSystemScreen({ specimenProject, actions }: DesignSystemScr
                 <TokenSwatch key={token.name} token={token} />
               ))}
             </div>
-            <h3 className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
+            <h3 className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-white/50">
               Surfaces
             </h3>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -105,7 +105,7 @@ export function DesignSystemScreen({ specimenProject, actions }: DesignSystemScr
                 <TokenSwatch key={token.name} token={token} />
               ))}
             </div>
-            <p className="mt-6 font-mono text-xs text-white/40">
+            <p className="mt-6 font-mono text-xs text-white/50">
               Click a swatch to copy its value.
             </p>
           </DocsSection>
@@ -119,7 +119,7 @@ export function DesignSystemScreen({ specimenProject, actions }: DesignSystemScr
             <GlassPanel className="divide-y divide-white/10 overflow-hidden rounded-2xl">
               {TYPE_SPECIMENS.map((specimen) => (
                 <div key={specimen.role} className="px-6 py-8 md:px-8">
-                  <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
+                  <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-white/50">
                     {specimen.role}
                   </p>
                   <p className={specimen.className}>
@@ -131,7 +131,7 @@ export function DesignSystemScreen({ specimenProject, actions }: DesignSystemScr
                       specimen.sample
                     )}
                   </p>
-                  <p className="mt-4 font-mono text-[11px] text-white/30">{specimen.spec}</p>
+                  <p className="mt-4 font-mono text-[11px] text-white/50">{specimen.spec}</p>
                 </div>
               ))}
             </GlassPanel>
@@ -145,7 +145,7 @@ export function DesignSystemScreen({ specimenProject, actions }: DesignSystemScr
           >
             <div className="grid gap-4 md:grid-cols-3">
               <GlassPanel className="rounded-2xl p-8">
-                <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
+                <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-white/50">
                   glass-panel
                 </p>
                 <p className="text-sm text-white/60">

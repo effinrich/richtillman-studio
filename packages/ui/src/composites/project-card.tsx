@@ -43,7 +43,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             loading="lazy"
           />
         ) : (
-          <Icon className="project-icon h-12 w-12 text-white/30 transition-all duration-500 group-hover:scale-110 group-hover:text-gold" />
+          <Icon className="project-icon h-12 w-12 text-white/30 transition-all duration-500 group-hover:scale-110 group-hover:text-gold" aria-hidden />
         )}
         <div className="project-img-overlay pointer-events-none absolute inset-0 bg-gold/10 opacity-0 transition-opacity duration-500" />
         <span className="absolute top-4 right-4">
@@ -56,7 +56,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             {project.metric}
           </span>
         ) : null}
-        <h3 className="mb-2 text-xl font-bold tracking-tight text-white">{project.title}</h3>
+        <h2 className="mb-2 text-xl font-bold tracking-tight text-white">{project.title}</h2>
         <p className="mb-4 text-sm leading-relaxed text-white/50">{project.description}</p>
         <div className="flex flex-wrap gap-2">
           {project.tags.map((tag) => (

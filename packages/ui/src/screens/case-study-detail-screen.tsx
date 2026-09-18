@@ -23,9 +23,9 @@ export function CaseStudyDetailScreen({
       <main className="relative z-10 mx-auto max-w-4xl px-6 pt-32 pb-24">
         <a
           href={backHref}
-          className="mb-8 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-white/40 transition-colors hover:text-gold"
+          className="mb-8 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-white/50 transition-colors hover:text-gold"
         >
-          <ArrowLeft className="h-4 w-4" />
+          <ArrowLeft className="h-4 w-4" aria-hidden />
           Back to Case Studies
         </a>
 
@@ -36,7 +36,7 @@ export function CaseStudyDetailScreen({
             ))}
           </div>
           <h1 className="mb-4 text-4xl font-bold tracking-tight md:text-6xl">{caseStudy.title}</h1>
-          <p className="mb-6 text-xl text-white/40">{caseStudy.subtitle}</p>
+          <p className="mb-6 text-xl text-white/50">{caseStudy.subtitle}</p>
           {caseStudy.liveHref ? (
             <ButtonAnchor
               href={caseStudy.liveHref}
@@ -65,7 +65,7 @@ export function CaseStudyDetailScreen({
           {caseStudy.metrics.map((metric) => (
             <GlassPanel key={metric.label} className="rounded-xl p-4 text-center">
               <p className="text-2xl font-bold text-gold">{metric.value}</p>
-              <p className="font-mono text-[10px] text-white/40">{metric.label}</p>
+              <p className="font-mono text-[10px] text-white/50">{metric.label}</p>
             </GlassPanel>
           ))}
         </div>
@@ -83,7 +83,7 @@ export function CaseStudyDetailScreen({
 
         {related.length > 0 ? (
           <div className="mt-20 border-t border-white/10 pt-10">
-            <p className="mb-6 font-mono text-xs uppercase tracking-widest text-white/40">
+            <p className="mb-6 font-mono text-xs uppercase tracking-widest text-white/50">
               More case studies
             </p>
             <div className="grid gap-4 sm:grid-cols-2">
@@ -92,9 +92,9 @@ export function CaseStudyDetailScreen({
                   <GlassPanel className="flex h-full items-center justify-between gap-4 rounded-xl p-5 transition-all hover:border-gold/30">
                     <div>
                       <p className="font-bold text-white group-hover:text-gold">{study.title}</p>
-                      <p className="text-sm text-white/40">{study.subtitle}</p>
+                      <p className="text-sm text-white/50">{study.subtitle}</p>
                     </div>
-                    <ArrowRight className="h-4 w-4 shrink-0 text-white/30 group-hover:text-gold" />
+                    <ArrowRight className="h-4 w-4 shrink-0 text-white/30 group-hover:text-gold" aria-hidden />
                   </GlassPanel>
                 </a>
               ))}

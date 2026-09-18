@@ -38,7 +38,7 @@ export function ResumeScreen({ resume, pdfHref = "/resume/rich-tillman.pdf" }: R
         </GlassPanel>
 
         <section className="mb-12">
-          <h2 className="mb-8 font-mono text-xs uppercase tracking-widest text-white/30">
+          <h2 className="mb-8 font-mono text-xs uppercase tracking-widest text-white/50">
             Experience
           </h2>
           <div className="space-y-8">
@@ -47,9 +47,9 @@ export function ResumeScreen({ resume, pdfHref = "/resume/rich-tillman.pdf" }: R
                 <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
                   <div>
                     <h3 className="text-xl font-bold text-white">{job.title}</h3>
-                    <p className="text-white/40">{job.company}</p>
+                    <p className="text-white/50">{job.company}</p>
                   </div>
-                  <span className="font-mono text-xs text-white/30">{job.period}</span>
+                  <span className="font-mono text-xs text-white/50">{job.period}</span>
                 </div>
                 <ul className="space-y-2">
                   {job.highlights.map((highlight) => (
@@ -65,7 +65,7 @@ export function ResumeScreen({ resume, pdfHref = "/resume/rich-tillman.pdf" }: R
         </section>
 
         <section className="mb-12">
-          <h2 className="mb-8 font-mono text-xs uppercase tracking-widest text-white/30">
+          <h2 className="mb-8 font-mono text-xs uppercase tracking-widest text-white/50">
             Projects
           </h2>
           <div className="space-y-6">
@@ -79,7 +79,7 @@ export function ResumeScreen({ resume, pdfHref = "/resume/rich-tillman.pdf" }: R
         </section>
 
         <section>
-          <h2 className="mb-6 font-mono text-xs uppercase tracking-widest text-white/30">Skills</h2>
+          <h2 className="mb-6 font-mono text-xs uppercase tracking-widest text-white/50">Skills</h2>
           <div className="flex flex-wrap gap-3">
             {resume.skills.map((skill) => (
               <Chip key={skill}>{skill}</Chip>

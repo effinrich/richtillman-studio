@@ -12,18 +12,18 @@ export function SiteFooter() {
             </div>
             <div>
               <p className="text-sm font-bold text-white">Rich Tillman</p>
-              <p className="text-xs uppercase tracking-widest text-white/30">
+              <p className="text-xs uppercase tracking-widest text-white/50">
                 Principal Frontend Engineer
               </p>
             </div>
           </div>
-          <p className="text-sm leading-relaxed text-white/40">
+          <p className="text-sm leading-relaxed text-white/50">
             Building the bridge between design systems and AI-native developer tooling.
           </p>
         </div>
 
         <div>
-          <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-white/30">
+          <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-white/50">
             Explore
           </p>
           <ul className="space-y-2 text-sm text-white/60">
@@ -38,7 +38,7 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-white/30">
+          <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-white/50">
             Connect
           </p>
           <div className="flex gap-4">
@@ -71,7 +71,7 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="mx-auto mt-12 flex max-w-7xl flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 text-xs text-white/20 md:flex-row">
+      <div className="mx-auto mt-12 flex max-w-7xl flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 text-xs text-white/50 md:flex-row">
         <span>© {new Date().getFullYear()} Rich Tillman. All rights reserved.</span>
         <span className="font-mono uppercase tracking-[0.2em]">
           React 19 · TanStack Start · Tailwind v4

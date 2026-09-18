@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "storybook": {
+      "command": "bun",
+      "args": ["packages/storybook-mcp/src/cli.ts"],
+      "env": {
+        "STORYBOOK_MCP_ROOT": "${workspaceFolder}",
+        "STORYBOOK_MCP_LIBRARY": "packages/ui"
+      }
+    }
+  }
+}

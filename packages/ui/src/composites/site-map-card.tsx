@@ -23,12 +23,12 @@ export function SiteMapCard({ link }: SiteMapCardProps) {
       <GlassPanel
         className={`group h-full rounded-2xl p-6 transition-all ${accentClass[link.accent]}`}
       >
-        <h3
+        <h2
           className={`mb-2 text-lg font-semibold leading-tight text-white transition-colors ${titleHover[link.accent]}`}
         >
           {link.title}
-        </h3>
-        <p className="font-mono text-[10px] uppercase tracking-widest text-white/30">
+        </h2>
+        <p className="font-mono text-[10px] uppercase tracking-widest text-white/50">
           {link.description}
         </p>
       </GlassPanel>

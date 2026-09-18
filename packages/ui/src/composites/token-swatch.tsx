@@ -36,7 +36,7 @@ export function TokenSwatch({ token }: TokenSwatchProps) {
         />
         <span className="flex flex-col gap-1 p-4">
           <span className="font-mono text-sm text-white">{token.name}</span>
-          <span className="font-mono text-[11px] text-white/40">
+          <span className="font-mono text-[11px] text-white/50">
             {copied ? "Copied" : token.value}
           </span>
           <span className="mt-1 text-xs leading-relaxed text-white/50">{token.usage}</span>

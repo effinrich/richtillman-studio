@@ -18,6 +18,7 @@
     "chromatic": "bun run --cwd packages/ui chromatic",
     "deploy": "turbo run deploy",
     "start": "turbo run start",
+    "mcp:setup": "bun packages/storybook-mcp/scripts/setup-cursor.ts",
     "boundaries": "turbo boundaries",
     "postinstall": "lefthook install || true"
   },

@@ -40,7 +40,10 @@ export function HomeScreen({ metrics, actions }: HomeScreenProps) {
           </div>
         </div>
 
-        <div className="absolute top-1/2 right-8 hidden -translate-y-1/2 animate-pulse flex-col items-center gap-3 text-white/30 lg:flex">
+        <div
+          className="absolute top-1/2 right-8 hidden -translate-y-1/2 animate-pulse flex-col items-center gap-3 text-white/50 lg:flex"
+          aria-hidden
+        >
           <MousePointerClick className="h-6 w-6" aria-hidden />
           <span className="vertical-text font-mono text-[10px] uppercase tracking-widest">
             Click bg to randomize
@@ -56,9 +59,9 @@ export function HomeScreen({ metrics, actions }: HomeScreenProps) {
               className={`flex flex-col gap-2 ${index > 0 ? "md:border-l md:border-white/10 md:pl-12" : ""}`}
               style={{ animation: `fade-in-up 0.6s ease-out ${0.1 + index * 0.15}s backwards` }}
             >
-              <h3 className="text-4xl font-bold tracking-tight text-white md:text-5xl">
+              <p className="text-4xl font-bold tracking-tight text-white md:text-5xl">
                 {metric.value}
-              </h3>
+              </p>
               <p className="font-mono text-sm text-white/50">{metric.label}</p>
             </div>
           ))}

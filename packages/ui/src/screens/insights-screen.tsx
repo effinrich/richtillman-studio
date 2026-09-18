@@ -41,9 +41,10 @@ export function InsightsScreen({ articles, featuredCta }: InsightsScreenProps) {
                 <p className="mb-8 text-white/50">{featured.excerpt}</p>
                 {featuredCta}
               </div>
-              <div className="flex min-h-[280px] items-center justify-center bg-linear-to-br from-gold/10 via-cyan/5 to-magenta/10">
-                <span className="font-mono text-6xl font-bold text-white/10">MCP</span>
-              </div>
+              <div
+                className="flex min-h-[280px] items-center justify-center bg-linear-to-br from-gold/10 via-cyan/5 to-magenta/10"
+                aria-hidden
+              />
             </GlassPanel>
           </section>
         ) : null}

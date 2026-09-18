@@ -6,7 +6,7 @@ JIT design-system package for **richtillman.xyz**: primitives, layout, composite
 import { Button, GlassPanel } from "@richtillman/ui"
 ```
 
-This package does **not** depend on `@richtillman/storybook-mcp`. The MCP scans this folder from env/config and writes stories that import `@richtillman/ui`.
+This package does **not** depend on `@richtillman/storybook-mcp`. The MCP scans this folder from env/config and writes colocated stories that import the sibling module (`./button`), not the package barrel.
 
 ## Storybook
 
