@@ -3,6 +3,7 @@
 
 @source "../**/*.{ts,tsx}";
 @source "../../.storybook/**/*.{ts,tsx}";
+@source "../../../../apps/web/src/**/*.{ts,tsx}";
 
 @theme {
   --color-gold: #ffd700;
