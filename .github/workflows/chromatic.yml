@@ -50,5 +50,5 @@ jobs:
           verbose: true
           storybookBaseDir: packages/ui
           storybookConfigDir: .storybook
-          storybookStaticDir: storybook-static
-          storybookBuildDir: storybook-static
+          storybookStaticDir: packages/ui/storybook-static
+          storybookBuildDir: packages/ui/storybook-static
