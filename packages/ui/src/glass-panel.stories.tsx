@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/tanstack-react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 import { expect, within } from "storybook/test"
 import { GlassPanel } from "./glass-panel"
 
 const meta: Meta<typeof GlassPanel> = {
-  title: "UI/GlassPanel",
+  title: "Primitives/GlassPanel",
   component: GlassPanel,
   parameters: {
     layout: "centered",
@@ -15,7 +15,7 @@ type Story = StoryObj<typeof GlassPanel>
 
 const content = (
   <div className="p-8 text-white">
-    <h3 className="mb-2 text-xl font-bold">Glass Panel</h3>
+    <p className="mb-2 text-xl font-bold">Glass Panel</p>
     <p className="text-white/50">Neon portfolio aesthetic component</p>
   </div>
 )

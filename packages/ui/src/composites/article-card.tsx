@@ -13,13 +13,13 @@ export function ArticleCard({ article }: ArticleCardProps) {
     >
       <div className="mb-4 flex items-center gap-3">
         <Badge variant="gold">{article.category}</Badge>
-        <span className="font-mono text-[10px] text-white/30">{article.publishedAt}</span>
+        <span className="font-mono text-[10px] text-white/50">{article.publishedAt}</span>
         <span className="h-1 w-1 rounded-full bg-white/20" />
-        <span className="font-mono text-[10px] text-white/30">{article.readTime}</span>
+        <span className="font-mono text-[10px] text-white/50">{article.readTime}</span>
       </div>
-      <h3 className="mb-3 text-xl font-bold text-white transition-colors group-hover:text-gold">
+      <h2 className="mb-3 text-xl font-bold text-white transition-colors group-hover:text-gold">
         {article.title}
-      </h3>
+      </h2>
       <p className="text-sm leading-relaxed text-white/50">{article.excerpt}</p>
     </a>
   )

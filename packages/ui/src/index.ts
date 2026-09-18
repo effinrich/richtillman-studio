@@ -37,6 +37,9 @@ export type {
 } from "./models"
 
 export { CanvasBackground } from "./layout/canvas-background"
+export type { CanvasIntensity } from "./layout/canvas-background"
+export { InPageTabs } from "./in-page-tabs"
+export type { InPageTab } from "./in-page-tabs"
 export { NavigationBar } from "./layout/navigation-bar"
 export { PortfolioLayout } from "./layout/portfolio-layout"
 export { SiteFooter } from "./layout/site-footer"

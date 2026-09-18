@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/tanstack-react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 import { ContactScreen } from "./contact-screen"
 
 const meta: Meta<typeof ContactScreen> = {

@@ -1,15 +1,20 @@
-import type { Preview } from "@storybook/tanstack-react"
-import "../src/styles/app.css"
+import type { Preview } from "@storybook/react-vite"
+import "@richtillman/ui/styles.css"
 
 const preview: Preview = {
+  tags: ["autodocs"],
   parameters: {
     backgrounds: {
       default: "dark",
       values: [{ name: "dark", value: "#000000" }],
     },
     layout: "centered",
+    a11y: {
+      test: "error",
+    },
     chromatic: {
       pauseAnimationAtEnd: true,
+      delay: 300,
       diffThreshold: 0.2,
     },
     viewport: {

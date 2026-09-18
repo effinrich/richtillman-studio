@@ -109,7 +109,7 @@ export function createTools(options: {
     },
     [TOOL_NAMES.GENERATE_STORY]: {
       description:
-        "Write a Storybook CSF file next to a UI component. Imports @richtillman/ui, never relative internals.",
+        "Write a Storybook CSF file next to a UI component. Imports the colocated module, not the @richtillman/ui barrel.",
       inputSchema: {
         type: "object",
         properties: {

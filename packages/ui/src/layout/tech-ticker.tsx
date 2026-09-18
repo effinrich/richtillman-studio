@@ -20,7 +20,11 @@ export function TechTicker() {
       {TICKER_ITEMS.map((item, index) => (
         <span key={`${item}-${index}`} className="flex items-center gap-12">
           <span>{item}</span>
-          {index < TICKER_ITEMS.length - 1 ? <span className="text-white/10">/</span> : null}
+          {index < TICKER_ITEMS.length - 1 ? (
+            <span className="text-white/10" aria-hidden>
+              /
+            </span>
+          ) : null}
         </span>
       ))}
     </div>
@@ -28,7 +32,7 @@ export function TechTicker() {
 
   return (
     <div className="pointer-events-none relative z-10 w-full overflow-hidden border-t border-white/5 bg-black/50 py-4 backdrop-blur-sm">
-      <div className="animate-ticker flex whitespace-nowrap font-mono text-xs uppercase tracking-widest text-white/30">
+      <div className="animate-ticker flex whitespace-nowrap font-mono text-xs uppercase tracking-widest text-white/50">
         {row}
         {row}
       </div>

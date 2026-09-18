@@ -28,7 +28,7 @@ export function Chip({
   return (
     <span
       className={cn(
-        "inline-flex min-h-11 items-center gap-2 rounded-full px-3 py-1.5 text-xs transition-colors",
+        "inline-flex min-h-11 items-center gap-2 rounded px-3 py-1.5 text-xs transition-colors",
         VARIANT[variant],
         className,
       )}
@@ -39,7 +39,7 @@ export function Chip({
           className={cn(
             "inline-block rounded-full bg-gold",
             variant === "status" ? "h-2 w-2" : "h-1.5 w-1.5",
-            pulse && "animate-pulse",
+            pulse && "animate-pulse motion-reduce:animate-none",
           )}
           aria-hidden
         />

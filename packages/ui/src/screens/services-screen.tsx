@@ -45,9 +45,9 @@ export function ServicesScreen({ services }: ServicesScreenProps) {
                 className={`rounded-2xl p-8 transition-all hover:border-gold/30 stagger-${Math.min(index + 1, 6)}`}
               >
                 <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5">
-                  <Icon className="h-6 w-6 text-gold" />
+                  <Icon className="h-6 w-6 text-gold" aria-hidden />
                 </div>
-                <h3 className="mb-3 text-xl font-bold text-white">{service.title}</h3>
+                <h2 className="mb-3 text-xl font-bold text-white">{service.title}</h2>
                 <p className="leading-relaxed text-white/50">{service.description}</p>
               </GlassPanel>
             )
@@ -55,14 +55,14 @@ export function ServicesScreen({ services }: ServicesScreenProps) {
         </div>
 
         <section>
-          <h2 className="mb-8 font-mono text-xs uppercase tracking-[0.2em] text-white/30">
+          <h2 className="mb-8 font-mono text-xs uppercase tracking-[0.2em] text-white/50">
             Engagement models
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {ENGAGEMENT_TYPES.map((item) => (
               <GlassPanel key={item.title} className="rounded-2xl p-6">
                 <h3 className="mb-2 text-base font-bold text-white">{item.title}</h3>
-                <p className="text-sm text-white/40">{item.detail}</p>
+                <p className="text-sm text-white/50">{item.detail}</p>
               </GlassPanel>
             ))}
           </div>

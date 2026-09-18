@@ -7,12 +7,18 @@ import {
 import { loadConfig } from "./config.js"
 import { createTools } from "./tools.js"
 
+type Tools = ReturnType<typeof createTools>
+
+function isKnownTool(tools: Tools, name: string): name is keyof Tools {
+  return Object.hasOwn(tools, name)
+}
+
 export async function startStorybookMcp(metaUrl: string): Promise<void> {
   const { repoRoot, config } = loadConfig(metaUrl)
   const tools = createTools({ repoRoot, config })
   const server = new Server(
     {
-      name: "@richtillman/mcp-storybook",
+      name: "@richtillman/storybook-mcp",
       version: "0.1.0",
     },
     {
@@ -32,16 +38,13 @@ export async function startStorybookMcp(metaUrl: string): Promise<void> {
 
   server.setRequestHandler(CallToolRequestSchema, async (request) => {
     const name = request.params.name
-    const tool = Object.hasOwn(tools, name)
-      ? tools[name as keyof typeof tools]
-      : undefined
-    if (!tool) {
+    if (!isKnownTool(tools, name)) {
       return {
         content: [{ type: "text", text: `Unknown tool: ${name}` }],
         isError: true,
       }
     }
-    return tool.handler(request.params.arguments)
+    return tools[name].handler(request.params.arguments)
   })
 
   const transport = new StdioServerTransport()

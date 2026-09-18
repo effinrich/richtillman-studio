@@ -12,7 +12,7 @@ export function Textarea({ id, error, className, ...props }: TextareaProps) {
       aria-invalid={error ? true : undefined}
       aria-describedby={error && id ? `${id}-error` : undefined}
       className={cn(
-        "glass-input min-h-11 w-full resize-none rounded-xl px-4 py-3 text-white placeholder:text-white/30",
+        "glass-input min-h-11 w-full resize-none rounded px-4 py-3 text-white placeholder:text-white/50",
         className,
       )}
       {...props}

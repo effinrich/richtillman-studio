@@ -1,6 +1,10 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "import", "jsx-a11y"],
+  "plugins": ["react", "typescript", "import", "jsx-a11y", "unicorn"],
+  "options": {
+    "typeAware": true,
+    "typeCheck": false
+  },
   "categories": {
     "correctness": "error",
     "perf": "warn",
@@ -26,7 +30,13 @@
       "error",
       {
         "case": "kebabCase",
-        "ignore": "^(AGENTS\\.md|README\\.md|CHANGELOG\\.md|LICENSE|__root\\.tsx|routeTree\\.gen\\.ts|\\d{14}_[a-f0-9-]+\\.sql)$"
+        "ignore": [
+          "^(AGENTS|README|CHANGELOG)\\.md$",
+          "^LICENSE$",
+          "^__root\\.tsx$",
+          "^routeTree\\.gen\\.ts$",
+          "^\\d{14}_[a-f0-9-]+\\.sql$"
+        ]
       }
     ]
   },

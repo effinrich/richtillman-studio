@@ -3,13 +3,16 @@ name: "Chromatic"
 # Required status check. No paths: filter — a skipped workflow never creates
 # a check run and would block merge. TurboSnap keeps builds fast.
 on:
+  push:
+    branches: [main]
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
+  workflow_dispatch:
 
 jobs:
   chromatic:
     name: Run Chromatic
-    if: github.event.pull_request.draft == false
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -25,7 +28,9 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           workingDir: packages/ui
+          configFile: ../../chromatic.config.json
           onlyChanged: true
+          autoAcceptChanges: ${{ github.ref == 'refs/heads/main' }}
           exitZeroOnChanges: false
           zip: true
         env:

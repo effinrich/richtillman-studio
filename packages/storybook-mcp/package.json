@@ -1,11 +1,11 @@
 {
-  "name": "@richtillman/mcp-storybook",
+  "name": "@richtillman/storybook-mcp",
   "version": "0.1.0",
   "private": true,
   "description": "MCP server that generates Storybook stories for @richtillman/ui",
   "type": "module",
   "bin": {
-    "mcp-storybook": "./dist/cli.js"
+    "storybook-mcp": "./dist/cli.js"
   },
   "exports": {
     ".": {

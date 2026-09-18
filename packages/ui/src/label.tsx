@@ -6,7 +6,7 @@ export type LabelProps = ComponentProps<"label">
 export function Label({ className, children, ...props }: LabelProps) {
   return (
     <label
-      className={cn("mb-2 block font-mono text-xs uppercase tracking-widest text-white/40", className)}
+      className={cn("mb-2 block font-mono text-xs uppercase tracking-widest text-white/50", className)}
       {...props}
     >
       {children}

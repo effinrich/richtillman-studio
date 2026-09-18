@@ -1,26 +1,24 @@
 # Rich Tillman Studio
 
-Turborepo for the live portfolio at **richtillman.xyz**. Three packages: the TanStack Start site (`@richtillman/web`), design-system primitives (`@richtillman/ui`), and a compiled Storybook MCP (`@richtillman/mcp-storybook`).
-
-`portfolio-v2` stays on Cloudflare until this Vercel project is linked, the domain is pointed, and the Worker is retired.
+Turborepo for the studio site: the TanStack Start app (`@richtillman/web`), design-system primitives (`@richtillman/ui`), and a compiled Storybook MCP (`@richtillman/storybook-mcp`). The app deploys as a Cloudflare Worker named `richtillman-studio`.
 
 ## Stack
 
 - **Monorepo:** Turborepo + Bun workspaces
-- **App:** TanStack Start (React 19, file-based routing, SSR) on Vercel via Nitro
+- **App:** TanStack Start (React 19, file-based routing, SSR) on Cloudflare Workers via Wrangler
 - **UI:** `@richtillman/ui` — JIT source exports, shadcn new-york API (CVA + Slot), OLED/gold tokens
-- **MCP:** `@richtillman/mcp-storybook` — compiled `bin` → `dist` stdio server (not JIT)
+- **MCP:** `@richtillman/storybook-mcp` — compiled `bin` → `dist` stdio server (not JIT)
 - **Data:** Supabase with local seed fallback
-- **Visual QA:** Storybook 10 + Chromatic (primitives and screens in `packages/ui`)
+- **Visual QA:** Storybook 10 (`@storybook/react-vite` 10.6.0) + Chromatic (primitives and screens in `packages/ui`). Story interaction tests are `play` functions, not Vitest/Playwright.
 - **Tooling:** oxlint, oxfmt, lefthook
 
 ## Packages
 
 ```
 richtillman-studio/
-  apps/web/                    # @richtillman/web — thin route wrappers, loaders, Vercel
+  apps/web/                    # @richtillman/web — thin route wrappers, loaders, Worker
   packages/ui/                 # @richtillman/ui — primitives, screens, Storybook
-  packages/mcp-storybook/      # @richtillman/mcp-storybook — compiled Storybook MCP
+  packages/storybook-mcp/      # @richtillman/storybook-mcp — compiled Storybook MCP
 ```
 
 Import UI by package name only:
@@ -29,7 +27,7 @@ Import UI by package name only:
 import { Button, GlassPanel } from "@richtillman/ui"
 ```
 
-`ButtonLink` stays in the app (`createLink` around `ButtonAnchor`). `ProjectCard` stays in the app (router + seed types). `packages/ui` must not depend on the MCP. The MCP does not import UI internals; it reads `packages/ui` from env/config and generated stories import `@richtillman/ui`.
+`ButtonLink` stays in the app (`createLink` around `ButtonAnchor`). `ProjectCard` stays in the app (router + seed types). `packages/ui` must not depend on the MCP. The MCP does not import UI internals; it reads `packages/ui` from env/config and generated stories import the colocated module.
 
 ## Getting started
 
@@ -40,103 +38,90 @@ cp apps/web/.env.example apps/web/.env.local
 
 bun run dev
 # turbo run dev → apps/web on http://localhost:3000
+
+bun run mcp:setup
+# writes .cursor/mcp.json — enable “storybook” in Cursor Settings → MCP
 ```
 
 ## Scripts
 
-Root `package.json` only delegates to Turbo. Run from the repo root:
+Root `package.json` delegates to Turbo except Chromatic, which cds into `packages/ui`. Run from the repo root:
 
 | Task       | Command                                                                         |
 | ---------- | ------------------------------------------------------------------------------- |
 | Dev        | `bun run dev` (`turbo run dev`)                                                 |
 | Typecheck  | `bun run typecheck`                                                             |
 | Lint       | `bun run lint`                                                                  |
-| Test       | `bun run test`                                                                  |
+| Test       | `bun run test` (MCP + web unit tests; UI uses Storybook `play` + Chromatic)     |
 | Build      | `bun run build` (web + compiled MCP; UI is JIT and has no `build`)              |
 | Storybook  | `bun run storybook`                                                             |
-| Chromatic  | `bun run chromatic` (`turbo run chromatic --filter=@richtillman/ui`)            |
-| Deploy     | `bun run deploy` (`turbo run deploy` → `vercel deploy` in apps/web)             |
+| Chromatic  | `bun run chromatic` (`bun run --cwd packages/ui chromatic`)                     |
+| Deploy     | `bun run deploy` (`turbo run deploy` → `wrangler deploy` in apps/web)           |
+| MCP setup  | `bun run mcp:setup` (writes `.cursor/mcp.json`; Cursor launches via Bun, no build) |
 | MCP stdio  | `bun run start` (`turbo run start` → MCP `dist/cli.js`, depends on MCP `build`) |
 | Boundaries | `bun run boundaries` (`turbo boundaries`)                                       |
 
 ## Storybook + Chromatic
 
-UI Storybook lives with the primitives **and screens** at `packages/ui/.storybook` (isolated Vite — no TanStack Start / Nitro / Vercel app config). Root scripts only `turbo run`. Chromatic CLI lives in `@richtillman/ui`, never at the repo root.
+UI Storybook lives with the primitives **and screens** at `packages/ui/.storybook` on `@storybook/react-vite` 10.6.0 (isolated Vite — no TanStack Start / Cloudflare Worker app config). Other root scripts `turbo run`; Chromatic is the exception and cds into `packages/ui`. Chromatic CLI lives in `@richtillman/ui`, never at the repo root.
 
-Chromatic’s CLI appends `--output-dir` and `--webpack-stats-json` to `build-storybook`. That is fine when the script is `storybook build` in `packages/ui`. Root `turbo run` rejects those extra flags, so CI must not let Chromatic invoke Turbo.
+Chromatic’s CLI appends a temp `--output-dir` (and stats-json flags) to the build script. That is normal — do not pin `outputDir`. Those flags must hit `packages/ui` (`storybook build`), not root `turbo run build-storybook`. Config uses `buildScriptName: chromatic-build`, which exists only on `@richtillman/ui`. Set `CHROMATIC_PROJECT_TOKEN` in the environment; never pass `--project-token` on the command line or commit it.
 
 ```bash
 bun run storybook          # http://localhost:6006  (packages/ui)
-bun run chromatic          # turbo → packages/ui `chromatic` → `storybook build`
+bun run chromatic          # bun run --cwd packages/ui chromatic
 ```
 
-`bun run chromatic` is `turbo run chromatic --filter=@richtillman/ui`, which runs the UI package’s `chromatic` CLI. Chromatic then calls `build-storybook` (`storybook build -c .storybook --stats-json`) and writes `preview-stats.json` for TurboSnap. Do **not** `bunx chromatic` from the repo root.
+Do **not** `npx chromatic` / `bunx chromatic` from the repo root: that reads root `package.json`. From the repo root use `bun run chromatic`. From `packages/ui` use `bun run chromatic` (same UI script).
 
 CI reads `CHROMATIC_PROJECT_TOKEN` from the GitHub secret. Never commit the real token.
 
-Turbo does not cache `chromatic`. PR workflow is a required check (`exitZeroOnChanges: false`). `main` auto-accepts the baseline. Checkouts use `fetch-depth: 0` for TurboSnap. CI installs at the repo root, then `chromaui/action` uses `workingDir: packages/ui` so Chromatic builds Storybook itself.
+One workflow (`.github/workflows/chromatic.yml`) covers both: PRs are a required check (`exitZeroOnChanges: false`); pushes to `main` auto-accept the baseline. Checkouts use `fetch-depth: 0` for TurboSnap. CI installs at the repo root, then `chromaui/action` uses `workingDir: packages/ui` so Chromatic runs the UI `chromatic-build` script (`storybook build`) with its usual temp output dir.
 
 ## Storybook MCP
 
-Compiled package. Build, then point Cursor at the bin. Do not auto-install an MCP server (Runlayer). Env belongs in `packages/mcp-storybook/.env.example`, not a root `.env`.
+`@richtillman/storybook-mcp` (`packages/storybook-mcp`) is the Storybook MCP for this repo — a stdio server. Official `@storybook/addon-mcp` is not installed. Storybook on `:6006` has no `/mcp` endpoint.
+
+Cursor launches it. Do **not** run the CLI in a terminal to attach it to chat:
 
 ```bash
-bunx turbo run build --filter=@richtillman/mcp-storybook
+bun install
+bun run mcp:setup
 ```
 
-Cursor config (manual):
+Enable **storybook** in Cursor Settings → MCP. Local use is Bun on `packages/storybook-mcp/src/cli.ts` (no Turbo build). The command writes gitignored `.cursor/mcp.json` from `packages/storybook-mcp/mcp.json` and will not remove other MCP servers you already have.
 
-```json
-{
-  "mcpServers": {
-    "storybook": {
-      "command": "node",
-      "args": ["packages/mcp-storybook/dist/cli.js"],
-      "env": {
-        "STORYBOOK_MCP_ROOT": "${workspaceFolder}",
-        "STORYBOOK_MCP_LIBRARY": "packages/ui"
-      }
-    }
-  }
-}
-```
+Nine tools: `list_components`, `analyze_component`, `generate_story`, `update_story`, `validate_story`, `get_story_template`, `list_templates`, `get_component_coverage`, `suggest_stories`. `generate_story` and `update_story` write files.
 
-See `packages/mcp-storybook/README.md` for the keep/strip list from ForgeKit.
+`dist/` is the publish/CI artifact (`bunx turbo run build --filter=@richtillman/storybook-mcp`). The compiled CLI has no `--help`. Details: `packages/storybook-mcp/README.md`.
 
-## Vercel + richtillman.xyz
+## Deploy (Cloudflare Workers)
 
-This repo is the Vercel cutover. Do not use Wrangler or the `rich-tillman-portfolio` Worker here.
+Same target style as portfolio-1: `@cloudflare/vite-plugin` + `wrangler.jsonc` + `nodejs_compat`. This repo ships a **new** Worker named `richtillman-studio`. It does not overwrite the live `portfolio` Worker or attach `richtillman.xyz`.
 
-1. Push the repo and import it in the Vercel dashboard (or `vercel link` from the repo root).
-2. Framework preset: **TanStack Start**. Install: `bun install`. Root directory: repo root (Nitro writes `.vercel/output`).
-3. Ignored Build Step (optional): `npx turbo-ignore @richtillman/web`
-4. Env vars on the **project** (not a root `.env`): `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`. Pull locally with `vercel env pull apps/web/.env.local`.
-5. Domains: add `richtillman.xyz` and `www.richtillman.xyz` in Project → Settings → Domains. Point DNS at Vercel when you are ready to leave Cloudflare.
-
-CLI from this repo:
+From the repo root (requires `wrangler login` once):
 
 ```bash
+bun install
 bun run deploy
 ```
 
-`apps/web` `deploy` script is `vercel deploy` (preview). Promote or `vercel deploy --prod` after the project is linked.
+That runs `turbo run deploy` → `vite build` then `wrangler deploy` in `apps/web`. From the package:
 
-## Vercel Agent
+```bash
+cd apps/web
+bun run build
+bun run deploy
+```
 
-Vercel Agent is platform-level. Enable code review at `https://vercel.com/{team}/{project}/settings` → **AI**. There is no npm package to install and no `@vercel` mention bot in this app.
+Preview the Worker locally with `bun run preview:worker` in `apps/web`. Secrets go in `apps/web/.dev.vars` (local) or `wrangler secret put` (prod) — never in `wrangler.jsonc`. Optional Vite env: `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` in `apps/web/.env.local`.
 
-## AI Gateway
-
-This site has no chatbot. If you add AI later:
-
-- Enable AI Gateway on the Vercel project
-- Use the AI SDK with `model: 'provider/model'` (check current slugs at https://vercel.com/docs/ai-gateway)
-- Auth via OIDC (`vercel env pull apps/web/.env.local`) or `AI_GATEWAY_API_KEY` in **apps/web** env — never a root `.env`, never hardcoded keys
+Workers.dev URL after the first deploy: `https://richtillman-studio.<account>.workers.dev`. Custom domains are dashboard-only (portfolio-1 binds `richtillman.xyz` there, not in git). Do not point that hostname at this Worker unless you intend to replace the live site.
 
 ## Supabase
 
 ```bash
-# from apps/web, after linking the same project as v2:
+# from apps/web, after linking the Supabase project:
 supabase db push
 supabase db seed
 ```
@@ -144,10 +129,3 @@ supabase db seed
 ## Design system
 
 `/design-system` imports the same `@richtillman/ui` modules as Storybook. Tokens are gold `#ffd700`, cyan, magenta, true black — not zinc.
-
-## Remaining gaps
-
-- `vercel login` / `vercel link` (not done in this scaffold)
-- DNS for richtillman.xyz after the Vercel project exists
-- Figma Code Connect later
-- Cursor MCP config is documented, not installed

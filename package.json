@@ -15,16 +15,18 @@
     "test": "turbo run test",
     "storybook": "turbo run storybook",
     "build-storybook": "turbo run build-storybook",
-    "chromatic": "turbo run chromatic --filter=@richtillman/ui",
+    "chromatic": "bun run --cwd packages/ui chromatic",
     "deploy": "turbo run deploy",
     "start": "turbo run start",
+    "mcp:setup": "bun packages/storybook-mcp/scripts/setup-cursor.ts",
     "boundaries": "turbo boundaries",
     "postinstall": "lefthook install || true"
   },
   "devDependencies": {
     "lefthook": "^2.1.10",
     "oxfmt": "^0.59.0",
-    "oxlint": "^1.74.0",
+    "oxlint": "^1.83.0",
+    "oxlint-tsgolint": "^7.0.2001",
     "turbo": "^2.5.8",
     "typescript": "^6.0.2"
   },

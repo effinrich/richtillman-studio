@@ -1,6 +1,14 @@
 import type { ComponentInfo, StoryGenerationOptions } from "./types.js"
 
-const STORYBOOK_IMPORT = "@storybook/tanstack-react"
+const STORYBOOK_IMPORT = "@storybook/react-vite"
+
+function siblingImport(component: ComponentInfo): string {
+  const file = component.relativePath.replaceAll("\\", "/")
+  const slash = file.lastIndexOf("/")
+  const basename = slash === -1 ? file : file.slice(slash + 1)
+  const stem = basename.replace(/\.(tsx|jsx)$/, "")
+  return `./${stem}`
+}
 
 function storyTitle(component: ComponentInfo): string {
   return `UI/${component.name}`
@@ -26,12 +34,11 @@ function defaultArgs(component: ComponentInfo): string {
 function argTypesBlock(component: ComponentInfo): string {
   if (component.props.length === 0) return ""
   const lines = component.props.map((prop) => {
-    const control =
-      prop.type.includes("boolean")
-        ? "boolean"
-        : prop.type.includes("number")
-          ? "number"
-          : "text"
+    const control = prop.type.includes("boolean")
+      ? "boolean"
+      : prop.type.includes("number")
+        ? "number"
+        : "text"
     return `    ${prop.name}: { control: "${control}" },`
   })
   return `\n  argTypes: {\n${lines.join("\n")}\n  },`
@@ -42,7 +49,7 @@ export function generateBasicTemplate(
   _options: StoryGenerationOptions,
 ): string {
   return `import type { Meta, StoryObj } from "${STORYBOOK_IMPORT}"
-import { ${component.name} } from "@richtillman/ui"
+import { ${component.name} } from "${siblingImport(component)}"
 
 const meta = {
   title: "${storyTitle(component)}",
@@ -65,7 +72,7 @@ export function generateWithControlsTemplate(
   _options: StoryGenerationOptions,
 ): string {
   return `import type { Meta, StoryObj } from "${STORYBOOK_IMPORT}"
-import { ${component.name} } from "@richtillman/ui"
+import { ${component.name} } from "${siblingImport(component)}"
 
 const meta = {
   title: "${storyTitle(component)}",
@@ -104,7 +111,7 @@ export const Outline: Story = {
     : ""
 
   return `import type { Meta, StoryObj } from "${STORYBOOK_IMPORT}"
-import { ${component.name} } from "@richtillman/ui"
+import { ${component.name} } from "${siblingImport(component)}"
 
 const meta = {
   title: "${storyTitle(component)}",
@@ -138,7 +145,7 @@ export const Interactive: Story = {
     : ""
 
   return `import type { Meta, StoryObj } from "${STORYBOOK_IMPORT}"
-import { ${component.name} } from "@richtillman/ui"
+import { ${component.name} } from "${siblingImport(component)}"
 
 const meta = {
   title: "${storyTitle(component)}",
@@ -161,7 +168,7 @@ export function generateFormTemplate(
   _options: StoryGenerationOptions,
 ): string {
   return `import type { Meta, StoryObj } from "${STORYBOOK_IMPORT}"
-import { ${component.name} } from "@richtillman/ui"
+import { ${component.name} } from "${siblingImport(component)}"
 
 const meta = {
   title: "${storyTitle(component)}",
@@ -188,12 +195,8 @@ export const Filled: Story = {
 export function getTemplateSource(name: string): string {
   const samples: Record<string, string> = {
     basic: escapeForTemplate(generateBasicTemplate(SAMPLE, SAMPLE_OPTIONS)),
-    "with-controls": escapeForTemplate(
-      generateWithControlsTemplate(SAMPLE, SAMPLE_OPTIONS),
-    ),
-    "with-variants": escapeForTemplate(
-      generateWithVariantsTemplate(SAMPLE, SAMPLE_OPTIONS),
-    ),
+    "with-controls": escapeForTemplate(generateWithControlsTemplate(SAMPLE, SAMPLE_OPTIONS)),
+    "with-variants": escapeForTemplate(generateWithVariantsTemplate(SAMPLE, SAMPLE_OPTIONS)),
     interactive: escapeForTemplate(
       generateInteractiveTemplate(SAMPLE, {
         ...SAMPLE_OPTIONS,

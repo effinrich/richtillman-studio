@@ -1,12 +1,27 @@
-import { useCallback, useEffect, useRef } from "react"
+import { useCallback, useEffect, useRef, useState, type MouseEvent } from "react"
 import { cn } from "../cn"
+
+export type CanvasIntensity = "ambient" | "recessed"
 
 type CanvasBackgroundProps = {
   className?: string
+  intensity?: CanvasIntensity
 }
 
 const DEFAULT_TUBE_COLORS = ["#00f0ff", "#ff007f", "#ffd700"]
 const DEFAULT_LIGHT_COLORS = ["#83f36e", "#00f0ff", "#ff008a", "#ffd700"]
+
+const TRACE_OPACITY: Record<CanvasIntensity, number> = {
+  ambient: 0.32,
+  recessed: 0.25,
+}
+
+const SCRIM: Record<CanvasIntensity, string> = {
+  ambient:
+    "pointer-events-none absolute inset-0 z-0 bg-linear-to-b from-black/55 via-black/70 to-black/92",
+  recessed:
+    "pointer-events-none absolute inset-0 z-0 bg-linear-to-b from-black/68 via-black/80 to-black/94",
+}
 
 function randomHexColors(count: number) {
   return Array.from(
@@ -25,9 +40,26 @@ type TubesApp = {
   }
 }
 
-export function CanvasBackground({ className }: CanvasBackgroundProps) {
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = useState(false)
+
+  useEffect(() => {
+    if (typeof window.matchMedia !== "function") return
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const onChange = () => setReduced(media.matches)
+    onChange()
+    media.addEventListener("change", onChange)
+    // oxlint-disable-next-line typescript/consistent-return
+    return () => media.removeEventListener("change", onChange)
+  }, [])
+
+  return reduced
+}
+
+export function CanvasBackground({ className, intensity = "ambient" }: CanvasBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const appRef = useRef<TubesApp | null>(null)
+  const reduceMotion = usePrefersReducedMotion()
 
   const randomize = useCallback(() => {
     if (!appRef.current) return
@@ -36,6 +68,8 @@ export function CanvasBackground({ className }: CanvasBackgroundProps) {
   }, [])
 
   useEffect(() => {
+    if (reduceMotion) return
+
     let cancelled = false
     let frame = 0
     let timeoutId: number | undefined
@@ -74,6 +108,7 @@ export function CanvasBackground({ className }: CanvasBackgroundProps) {
         if (cancelled || !canvasRef.current) return
 
         const TubesCursor = (
+          // oxlint-disable-next-line typescript/no-unsafe-type-assertion
           window as unknown as {
             tubesCursor: (
               canvas: HTMLCanvasElement,
@@ -104,14 +139,17 @@ export function CanvasBackground({ className }: CanvasBackgroundProps) {
     }
 
     void init()
+    // oxlint-disable-next-line typescript/consistent-return
     return () => {
       cancelled = true
       if (timeoutId !== undefined) window.clearTimeout(timeoutId)
       window.cancelAnimationFrame(frame)
+      appRef.current = null
     }
-  }, [])
+  }, [reduceMotion])
 
-  function handleClick(event: React.MouseEvent<HTMLDivElement>) {
+  function handleClick(event: MouseEvent<HTMLDivElement>) {
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion
     const target = event.target as HTMLElement
     if (target.closest("a, button, input, textarea, select, label")) return
     randomize()
@@ -126,11 +164,13 @@ export function CanvasBackground({ className }: CanvasBackgroundProps) {
       onClick={handleClick}
       role="presentation"
     >
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 z-0 block h-full w-full"
-        style={{ opacity: 0.9, touchAction: "none" }}
-      />
+      {reduceMotion ? null : (
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 z-0 block h-full w-full"
+          style={{ opacity: TRACE_OPACITY[intensity], touchAction: "none" }}
+        />
+      )}
       <div
         className="pointer-events-none absolute inset-0 z-0"
         style={{
@@ -139,7 +179,7 @@ export function CanvasBackground({ className }: CanvasBackgroundProps) {
           backgroundSize: "40px 40px",
         }}
       />
-      <div className="pointer-events-none absolute inset-0 z-0 bg-linear-to-b from-black/20 via-black/40 to-black" />
+      <div className={SCRIM[intensity]} />
     </div>
   )
 }

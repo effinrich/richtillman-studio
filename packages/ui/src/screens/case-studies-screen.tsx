@@ -47,7 +47,7 @@ export function CaseStudiesScreen({ caseStudies, renderCta }: CaseStudiesScreenP
                   ))}
                 </div>
                 <h2 className="mb-2 text-2xl font-bold text-white md:text-3xl">{study.title}</h2>
-                <p className="mb-4 text-white/40">{study.subtitle}</p>
+                <p className="mb-4 text-white/50">{study.subtitle}</p>
                 <p className="mb-6 leading-relaxed text-white/60">{study.summary}</p>
                 {renderCta(study)}
               </div>
@@ -55,7 +55,7 @@ export function CaseStudiesScreen({ caseStudies, renderCta }: CaseStudiesScreenP
                 {study.metrics.map((metric) => (
                   <div key={metric.label}>
                     <p className="text-3xl font-bold text-white">{metric.value}</p>
-                    <p className="font-mono text-xs text-white/40">{metric.label}</p>
+                    <p className="font-mono text-xs text-white/50">{metric.label}</p>
                   </div>
                 ))}
               </div>

@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/tanstack-react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 import { expect, within } from "storybook/test"
 import { Badge } from "./badge"
 
 const meta: Meta<typeof Badge> = {
-  title: "UI/Badge",
+  title: "Primitives/Badge",
   component: Badge,
   parameters: {
     layout: "centered",

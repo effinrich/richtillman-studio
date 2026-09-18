@@ -26,4 +26,4 @@ jobs:
       - name: Test
         run: bunx turbo run test --affected
       - name: Build compiled packages
-        run: bunx turbo run build --filter=@richtillman/mcp-storybook
+        run: bunx turbo run build --filter=@richtillman/storybook-mcp

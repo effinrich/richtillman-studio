@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/tanstack-react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 import { expect, within } from "storybook/test"
 import { SectionHeader } from "./section-header"
 
 const meta: Meta<typeof SectionHeader> = {
-  title: "UI/SectionHeader",
+  title: "Primitives/SectionHeader",
   component: SectionHeader,
   parameters: {
     layout: "padded",

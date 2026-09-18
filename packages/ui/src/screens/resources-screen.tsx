@@ -39,10 +39,10 @@ export function ResourcesScreen({ resources }: ResourcesScreenProps) {
                     {resource.category}
                   </span>
                   <div className="mb-2 flex items-center justify-between">
-                    <h3 className="text-lg font-bold text-white group-hover:text-cyan">
+                    <h2 className="text-lg font-bold text-white group-hover:text-cyan">
                       {resource.title}
-                    </h3>
-                    <ExternalLink className="h-4 w-4 text-white/30 group-hover:text-cyan" />
+                    </h2>
+                    <ExternalLink className="h-4 w-4 text-white/30 group-hover:text-cyan" aria-hidden />
                   </div>
                   <p className="text-sm text-white/50">{resource.description}</p>
                 </GlassPanel>

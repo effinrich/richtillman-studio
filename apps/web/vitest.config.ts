@@ -2,7 +2,7 @@ import { defineConfig } from "vitest/config"
 import viteReact from "@vitejs/plugin-react"
 import tailwindcss from "@tailwindcss/vite"
 
-// Standalone Vitest config — no Nitro / TanStack Start plugins.
+// Standalone Vitest config — no Cloudflare / TanStack Start plugins.
 export default defineConfig({
   resolve: { tsconfigPaths: true },
   plugins: [tailwindcss(), viteReact()],
