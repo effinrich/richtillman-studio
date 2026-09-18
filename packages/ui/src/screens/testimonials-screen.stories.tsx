@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import { TestimonialsScreen } from "@richtillman/ui"
+import { TestimonialsScreen } from "./testimonials-screen"
 import { SAMPLE_TESTIMONIALS } from "../fixtures"
 
 const meta: Meta<typeof TestimonialsScreen> = {

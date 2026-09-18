@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import { SiteMapScreen } from "@richtillman/ui"
+import { SiteMapScreen } from "./site-map-screen"
 import { SAMPLE_SITE_MAP } from "../fixtures"
 
 const meta: Meta<typeof SiteMapScreen> = {

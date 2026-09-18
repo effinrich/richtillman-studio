@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import { ButtonAnchor, InsightsScreen } from "@richtillman/ui"
+import { ButtonAnchor } from "../button"
 import { SAMPLE_ARTICLES } from "../fixtures"
+import { InsightsScreen } from "./insights-screen"
 
 const meta: Meta<typeof InsightsScreen> = {
   title: "Screens/Insights",

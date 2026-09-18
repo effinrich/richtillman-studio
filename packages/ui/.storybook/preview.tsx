@@ -2,6 +2,7 @@ import type { Preview } from "@storybook/react-vite"
 import "@richtillman/ui/styles.css"
 
 const preview: Preview = {
+  tags: ["autodocs"],
   parameters: {
     backgrounds: {
       default: "dark",

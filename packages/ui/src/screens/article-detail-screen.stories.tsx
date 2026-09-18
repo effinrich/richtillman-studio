@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import { ArticleDetailScreen } from "@richtillman/ui"
+import { ArticleDetailScreen } from "./article-detail-screen"
 import { SAMPLE_ARTICLES } from "../fixtures"
 
 const meta: Meta<typeof ArticleDetailScreen> = {

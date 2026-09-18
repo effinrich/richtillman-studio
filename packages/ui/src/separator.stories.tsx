@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { expect, within } from "storybook/test"
-import { Separator } from "@richtillman/ui"
+import { Separator } from "./separator"
 
 const meta: Meta<typeof Separator> = {
   title: "Primitives/Separator",

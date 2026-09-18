@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import { ButtonAnchor, CaseStudiesScreen } from "@richtillman/ui"
+import { ButtonAnchor } from "../button"
 import { SAMPLE_CASE_STUDIES } from "../fixtures"
+import { CaseStudiesScreen } from "./case-studies-screen"
 
 const meta: Meta<typeof CaseStudiesScreen> = {
   title: "Screens/CaseStudies",

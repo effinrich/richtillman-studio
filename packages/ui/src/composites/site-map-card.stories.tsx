@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { expect, within } from "storybook/test"
-import { SiteMapCard } from "@richtillman/ui"
+import { SiteMapCard } from "./site-map-card"
 
 const meta: Meta<typeof SiteMapCard> = {
   title: "Cards/SiteMapCard",

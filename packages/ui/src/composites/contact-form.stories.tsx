@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { expect, userEvent, within } from "storybook/test"
-import { ContactForm } from "@richtillman/ui"
+import { ContactForm } from "./contact-form"
 
 const meta: Meta<typeof ContactForm> = {
   title: "Cards/ContactForm",

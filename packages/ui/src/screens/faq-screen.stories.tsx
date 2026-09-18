@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import { FaqScreen } from "@richtillman/ui"
+import { FaqScreen } from "./faq-screen"
 import { SAMPLE_FAQ } from "../fixtures"
 
 const meta: Meta<typeof FaqScreen> = {

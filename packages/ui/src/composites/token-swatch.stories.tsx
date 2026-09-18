@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { expect, within } from "storybook/test"
-import { TokenSwatch } from "@richtillman/ui"
+import { TokenSwatch } from "./token-swatch"
 
 const meta: Meta<typeof TokenSwatch> = {
   title: "Cards/TokenSwatch",

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { expect, within } from "storybook/test"
-import { ContactSuccess } from "@richtillman/ui"
+import { ContactSuccess } from "./contact-success"
 
 const meta: Meta<typeof ContactSuccess> = {
   title: "Cards/ContactSuccess",

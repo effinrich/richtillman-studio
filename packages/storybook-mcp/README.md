@@ -2,7 +2,7 @@
 
 Compiled MCP **stdio** server that scans `@richtillman/ui` and generates Storybook CSF. This is the Storybook MCP for the studio — not `@storybook/addon-mcp`, and not an HTTP server on `:6006`.
 
-It is a **package**, not an app. `bin` points at `dist`. UI stays JIT/source; this package is compiled with `tsc`. It does **not** import `@richtillman/ui` internals. It reads `packages/ui` from env/config (filesystem). Generated stories import the public export `@richtillman/ui`.
+It is a **package**, not an app. `bin` points at `dist`. UI stays JIT/source; this package is compiled with `tsc`. It does **not** import `@richtillman/ui` internals. It reads `packages/ui` from env/config (filesystem). Generated stories import the colocated component module (`./button`), not the package barrel. Consumers (`apps/web`) still import `@richtillman/ui`.
 
 ## Build
 

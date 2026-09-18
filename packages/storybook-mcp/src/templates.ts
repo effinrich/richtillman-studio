@@ -2,6 +2,14 @@ import type { ComponentInfo, StoryGenerationOptions } from "./types.js"
 
 const STORYBOOK_IMPORT = "@storybook/react-vite"
 
+function siblingImport(component: ComponentInfo): string {
+  const file = component.relativePath.replaceAll("\\", "/")
+  const slash = file.lastIndexOf("/")
+  const basename = slash === -1 ? file : file.slice(slash + 1)
+  const stem = basename.replace(/\.(tsx|jsx)$/, "")
+  return `./${stem}`
+}
+
 function storyTitle(component: ComponentInfo): string {
   return `UI/${component.name}`
 }
@@ -41,7 +49,7 @@ export function generateBasicTemplate(
   _options: StoryGenerationOptions,
 ): string {
   return `import type { Meta, StoryObj } from "${STORYBOOK_IMPORT}"
-import { ${component.name} } from "@richtillman/ui"
+import { ${component.name} } from "${siblingImport(component)}"
 
 const meta = {
   title: "${storyTitle(component)}",
@@ -64,7 +72,7 @@ export function generateWithControlsTemplate(
   _options: StoryGenerationOptions,
 ): string {
   return `import type { Meta, StoryObj } from "${STORYBOOK_IMPORT}"
-import { ${component.name} } from "@richtillman/ui"
+import { ${component.name} } from "${siblingImport(component)}"
 
 const meta = {
   title: "${storyTitle(component)}",
@@ -103,7 +111,7 @@ export const Outline: Story = {
     : ""
 
   return `import type { Meta, StoryObj } from "${STORYBOOK_IMPORT}"
-import { ${component.name} } from "@richtillman/ui"
+import { ${component.name} } from "${siblingImport(component)}"
 
 const meta = {
   title: "${storyTitle(component)}",
@@ -137,7 +145,7 @@ export const Interactive: Story = {
     : ""
 
   return `import type { Meta, StoryObj } from "${STORYBOOK_IMPORT}"
-import { ${component.name} } from "@richtillman/ui"
+import { ${component.name} } from "${siblingImport(component)}"
 
 const meta = {
   title: "${storyTitle(component)}",
@@ -160,7 +168,7 @@ export function generateFormTemplate(
   _options: StoryGenerationOptions,
 ): string {
   return `import type { Meta, StoryObj } from "${STORYBOOK_IMPORT}"
-import { ${component.name} } from "@richtillman/ui"
+import { ${component.name} } from "${siblingImport(component)}"
 
 const meta = {
   title: "${storyTitle(component)}",

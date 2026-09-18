@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import { ResumeScreen } from "@richtillman/ui"
+import { ResumeScreen } from "./resume-screen"
 import { SAMPLE_RESUME } from "../fixtures"
 
 const meta: Meta<typeof ResumeScreen> = {

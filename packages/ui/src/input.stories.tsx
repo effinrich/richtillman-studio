@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { expect, within } from "storybook/test"
-import { Input } from "@richtillman/ui"
+import { Input } from "./field"
 
 const meta: Meta<typeof Input> = {
   title: "Primitives/Input",

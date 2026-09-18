@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import { ForgekitMcpScreen } from "@richtillman/ui"
+import { ForgekitMcpScreen } from "./forgekit-mcp-screen"
 
 const meta: Meta<typeof ForgekitMcpScreen> = {
   title: "Screens/ForgekitMcp",

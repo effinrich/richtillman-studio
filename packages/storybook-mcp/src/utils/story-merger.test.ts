@@ -7,7 +7,7 @@ import {
 } from "./story-merger.js"
 
 const existing = `import type { Meta, StoryObj } from "@storybook/react-vite"
-import { Button } from "@richtillman/ui"
+import { Button } from "./button"
 
 const meta = {
   title: "UI/Button",

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { expect, within } from "storybook/test"
-import { ArticleCard } from "@richtillman/ui"
+import { ArticleCard } from "./article-card"
 import { SAMPLE_ARTICLES } from "../fixtures"
 
 const meta: Meta<typeof ArticleCard> = {

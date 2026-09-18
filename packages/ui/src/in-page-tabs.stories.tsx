@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { expect, within } from "storybook/test"
-import { InPageTabs } from "@richtillman/ui"
+import { InPageTabs } from "./in-page-tabs"
 
 const meta: Meta<typeof InPageTabs> = {
   title: "Primitives/InPageTabs",
