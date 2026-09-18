@@ -15,4 +15,3 @@
 - oxfmt does not support `extends`; use a single repo-root `.oxfmtrc.json` (`semi: false`). Nested oxlintrc should inherit with `"plugins": []`.
 - Keep oxlint `typeAware: true` and `typeCheck: false` so TypeScript Quick Fix stays with the TS language service.
 - The web app stylesheet is `@import "@richtillman/ui/styles.css"`; keep `@source` of `apps/web/src` in `packages/ui/src/styles/app.css` so app-only classes are not purged.
-- Do not add `@chromatic-com/storybook` to local Storybook addons — it publishes on `storybook dev` and thrashes the sidebar. Chromatic visual snapshot CI is disabled; keep the required `Run Chromatic` job as a passing no-op. Interaction tests are Storybook `play()` functions.

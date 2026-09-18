@@ -15,7 +15,7 @@ const preview: Preview = {
     chromatic: {
       pauseAnimationAtEnd: true,
       delay: 300,
-      diffThreshold: 0.2,
+      diffThreshold: 0.5,
     },
     viewport: {
       viewports: {

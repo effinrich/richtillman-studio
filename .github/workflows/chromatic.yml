@@ -1,19 +1,58 @@
-name: "Chromatic"
+name: Chromatic
 
-# Required status check. Keep this job reporting success so merge is not blocked.
-# Visual snapshots are off; Storybook play() functions are the interaction tests.
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
-  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
 
 jobs:
   chromatic:
-    name: Run Chromatic
-    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
+    name: Publish Storybook to Chromatic
     runs-on: ubuntu-latest
+
     steps:
-      - name: Skip Chromatic visual snapshots
-        run: echo "Chromatic visual snapshots are disabled. Interaction tests are Storybook play functions, not a Chromatic publish."
+      - name: Check out source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          no-cache: true
+
+      - name: Checkout code
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24.20.0
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Publish to Chromatic
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          workingDir: packages/ui
+          buildScriptName: build-storybook
+          exitOnceUploaded: true
+          onlyChanged: true
+          zip: true
+          retries: 5
+          timeout: 10000
+          verbose: true
+          storybookBaseDir: packages/ui
+          storybookConfigDir: .storybook
+          # storybookStaticDir: packages/ui/storybook-static
+          # storybookBuildDir: packages/ui/storybook-static
