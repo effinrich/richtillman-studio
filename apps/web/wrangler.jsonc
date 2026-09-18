@@ -8,5 +8,9 @@
   // Workers Logs — same as portfolio-1. Secrets via `wrangler secret put`, never here.
   "observability": {
     "enabled": true,
+    "invocation_logs": true
   },
+  "traces": {
+    "enabled": false
+  }
 }
