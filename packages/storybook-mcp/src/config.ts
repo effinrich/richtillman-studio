@@ -31,7 +31,7 @@ function readJsonConfig(filePath: string): Partial<StorybookMcpConfig> {
   if (!parsed || typeof parsed !== "object") {
     return {}
   }
-  return parsed as Partial<StorybookMcpConfig>
+  return parsed
 }
 
 export function loadConfig(metaUrl: string): {

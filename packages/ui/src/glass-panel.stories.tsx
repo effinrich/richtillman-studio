@@ -3,7 +3,7 @@ import { expect, within } from "storybook/test"
 import { GlassPanel } from "./glass-panel"
 
 const meta: Meta<typeof GlassPanel> = {
-  title: "UI/GlassPanel",
+  title: "Primitives/GlassPanel",
   component: GlassPanel,
   parameters: {
     layout: "centered",

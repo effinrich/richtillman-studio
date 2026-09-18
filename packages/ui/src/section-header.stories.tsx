@@ -3,7 +3,7 @@ import { expect, within } from "storybook/test"
 import { SectionHeader } from "./section-header"
 
 const meta: Meta<typeof SectionHeader> = {
-  title: "UI/SectionHeader",
+  title: "Primitives/SectionHeader",
   component: SectionHeader,
   parameters: {
     layout: "padded",

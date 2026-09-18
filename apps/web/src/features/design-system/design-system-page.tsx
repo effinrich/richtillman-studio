@@ -8,7 +8,7 @@ const specimenProject = PROJECTS.find((project) => project.slug === "forgekit-mc
 export function DesignSystemPage() {
   return (
     <DesignSystemScreen
-      specimenProject={specimenProject!}
+      specimenProject={specimenProject}
       actions={
         <>
           <ButtonLink to="/work" variant="primary">

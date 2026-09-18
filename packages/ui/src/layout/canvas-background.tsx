@@ -49,6 +49,7 @@ function usePrefersReducedMotion() {
     const onChange = () => setReduced(media.matches)
     onChange()
     media.addEventListener("change", onChange)
+    // oxlint-disable-next-line typescript/consistent-return
     return () => media.removeEventListener("change", onChange)
   }, [])
 
@@ -107,6 +108,7 @@ export function CanvasBackground({ className, intensity = "ambient" }: CanvasBac
         if (cancelled || !canvasRef.current) return
 
         const TubesCursor = (
+          // oxlint-disable-next-line typescript/no-unsafe-type-assertion
           window as unknown as {
             tubesCursor: (
               canvas: HTMLCanvasElement,
@@ -137,6 +139,7 @@ export function CanvasBackground({ className, intensity = "ambient" }: CanvasBac
     }
 
     void init()
+    // oxlint-disable-next-line typescript/consistent-return
     return () => {
       cancelled = true
       if (timeoutId !== undefined) window.clearTimeout(timeoutId)
@@ -146,6 +149,7 @@ export function CanvasBackground({ className, intensity = "ambient" }: CanvasBac
   }, [reduceMotion])
 
   function handleClick(event: MouseEvent<HTMLDivElement>) {
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion
     const target = event.target as HTMLElement
     if (target.closest("a, button, input, textarea, select, label")) return
     randomize()

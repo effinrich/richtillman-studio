@@ -3,7 +3,7 @@ import { expect, within } from "storybook/test"
 import { Chip } from "./chip"
 
 const meta: Meta<typeof Chip> = {
-  title: "UI/Chip",
+  title: "Primitives/Chip",
   component: Chip,
   parameters: {
     layout: "centered",

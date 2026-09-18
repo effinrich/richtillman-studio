@@ -3,7 +3,7 @@ import { expect, within } from "storybook/test"
 import { Tag } from "./tag"
 
 const meta: Meta<typeof Tag> = {
-  title: "UI/Tag",
+  title: "Primitives/Tag",
   component: Tag,
   parameters: {
     layout: "centered",

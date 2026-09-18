@@ -54,11 +54,13 @@ export function InPageTabs({
       (entries) => {
         const visible = entries
           .filter((entry) => entry.isIntersecting)
+          // oxlint-disable-next-line unicorn/no-array-sort
           .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
         const top = visible[0]
         if (!top) return
-        const href = `#${top.target.id}` as InPageTab["href"]
-        if (items.some((item) => item.href === href)) setActiveHref(href)
+        const href = `#${top.target.id}`
+        // oxlint-disable-next-line typescript/no-unsafe-type-assertion
+        if (items.some((item) => item.href === href)) setActiveHref(href as InPageTab["href"])
       },
       {
         rootMargin: `-${stackPx}px 0px -45% 0px`,

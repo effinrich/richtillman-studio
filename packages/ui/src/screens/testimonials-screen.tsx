@@ -1,17 +1,19 @@
 import { Quote } from "lucide-react"
 import { GlassPanel } from "../glass-panel"
 import { PortfolioLayout } from "../layout/portfolio-layout"
-import type { Metric, TestimonialModel } from "../models"
+import type { Metric } from "../models"
 import { SectionHeader } from "../section-header"
+import type { TestimonialModel } from "../models"
+import type { TestimonialsScreenProps } from "./types"
 
 const SOCIAL_PROOF: Metric[] = [
   { value: "50+", label: "Teams advised" },
   { value: "500K+", label: "Users shipped to" },
   { value: "98%", label: "Visual test coverage" },
-  { value: "10+", label: "Years shipping React" },
+  { value: "10+", label: "Years shipping React" }
 ]
 
-type TestimonialsScreenProps = {
+export type TestimonialScreenProps = {
   testimonials: TestimonialModel[]
 }
 

@@ -133,6 +133,7 @@ export class ComponentScanner {
       })
     }
 
+    // oxlint-disable-next-line unicorn/no-array-sort
     return components.sort((a, b) => a.name.localeCompare(b.name))
   }
 

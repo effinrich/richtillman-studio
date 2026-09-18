@@ -3,7 +3,7 @@ import { expect, within } from "storybook/test"
 import { Field, Input } from "./field"
 
 const meta: Meta<typeof Field> = {
-  title: "UI/Field",
+  title: "Primitives/Field",
   component: Field,
   parameters: {
     layout: "centered",

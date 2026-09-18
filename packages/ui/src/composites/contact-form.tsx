@@ -13,6 +13,11 @@ const PROJECT_TYPES = [
   "Other",
 ]
 
+function readFormString(form: FormData, name: string): string {
+  const value = form.get(name)
+  return typeof value === "string" ? value : ""
+}
+
 type ContactFormProps = {
   onSubmit: ContactSubmitHandler
   onSubmitted?: () => void
@@ -63,14 +68,18 @@ export function ContactForm({ onSubmit, onSubmitted }: ContactFormProps) {
 
     const form = new FormData(event.currentTarget)
     const formData = {
-      name: String(form.get("name") ?? ""),
-      email: String(form.get("email") ?? ""),
-      company: String(form.get("company") ?? "") || undefined,
-      projectType: String(form.get("projectType") ?? ""),
-      message: String(form.get("message") ?? ""),
+      name: readFormString(form, "name"),
+      email: readFormString(form, "email"),
+      company: readFormString(form, "company") || undefined,
+      projectType: readFormString(form, "projectType"),
+      message: readFormString(form, "message"),
     }
 
-    const validationErrors = getFieldErrors(formData as Record<string, string>)
+    const validationErrors = getFieldErrors({
+      name: formData.name,
+      email: formData.email,
+      message: formData.message,
+    })
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors)
       setLoading(false)

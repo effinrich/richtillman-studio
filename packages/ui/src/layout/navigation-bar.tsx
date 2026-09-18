@@ -22,6 +22,7 @@ export function NavigationBar({ activeItem = "home", isAvailable = true }: Navig
     }
     onChange()
     media.addEventListener("change", onChange)
+    // oxlint-disable-next-line typescript/consistent-return
     return () => media.removeEventListener("change", onChange)
   }, [])
 
