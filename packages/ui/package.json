@@ -12,7 +12,7 @@
     "lint": "oxlint src .storybook",
     "lint:fix": "oxlint src .storybook --fix",
     "format": "oxfmt src .storybook",
-    "storybook": "storybook dev -p 6006 -c .storybook",
+    "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build --stats-json",
     "chromatic-build": "storybook build --stats-json",
     "chromatic": "chromatic --config-file ../../chromatic.config.json"

@@ -15,7 +15,7 @@
     "test": "turbo run test",
     "storybook": "turbo run storybook",
     "build-storybook": "turbo run build-storybook",
-    "chromatic": "bun run --cwd packages/ui chromatic",
+    "chromatic": "turbo run chromatic",
     "deploy": "turbo run deploy",
     "start": "turbo run start",
     "mcp:setup": "bun packages/storybook-mcp/scripts/setup-cursor.ts",
@@ -23,6 +23,8 @@
     "postinstall": "lefthook install || true"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^5.2.1",
+    "chromatic": "^18.0.1",
     "lefthook": "^2.1.10",
     "oxfmt": "^0.59.0",
     "oxlint": "^1.83.0",

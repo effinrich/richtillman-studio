@@ -4,5 +4,6 @@
   "zip": true,
   "storybookBaseDir": "packages/ui",
   "storybookConfigDir": ".storybook",
-  "buildScriptName": "chromatic-build"
+  "buildScriptName": "build-storybook",
+  "exitOnceUploaded": true
 }
