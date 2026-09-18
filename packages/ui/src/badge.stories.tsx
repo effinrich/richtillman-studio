@@ -14,7 +14,7 @@ export default meta
 type Story = StoryObj<typeof Badge>
 
 export const Gold: Story = {
-  args: { children: "Featured Analysis", variant: "cyan" },
+  args: { children: "Featured Analysis", variant: "gold" },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     await expect(canvas.getByText("Featured Analysis")).toBeInTheDocument()
