@@ -1,49 +1,50 @@
-import { Menu, X } from "lucide-react"
-import { useEffect, useId, useState } from "react"
-import { Chip } from "../chip"
-import { cn } from "../cn"
-import type { NavItem } from "../models"
-import { PRIMARY_NAV } from "./nav"
+import { Menu, X } from "lucide-react";
+import { useEffect, useId, useState } from "react";
+import { BrandMark } from "../brand-mark";
+import { Chip } from "../chip";
+import { cn } from "../cn";
+import type { NavItem } from "../models";
+import { PRIMARY_NAV } from "./nav";
 
 type NavigationBarProps = {
-  activeItem?: NavItem
-  isAvailable?: boolean
-}
+  activeItem?: NavItem;
+  isAvailable?: boolean;
+};
 
 export function NavigationBar({ activeItem = "home", isAvailable = true }: NavigationBarProps) {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const menuId = useId()
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuId = useId();
 
   useEffect(() => {
-    if (typeof window.matchMedia !== "function") return
-    const media = window.matchMedia("(min-width: 768px)")
+    if (typeof window.matchMedia !== "function") return;
+    const media = window.matchMedia("(min-width: 768px)");
     const onChange = () => {
-      if (media.matches) setMenuOpen(false)
-    }
-    onChange()
-    media.addEventListener("change", onChange)
+      if (media.matches) setMenuOpen(false);
+    };
+    onChange();
+    media.addEventListener("change", onChange);
     // oxlint-disable-next-line typescript/consistent-return
-    return () => media.removeEventListener("change", onChange)
-  }, [])
+    return () => media.removeEventListener("change", onChange);
+  }, []);
 
   useEffect(() => {
-    if (!menuOpen) return
+    if (!menuOpen) return;
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setMenuOpen(false)
-    }
+      if (event.key === "Escape") setMenuOpen(false);
+    };
 
-    document.addEventListener("keydown", onKeyDown)
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = "hidden"
+    document.addEventListener("keydown", onKeyDown);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
     return () => {
-      document.removeEventListener("keydown", onKeyDown)
-      document.body.style.overflow = previousOverflow
-    }
-  }, [menuOpen])
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [menuOpen]);
 
-  const closeMenu = () => setMenuOpen(false)
+  const closeMenu = () => setMenuOpen(false);
 
   return (
     <>
@@ -60,11 +61,10 @@ export function NavigationBar({ activeItem = "home", isAvailable = true }: Navig
           <a
             href="/"
             className="flex min-h-11 min-w-0 items-center gap-3 sm:gap-4"
+            aria-label="Rich Tillman Studio — home"
             onClick={closeMenu}
           >
-            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded border border-white/20 bg-zinc-900 font-mono text-sm font-bold text-gold">
-              R
-            </div>
+            <BrandMark className="h-8 w-8 text-white" />
             <span className="hidden min-w-0 truncate font-medium tracking-tight text-white/90 sm:inline-block">
               Rich Tillman
               <span className="hidden font-normal text-white/50 lg:inline">
@@ -146,5 +146,5 @@ export function NavigationBar({ activeItem = "home", isAvailable = true }: Navig
         />
       ) : null}
     </>
-  )
+  );
 }

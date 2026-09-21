@@ -30,6 +30,9 @@
   --color-border: rgba(255, 255, 255, 0.08);
   --color-input: rgba(0, 0, 0, 0.4);
   --color-ring: #ffd700;
+  /* Success: ContactSuccess banner only. Tints at /10 and /30, text on `success-foreground`. */
+  --color-success: #4ade80;
+  --color-success-foreground: #86efac;
   /* Controls (Chip, Tag, Badge, Button, Field). Half of the previous 0.75rem token — not stadium pills. */
   --radius: 0.375rem;
   --site-header-height: 5rem;

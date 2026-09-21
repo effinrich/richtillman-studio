@@ -1,5 +1,6 @@
-import { Github, Linkedin, Mail } from "lucide-react"
-import { SECONDARY_NAV } from "./nav"
+import { Github, Linkedin, Mail } from "lucide-react";
+import { BrandMark } from "../brand-mark";
+import { SECONDARY_NAV } from "./nav";
 
 export function SiteFooter() {
   return (
@@ -7,9 +8,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-3">
         <div>
           <div className="mb-4 flex items-center gap-4">
-            <div className="flex h-10 w-10 items-center justify-center rounded border border-white/20 bg-zinc-900 font-mono text-xl font-bold text-gold">
-              R
-            </div>
+            <BrandMark className="h-10 w-10 text-white" />
             <div>
               <p className="text-sm font-bold text-white">Rich Tillman</p>
               <p className="text-xs uppercase tracking-widest text-white/50">
@@ -78,5 +77,5 @@ export function SiteFooter() {
         </span>
       </div>
     </footer>
-  )
+  );
 }
