@@ -1,5 +1,5 @@
-import type { Preview } from "@storybook/react-vite"
-import "@richtillman/ui/styles.css"
+import type { Preview } from "@storybook/react-vite";
+import "@richtillman/ui/styles.css";
 
 const preview: Preview = {
   tags: ["autodocs"],
@@ -14,8 +14,8 @@ const preview: Preview = {
     },
     chromatic: {
       pauseAnimationAtEnd: true,
-      delay: 300,
-      diffThreshold: 0.5,
+      delay: 100,
+      diffThreshold: 0,
     },
     viewport: {
       viewports: {
@@ -25,6 +25,6 @@ const preview: Preview = {
       },
     },
   },
-}
+};
 
-export default preview
+export default preview;
