@@ -14,6 +14,8 @@ Turborepo for the studio site: the TanStack Start app (`@richtillman/web`), desi
 
 ## Design
 
+[Chromatic](https://www.chromatic.com/builds?appId=6aac43e8772e2fa6b563369d)
+[Storybook](https://6aac43e8772e2fa6b563369d-dhzrqwndjk.chromatic.com/?path=/docs/primitives-badge--docs)
 [Figma design system](https://www.figma.com/design/2XfLIqqD1ztAmD5L9E480v/Rich-Tillman-Studio-%25E2%2580%2594-Design-System?node-id=0-1&p=f&t=hFuyF4DR3iAsKoxJ-0)
 
 ## Packages
