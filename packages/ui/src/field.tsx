@@ -1,21 +1,21 @@
-import type { ReactNode, SelectHTMLAttributes } from "react"
-import { cn } from "./cn"
-import { Input } from "./input"
-import { Label } from "./label"
-import { Textarea } from "./textarea"
+import type { ReactNode, SelectHTMLAttributes } from "react";
+import { cn } from "./cn";
+import { Input } from "./input";
+import { Label } from "./label";
+import { Textarea } from "./textarea";
 
 export type FieldProps = {
-  label: string
-  htmlFor: string
-  error?: string
-  children: ReactNode
-}
+  label: string;
+  htmlFor: string;
+  error?: string;
+  children: ReactNode;
+};
 
 export function Field({ label, htmlFor, error, children }: FieldProps) {
-  const errorId = `${htmlFor}-error`
+  const errorId = `${htmlFor}-error`;
 
   return (
-    <div className="form-field">
+    <div>
       <Label htmlFor={htmlFor}>{label}</Label>
       {children}
       {error ? (
@@ -24,17 +24,17 @@ export function Field({ label, htmlFor, error, children }: FieldProps) {
         </p>
       ) : null}
     </div>
-  )
+  );
 }
 
-export type { InputProps } from "./input"
-export { Input }
-export type { TextareaProps } from "./textarea"
-export { Textarea }
+export type { InputProps } from "./input";
+export { Input };
+export type { TextareaProps } from "./textarea";
+export { Textarea };
 
 export type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
-  error?: string
-}
+  error?: string;
+};
 
 export function Select({ id, error, className, children, ...props }: SelectProps) {
   return (
@@ -50,5 +50,5 @@ export function Select({ id, error, className, children, ...props }: SelectProps
     >
       {children}
     </select>
-  )
+  );
 }

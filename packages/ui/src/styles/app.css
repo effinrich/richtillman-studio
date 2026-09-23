@@ -30,8 +30,14 @@
   --color-border: rgba(255, 255, 255, 0.08);
   --color-input: rgba(0, 0, 0, 0.4);
   --color-ring: #ffd700;
-  /* Controls (Chip, Tag, Badge, Button, Field). Half of the previous 0.75rem token — not stadium pills. */
-  --radius: 0.375rem;
+  /* Success: ContactSuccess banner only. Tints at /10 and /30, text on `success-foreground`. */
+  --color-success: #4ade80;
+  --color-success-foreground: #86efac;
+  /* Controls (Chip, Tag, Badge, Button, Field) render Tailwind's `rounded` (0.25rem).
+     A `--radius: 0.375rem` token was declared here but never referenced by any utility,
+     so it documented an intent nothing honoured. Removed. If controls should move to
+     6px, wire `rounded-[var(--radius)]` into the primitives and re-add it in the same
+     change — the Figma library keeps `radius/control` (6px) as that migration target. */
   --site-header-height: 5rem;
   --ds-subnav-height: 3.5rem;
   --ds-scroll-margin: calc(var(--site-header-height) + var(--ds-subnav-height));

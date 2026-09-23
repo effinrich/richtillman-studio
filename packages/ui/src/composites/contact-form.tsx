@@ -1,8 +1,8 @@
-import { useCallback, useState, type FormEvent } from "react"
-import { Button } from "../button"
-import { Field, Input, Select, Textarea } from "../field"
-import type { ContactSubmitHandler } from "../models"
-import { getFieldErrors, validateField } from "./contact-validation"
+import { useCallback, useState, type FormEvent } from "react";
+import { Button } from "../button";
+import { Field, Input, Select, Textarea } from "../field";
+import type { ContactSubmitHandler } from "../models";
+import { getFieldErrors, validateField } from "./contact-validation";
 
 const PROJECT_TYPES = [
   "Design System",
@@ -11,79 +11,79 @@ const PROJECT_TYPES = [
   "Frontend Platform",
   "Advisory",
   "Other",
-]
+];
 
 function readFormString(form: FormData, name: string): string {
-  const value = form.get(name)
-  return typeof value === "string" ? value : ""
+  const value = form.get(name);
+  return typeof value === "string" ? value : "";
 }
 
 type ContactFormProps = {
-  onSubmit: ContactSubmitHandler
-  onSubmitted?: () => void
-}
+  onSubmit: ContactSubmitHandler;
+  onSubmitted?: () => void;
+};
 
 export function ContactForm({ onSubmit, onSubmitted }: ContactFormProps) {
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleFieldBlur = useCallback((fieldName: string, value: string) => {
-    const newErrors = validateField(fieldName, value)
+    const newErrors = validateField(fieldName, value);
     setErrors((prev) => {
-      const updated = { ...prev }
-      const message = newErrors[fieldName]
+      const updated = { ...prev };
+      const message = newErrors[fieldName];
       if (message) {
-        updated[fieldName] = message
+        updated[fieldName] = message;
       } else {
-        delete updated[fieldName]
+        delete updated[fieldName];
       }
-      return updated
-    })
-  }, [])
+      return updated;
+    });
+  }, []);
 
   const handleFieldChange = useCallback(
     (fieldName: string, value: string) => {
       if (errors[fieldName]) {
-        const newErrors = validateField(fieldName, value)
-        const message = newErrors[fieldName]
+        const newErrors = validateField(fieldName, value);
+        const message = newErrors[fieldName];
         if (message) {
-          setErrors((prev) => ({ ...prev, [fieldName]: message }))
+          setErrors((prev) => ({ ...prev, [fieldName]: message }));
         } else {
           setErrors((prev) => {
-            const updated = { ...prev }
-            delete updated[fieldName]
-            return updated
-          })
+            const updated = { ...prev };
+            delete updated[fieldName];
+            return updated;
+          });
         }
       }
     },
     [errors],
-  )
+  );
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    setLoading(true)
-    setError(null)
+    event.preventDefault();
+    setLoading(true);
+    setError(null);
 
-    const form = new FormData(event.currentTarget)
+    const form = new FormData(event.currentTarget);
     const formData = {
       name: readFormString(form, "name"),
       email: readFormString(form, "email"),
       company: readFormString(form, "company") || undefined,
       projectType: readFormString(form, "projectType"),
       message: readFormString(form, "message"),
-    }
+    };
 
     const validationErrors = getFieldErrors({
       name: formData.name,
       email: formData.email,
       message: formData.message,
-    })
+    });
     if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors)
-      setLoading(false)
-      return
+      setErrors(validationErrors);
+      setLoading(false);
+      return;
     }
 
     try {
@@ -93,20 +93,20 @@ export function ContactForm({ onSubmit, onSubmitted }: ContactFormProps) {
         company: formData.company,
         projectType: formData.projectType,
         message: formData.message,
-      })
-      event.currentTarget.reset()
-      setErrors({})
-      onSubmitted?.()
+      });
+      event.currentTarget.reset();
+      setErrors({});
+      onSubmitted?.();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to submit")
+      setError(err instanceof Error ? err.message : "Failed to submit");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 lg:col-span-3">
-      <div className="form-field grid gap-6 sm:grid-cols-2">
+      <div className="grid gap-6 sm:grid-cols-2">
         <Field label="Name" htmlFor="name" error={errors.name}>
           <Input
             id="name"
@@ -165,5 +165,5 @@ export function ContactForm({ onSubmit, onSubmitted }: ContactFormProps) {
         {loading ? "Sending..." : "Send message"}
       </Button>
     </form>
-  )
+  );
 }
