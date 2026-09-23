@@ -40,14 +40,4 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
           workingDir: packages/ui
-          buildScriptName: build-storybook
-          exitOnceUploaded: true
-          onlyChanged: true
-          zip: true
-          retries: 5
-          timeout: 10000
-          verbose: true
-          storybookBaseDir: packages/ui
-          storybookConfigDir: .storybook
-          # storybookStaticDir: packages/ui/storybook-static
-          # storybookBuildDir: packages/ui/storybook-static
+          configFile: ../../chromatic.config.json

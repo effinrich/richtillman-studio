@@ -3,7 +3,7 @@
 JIT design-system package for **richtillman.xyz**: primitives, layout, composites, and screens. App pages in `@richtillman/web` are thin wrappers that pass props and data. Import by package name only:
 
 ```ts
-import { Button, GlassPanel } from "@richtillman/ui"
+import { Button, GlassPanel } from "@richtillman/ui";
 ```
 
 This package does **not** depend on `@richtillman/storybook-mcp`. The MCP scans this folder from env/config and writes colocated stories that import the sibling module (`./button`), not the package barrel.
@@ -28,7 +28,7 @@ bun run chromatic          # bun run --cwd packages/ui chromatic
 
 That is the only supported Chromatic command. Do not `npx chromatic` / `bunx chromatic` from the repo root. Set `CHROMATIC_PROJECT_TOKEN` in the environment; never pass `--project-token` or commit it.
 
-One GitHub Action: `.github/workflows/chromatic.yml`. CI installs at the repo root, then `chromaui/action` uses `workingDir: packages/ui` and `buildScriptName: chromatic-build` (`storybook build`). PRs are a required check; pushes to `main` auto-accept the baseline. Chromatic a11y is on via `@storybook/addon-a11y` plus the project dashboard toggle.
+One GitHub Action: `.github/workflows/chromatic.yml`. CI installs at the repo root, then `chromaui/action` runs from `packages/ui` and reads the same root config as the package script. That config selects `chromatic-build` (`storybook build`), enables TurboSnap, and exits after upload. PRs are a required check; pushes to `main` auto-accept the baseline. Chromatic a11y is on via `@storybook/addon-a11y` plus the project dashboard toggle.
 
 ## Scripts
 

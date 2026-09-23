@@ -1,27 +1,28 @@
-import { useCallback, useEffect, useRef, useState, type MouseEvent } from "react"
-import { cn } from "../cn"
+import { useCallback, useEffect, useRef, useState, type MouseEvent } from "react";
+import { cn } from "../cn";
 
-export type CanvasIntensity = "ambient" | "recessed"
+export type CanvasIntensity = "ambient" | "recessed";
 
 type CanvasBackgroundProps = {
-  className?: string
-  intensity?: CanvasIntensity
-}
+  className?: string;
+  intensity?: CanvasIntensity;
+};
 
-const DEFAULT_TUBE_COLORS = ["#00f0ff", "#ff007f", "#ffd700"]
-const DEFAULT_LIGHT_COLORS = ["#83f36e", "#00f0ff", "#ff008a", "#ffd700"]
+const DEFAULT_TUBE_COLORS = ["#00f0ff", "#ff007f", "#ffd700"];
+const DEFAULT_LIGHT_COLORS = ["#83f36e", "#00f0ff", "#ff008a", "#ffd700"];
+const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 
 const TRACE_OPACITY: Record<CanvasIntensity, number> = {
   ambient: 0.32,
   recessed: 0.25,
-}
+};
 
 const SCRIM: Record<CanvasIntensity, string> = {
   ambient:
     "pointer-events-none absolute inset-0 z-0 bg-linear-to-b from-black/55 via-black/70 to-black/92",
   recessed:
     "pointer-events-none absolute inset-0 z-0 bg-linear-to-b from-black/68 via-black/80 to-black/94",
-}
+};
 
 function randomHexColors(count: number) {
   return Array.from(
@@ -30,99 +31,104 @@ function randomHexColors(count: number) {
       `#${Math.floor(Math.random() * 16777215)
         .toString(16)
         .padStart(6, "0")}`,
-  )
+  );
 }
 
 type TubesApp = {
   tubes: {
-    setColors: (colors: Array<string>) => void
-    setLightsColors: (colors: Array<string>) => void
-  }
-}
+    setColors: (colors: Array<string>) => void;
+    setLightsColors: (colors: Array<string>) => void;
+  };
+};
 
 function usePrefersReducedMotion() {
-  const [reduced, setReduced] = useState(false)
+  const [reduced, setReduced] = useState(false);
 
   useEffect(() => {
-    if (typeof window.matchMedia !== "function") return
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)")
-    const onChange = () => setReduced(media.matches)
-    onChange()
-    media.addEventListener("change", onChange)
+    if (typeof window.matchMedia !== "function") return;
+    const media = window.matchMedia(REDUCED_MOTION_QUERY);
+    const onChange = () => setReduced(media.matches);
+    onChange();
+    media.addEventListener("change", onChange);
     // oxlint-disable-next-line typescript/consistent-return
-    return () => media.removeEventListener("change", onChange)
-  }, [])
+    return () => media.removeEventListener("change", onChange);
+  }, []);
 
-  return reduced
+  return reduced;
 }
 
 export function CanvasBackground({ className, intensity = "ambient" }: CanvasBackgroundProps) {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const appRef = useRef<TubesApp | null>(null)
-  const reduceMotion = usePrefersReducedMotion()
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const appRef = useRef<TubesApp | null>(null);
+  const reduceMotion = usePrefersReducedMotion();
 
   const randomize = useCallback(() => {
-    if (!appRef.current) return
-    appRef.current.tubes.setColors(randomHexColors(3))
-    appRef.current.tubes.setLightsColors(randomHexColors(4))
-  }, [])
+    if (!appRef.current) return;
+    appRef.current.tubes.setColors(randomHexColors(3));
+    appRef.current.tubes.setLightsColors(randomHexColors(4));
+  }, []);
 
   useEffect(() => {
-    if (reduceMotion) return
+    if (
+      reduceMotion ||
+      (typeof window.matchMedia === "function" && window.matchMedia(REDUCED_MOTION_QUERY).matches)
+    ) {
+      return;
+    }
 
-    let cancelled = false
-    let frame = 0
-    let timeoutId: number | undefined
+    let cancelled = false;
+    let frame = 0;
+    let timeoutId: number | undefined;
 
     async function init() {
       try {
-        const script = document.createElement("script")
-        script.type = "module"
+        const script = document.createElement("script");
+        script.type = "module";
         script.textContent = `
           import TubesCursor from 'https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js';
           window.tubesCursor = TubesCursor;
-        `
-        document.head.appendChild(script)
+        `;
+        document.head.appendChild(script);
 
         await new Promise<void>((resolve, reject) => {
           timeoutId = window.setTimeout(() => {
-            window.cancelAnimationFrame(frame)
-            reject(new Error("threejs-components CDN load timed out"))
-          }, 5000)
+            window.cancelAnimationFrame(frame);
+            reject(new Error("threejs-components CDN load timed out"));
+          }, 5000);
 
           const check = () => {
             if ((window as Window & { tubesCursor?: unknown }).tubesCursor) {
-              window.clearTimeout(timeoutId)
-              resolve()
+              window.clearTimeout(timeoutId);
+              resolve();
             } else if (cancelled) {
-              window.clearTimeout(timeoutId)
-              reject(new Error("Canvas unmounted"))
+              window.clearTimeout(timeoutId);
+              reject(new Error("Canvas unmounted"));
             } else {
-              frame = requestAnimationFrame(check)
+              frame = requestAnimationFrame(check);
             }
-          }
+          };
 
-          check()
-        })
+          check();
+        });
 
-        if (cancelled || !canvasRef.current) return
+        if (cancelled || !canvasRef.current) return;
 
-        const TubesCursor = (
-          // oxlint-disable-next-line typescript/no-unsafe-type-assertion
+        const TubesCursor = // oxlint-disable-next-line typescript/no-unsafe-type-assertion
+        (
           window as unknown as {
             tubesCursor: (
               canvas: HTMLCanvasElement,
               options: {
                 tubes: {
-                  colors: Array<string>
-                  lights: { intensity: number; colors: Array<string> }
-                }
+                  colors: Array<string>;
+                  lights: { intensity: number; colors: Array<string> };
+                };
               },
-            ) => TubesApp
+            ) => TubesApp;
           }
-        ).tubesCursor
+        ).tubesCursor;
 
-        if (!TubesCursor) return
+        if (!TubesCursor) return;
 
         appRef.current = TubesCursor(canvasRef.current, {
           tubes: {
@@ -132,27 +138,27 @@ export function CanvasBackground({ className, intensity = "ambient" }: CanvasBac
               colors: DEFAULT_LIGHT_COLORS,
             },
           },
-        })
+        });
       } catch {
         // Graceful fallback when WebGL or CDN module is unavailable
       }
     }
 
-    void init()
+    void init();
     // oxlint-disable-next-line typescript/consistent-return
     return () => {
-      cancelled = true
-      if (timeoutId !== undefined) window.clearTimeout(timeoutId)
-      window.cancelAnimationFrame(frame)
-      appRef.current = null
-    }
-  }, [reduceMotion])
+      cancelled = true;
+      if (timeoutId !== undefined) window.clearTimeout(timeoutId);
+      window.cancelAnimationFrame(frame);
+      appRef.current = null;
+    };
+  }, [reduceMotion]);
 
   function handleClick(event: MouseEvent<HTMLDivElement>) {
     // oxlint-disable-next-line typescript/no-unsafe-type-assertion
-    const target = event.target as HTMLElement
-    if (target.closest("a, button, input, textarea, select, label")) return
-    randomize()
+    const target = event.target as HTMLElement;
+    if (target.closest("a, button, input, textarea, select, label")) return;
+    randomize();
   }
 
   return (
@@ -181,5 +187,5 @@ export function CanvasBackground({ className, intensity = "ambient" }: CanvasBac
       />
       <div className={SCRIM[intensity]} />
     </div>
-  )
+  );
 }
