@@ -33,7 +33,6 @@
       "persistent": true
     },
     "build-storybook": {
-      "cache": false,
       "outputs": ["storybook-static/**"]
     },
     "chromatic": {

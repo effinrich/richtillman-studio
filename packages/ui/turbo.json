@@ -1,8 +1,0 @@
-{
-  "extends": ["//"],
-  "tasks": {
-    "chromatic": {
-      "cache": false
-    }
-  }
-}
