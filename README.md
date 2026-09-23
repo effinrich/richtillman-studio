@@ -12,6 +12,10 @@ Turborepo for the studio site: the TanStack Start app (`@richtillman/web`), desi
 - **Visual QA:** Storybook 10 (`@storybook/react-vite` 10.6.0) + Chromatic (primitives and screens in `packages/ui`). Story interaction tests are `play` functions, not Vitest/Playwright.
 - **Tooling:** oxlint, oxfmt, lefthook
 
+## Design
+
+[Figma design system](https://www.figma.com/design/2XfLIqqD1ztAmD5L9E480v/Rich-Tillman-Studio-%25E2%2580%2594-Design-System?node-id=0-1&p=f&t=hFuyF4DR3iAsKoxJ-0)
+
 ## Packages
 
 ```
