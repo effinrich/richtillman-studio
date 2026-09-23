@@ -6,7 +6,7 @@
 - Keep Storybook MCP reviewer setup to `bun run mcp:setup` plus enabling the server in Cursor; document it in README, with no local `dist` build.
 - Be realistic and direct: disagree when that is the honest answer; no sneer and no groveling/yes-man.
 - For long work, start with a hardened plan: one-sentence goal, countable targets, and pass/fail specifics; re-read it instead of silently replanning.
-- Do not run Chromatic from local (`bun run chromatic` / CLI). Once set up, Chromatic is CI/production only. Local work is `storybook dev`.
+- Agent behavior: do not run Chromatic from local (`bun run chromatic` / CLI) while handling review tasks; prefer `storybook dev` locally and let CI run Chromatic.
 
 ## Learned Workspace Facts
 

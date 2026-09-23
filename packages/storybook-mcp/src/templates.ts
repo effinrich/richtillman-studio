@@ -96,9 +96,9 @@ export function generateWithVariantsTemplate(
 ): string {
   const variantStories = component.dependencies.hasVariants
     ? `
-export const Gold: Story = {
+export const Primary: Story = {
   args: {
-    variant: "gold",
+    variant: "primary",
   },
 }
 

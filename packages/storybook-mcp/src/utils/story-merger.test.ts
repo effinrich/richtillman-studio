@@ -21,31 +21,31 @@ export const Default: Story = {
   args: {},
 }
 
-export const Gold: Story = {
-  args: { variant: "gold" },
+export const Primary: Story = {
+  args: { variant: "primary" },
 }
 `
 
 describe("parseStoryExports", () => {
   it("returns CSF story names", () => {
-    expect(parseStoryExports(existing)).toEqual(["Default", "Gold"])
+    expect(parseStoryExports(existing)).toEqual(["Default", "Primary"])
   })
 })
 
 describe("extractStoryBlock", () => {
   it("returns one export block", () => {
-    expect(extractStoryBlock(existing, "Gold")).toContain('variant: "gold"')
+    expect(extractStoryBlock(existing, "Primary")).toContain('variant: "primary"')
   })
 })
 
 describe("mergeStories", () => {
   it("keeps user-added exports", () => {
     const generated = existing.replace(
-      /export const Gold:[\s\S]*$/,
+      /export const Primary:[\s\S]*$/,
       "export const Default: Story = {\n  args: {},\n}\n",
     )
     const result = mergeStories(generated, existing, ["Default"])
-    expect(result.preserved).toEqual(["Gold"])
+    expect(result.preserved).toEqual(["Primary"])
     expect(result.content).toContain("User-added stories")
   })
 })
@@ -57,6 +57,6 @@ describe("mergeStoryContent", () => {
       `export const Outline: Story = {\n  args: { variant: "outline" },\n}\n`,
       "Outline",
     )
-    expect(parseStoryExports(next)).toEqual(["Default", "Gold", "Outline"])
+    expect(parseStoryExports(next)).toEqual(["Default", "Primary", "Outline"])
   })
 })
