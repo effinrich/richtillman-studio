@@ -10,7 +10,7 @@ load, and make every published number on the site checkable by a third party.
 
 Measured 2026-11-07 against the deployed Worker `richtillman-studio` with Lighthouse 12.8.2,
 mobile preset (simulated throttling), Chromium from the Playwright install. Byte attribution
-comes from sourcemap mapping of an uncached production build whose asset hashes match the
+comes from sourcemap mapping of an uncached production bundle whose asset hashes match the
 deployed site byte for byte.
 
 | Metric                    | Baseline                                                      |
@@ -93,8 +93,8 @@ inside the CSS bundle.
 
 ## Step 3 — Import screens directly instead of through the UI barrel
 
-**Intent**: `packages/ui/src/index.ts` re-exports every screen, and all sixteen screens import
-`PortfolioLayout`, so Rollup hoists the whole barrel surface into one shared chunk of 99,496 B
+**Intent**: The UI package barrel re-exports every screen, and all sixteen screens import
+`PortfolioLayout`, so Rollup hoists the whole export surface into one shared chunk of 99,496 B
 that every route modulepreloads. Refactor the web app to import screen modules by their direct
 path, leaving the barrel for Storybook only, so each route pulls only the screens it renders.
 Add a test that asserts the home route's preload list contains no module from a screen the
@@ -105,7 +105,7 @@ route does not render.
 - The home route's modulepreload list contains no `design-system-screen`, `resume-screen`,
   `case-study-detail-screen`, or `contact-form` module.
 - Lighthouse mobile unused JavaScript savings are under 40 KiB.
-- Every route still renders, and Storybook still builds with the barrel intact.
+- Every route still renders, and Storybook still works with the barrel intact.
 
 **Out of scope**: Splitting `PortfolioLayout` itself, and moving the design system into a
 separate package.
@@ -122,7 +122,7 @@ seed chunk on the home route carries only the metrics collection.
 
 - The home route ships no more than 5 KiB gzip of content module.
 - Every route still falls back to the seed data when `VITE_SUPABASE_URL` is unset.
-- No loader performs a network call during server rendering in the production build.
+- No loader performs a network call during server rendering in the production bundle.
 
 **Out of scope**: Enabling Supabase, adding new content collections, or changing any copy.
 
@@ -150,16 +150,16 @@ twelve-month measurement window.
 `public, max-age=0, must-revalidate`, so every repeat view re-renders in the Worker and pays
 seven conditional round trips for content that is already content-hashed. Implement immutable
 caching for hashed assets and a short, explicit policy for the document, and add a CI check
-that fails the build when the client bundle grows past a budget. The budget also guards the
-TanStack devtools packages, which cost zero bytes today only because the devtools Vite plugin
-strips them; removing that plugin would add 244,686 B.
+that fails when the client bundle grows past a budget. The budget also guards the TanStack
+devtools packages, which cost zero bytes today only because the devtools Vite plugin strips
+them; removing that plugin would add 244,686 B.
 
 **Acceptance criteria**:
 
 - Hashed assets return `Cache-Control: public, max-age=31536000, immutable`, and a repeat
   view transfers 0 bytes for them without a revalidation round trip.
 - The document is either not cached or cached for under 300 seconds.
-- CI fails when the client JavaScript exceeds 160 KiB gzip, and the build passes today.
+- CI fails when the client JavaScript exceeds 160 KiB gzip, and the current bundle passes.
 
 **Out of scope**: Moving the site off Cloudflare, and changing the Worker runtime or the
 deployment pipeline.
@@ -169,8 +169,8 @@ deployment pipeline.
 **Intent**: The Lighthouse scores and the npm download counts on the site decay, and the site
 quotes them with a measurement date. After the changes above land, verify every published
 figure against its source, update the copy with the new numbers and the new measurement date,
-and confirm the whole site still passes the production checks: every route returns 200, no
-console errors, no stale strings.
+and confirm the whole site still passes the production integration checks: every route returns
+200, no console errors, no stale strings.
 
 **Acceptance criteria**:
 
