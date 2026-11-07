@@ -1,11 +1,14 @@
-import { ArrowRight } from "lucide-react"
 import { DesignSystemScreen } from "@richtillman/ui"
-import { PROJECTS } from "#/features/content/seed-data"
+import { ArrowRight } from "lucide-react"
+
+import type { Project } from "#/features/content/seed-data"
 import { ButtonLink } from "#/features/ui/button-link"
 
-const specimenProject = PROJECTS.find((project) => project.slug === "forgekit-mcp") ?? PROJECTS[0]
+type DesignSystemPageProps = {
+  specimenProject: Project
+}
 
-export function DesignSystemPage() {
+export function DesignSystemPage({ specimenProject }: DesignSystemPageProps) {
   return (
     <DesignSystemScreen
       specimenProject={specimenProject}

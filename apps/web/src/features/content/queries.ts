@@ -40,6 +40,17 @@ export async function getProjects() {
   )
 }
 
+export async function getSpecimenProject() {
+  const projects = await getProjects()
+  const specimen = projects.find((project) => project.slug === "forgekit-mcp") ?? projects[0]
+
+  if (!specimen) {
+    throw new Error("No project is available for the design system specimen")
+  }
+
+  return specimen
+}
+
 export async function getHomeMetrics() {
   const model = await getNpmDownloads()
 
