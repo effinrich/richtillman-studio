@@ -38,7 +38,7 @@ const SECTIONS: SiteMapSectionModel[] = [
       {
         title: "Nx Monorepo Architecture",
         href: "/case-studies/nx-monorepo",
-        description: "40+ packages, 12 teams",
+        description: "15+ engineers, 3 teams",
       },
       { title: "Services & Expertise", href: "/services", description: "Engagement offerings" },
       { title: "Resources & Stack", href: "/resources", description: "Tools and guides" },
@@ -66,9 +66,9 @@ const SECTIONS: SiteMapSectionModel[] = [
         description: "Featured analysis",
       },
       {
-        title: "Architecting for 100",
-        href: "/insights/architecting-for-100-on-lighthouse",
-        description: "Lighthouse playbook",
+        title: "Red-Teaming Frontier Models",
+        href: "/insights/red-teaming-frontend-models",
+        description: "AI evaluation notes",
       },
       {
         title: "Storybook Playgrounds",
@@ -81,9 +81,9 @@ const SECTIONS: SiteMapSectionModel[] = [
         description: "Leadership essay",
       },
       {
-        title: "LLM Agents in Monorepo",
-        href: "/insights/llm-agents-in-the-monorepo",
-        description: "48-hour migration",
+        title: "Onboarding Backend Engineers",
+        href: "/insights/onboarding-backend-engineers-to-react",
+        description: "One-month React curriculum",
       },
       {
         title: "Mastering TanStack Start",
@@ -93,7 +93,7 @@ const SECTIONS: SiteMapSectionModel[] = [
       {
         title: "React Native at Scale",
         href: "/insights/shipping-react-native-at-scale",
-        description: "500K+ users lessons",
+        description: "100K+ users lessons",
       },
     ],
   },

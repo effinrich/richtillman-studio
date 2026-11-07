@@ -1,4 +1,5 @@
 import type { ReactNode } from "react"
+
 import { Badge } from "../badge"
 import { ArticleCard } from "../composites/article-card"
 import { GlassPanel } from "../glass-panel"
@@ -25,7 +26,7 @@ export function InsightsScreen({ articles, featuredCta }: InsightsScreenProps) {
               Sharing the <span className="neon-text">signal</span> in the noise.
             </>
           }
-          description="Weekly thoughts on engineering leadership, design systems at scale, and the future of AI-native developer experience."
+          description="Notes on engineering leadership, design systems at scale, and the future of AI-native developer experience."
         />
 
         {featured ? (

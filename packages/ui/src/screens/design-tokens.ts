@@ -76,7 +76,7 @@ export const TYPE_SPECIMENS: TypeSpecimen[] = [
   },
   {
     role: "Metric",
-    sample: "6,200+",
+    sample: "8,000+",
     spec: "Inter 700 · 30–48px · tracking-tight",
     className: "text-4xl font-bold tracking-tight md:text-5xl",
   },

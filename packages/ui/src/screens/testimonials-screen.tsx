@@ -1,15 +1,16 @@
 import { Quote } from "lucide-react"
+
 import { GlassPanel } from "../glass-panel"
 import { PortfolioLayout } from "../layout/portfolio-layout"
 import type { Metric } from "../models"
-import { SectionHeader } from "../section-header"
 import type { TestimonialModel } from "../models"
+import { SectionHeader } from "../section-header"
 
 const SOCIAL_PROOF: Metric[] = [
-  { value: "50+", label: "Teams advised" },
-  { value: "500K+", label: "Users shipped to" },
-  { value: "98%", label: "Visual test coverage" },
-  { value: "10+", label: "Years shipping React" }
+  { value: "15", label: "Years shipping React" },
+  { value: "100K+", label: "Users on the shipped RN app" },
+  { value: "200", label: "Components in the Freebird system" },
+  { value: "8,000+", label: "npm downloads in 12 months" }
 ]
 
 export type TestimonialsScreenProps = {

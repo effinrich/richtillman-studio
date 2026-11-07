@@ -12,9 +12,9 @@ import type {
 } from "./models"
 
 export const SAMPLE_METRICS: Metric[] = [
-  { value: "6,200+", label: "npm installs · ForgeKit MCP" },
-  { value: "200+", label: "component design system" },
-  { value: "500K+", label: "users on shipped RN apps" },
+  { value: "8,000+", label: "npm downloads in 12 months · ForgeKit MCP" },
+  { value: "200", label: "components in the Freebird design system" },
+  { value: "100K+", label: "users on the Pineapple React Native app" },
 ]
 
 export const SAMPLE_PROJECTS: ProjectCardModel[] = [
@@ -23,7 +23,7 @@ export const SAMPLE_PROJECTS: ProjectCardModel[] = [
     title: "TokenCast",
     description: "Paste design tokens, get a live preview and exportable theme code.",
     tags: ["React Router", "Supabase", "Design Tokens"],
-    metric: "Lighthouse 100/99",
+    metric: "Lighthouse 100 perf / 91 a11y",
     href: "https://tokencast.vercel.app",
   },
   {
@@ -31,21 +31,21 @@ export const SAMPLE_PROJECTS: ProjectCardModel[] = [
     title: "ForgeKit MCP",
     description: "MCP servers for Figma-to-React design system workflows.",
     tags: ["MCP", "Figma", "Design Systems"],
-    metric: "6,200+ npm installs",
+    metric: "8,000+ npm downloads (12 mo)",
     href: "/projects/forgekit-mcp",
   },
   {
     slug: "nx-monorepo-scale",
     title: "Nx Monorepo Scale",
-    description: "Scaled from 3 apps to 40+ packages across 12 product teams.",
-    tags: ["Nx", "Monorepo", "CI/CD"],
-    metric: "65% faster CI",
+    description: "Led frontend for an Nx monorepo across three cross-functional teams.",
+    tags: ["Nx", "Monorepo", "Platform"],
+    metric: "15+ engineers",
     href: "/case-studies/nx-monorepo",
   },
   {
     slug: "flagship-mobile",
     title: "Pineapple Cross-Platform",
-    description: "Nx monorepo hosting 8+ React/TypeScript apps for 100K+ users.",
+    description: "Nx monorepo with a shared design-system UI library for 100K+ users.",
     tags: ["Nx", "Expo", "React Native"],
     metric: "100K+ users",
     href: "/insights/shipping-react-native-at-scale",
@@ -55,7 +55,7 @@ export const SAMPLE_PROJECTS: ProjectCardModel[] = [
     title: "Freebird Design System",
     description: "200 components spanning B2B, B2C, and React Native from a single system.",
     tags: ["React", "Storybook", "React Native"],
-    metric: "200+ components",
+    metric: "200 components",
     href: "/case-studies/design-system-scale",
   },
 ]
@@ -87,11 +87,11 @@ export const SAMPLE_CASE_STUDIES: CaseStudyModel[] = [
   {
     slug: "nx-monorepo",
     title: "Nx Monorepo at Redesign Health",
-    subtitle: "38 projects, enforced boundaries, Chakra v3",
+    subtitle: "15+ engineers, enforced boundaries, Chakra v3",
     tags: ["Nx", "Design Systems"],
     summary: "Staff to Engineering Director across a platform portal and shared UI library.",
     metrics: [
-      { label: "Projects", value: "38" },
+      { label: "Team members", value: "15+" },
       { label: "Teams", value: "3" },
     ],
     href: "/case-studies/nx-monorepo",

@@ -1,4 +1,5 @@
 import { ArrowLeft, ExternalLink } from "lucide-react"
+
 import { Badge } from "../badge"
 import { GlassPanel } from "../glass-panel"
 import { PortfolioLayout } from "../layout/portfolio-layout"
@@ -53,7 +54,7 @@ export function ForgekitMcpScreen({ backHref = "/work" }: ForgekitMcpScreenProps
 
         <div className="mb-12 grid grid-cols-3 gap-4">
           {[
-            { value: "6,200+", label: "npm installs" },
+            { value: "8,000+", label: "npm downloads (12 mo)" },
             { value: "2", label: "MCP packages" },
             { value: "4", label: "IDE integrations" },
           ].map((metric) => (
@@ -66,10 +67,10 @@ export function ForgekitMcpScreen({ backHref = "/work" }: ForgekitMcpScreenProps
 
         <article className="mb-12 space-y-6">
           <p className="text-lg leading-relaxed text-white/70">
-            ForgeKit MCP integrates directly with AI coding assistants like Cursor, Windsurf, and
-            Claude Desktop. Instead of screenshot interpretation, the servers return structured
-            design-system context — tokens, component trees, and Storybook metadata agents can act
-            on.
+            ForgeKit MCP integrates directly with AI coding assistants like Cursor, VS Code, Zed,
+            Continue, and Claude Desktop. Instead of screenshot interpretation, the servers return
+            structured design-system context — tokens, component trees, and Storybook metadata
+            agents can act on.
           </p>
           <p className="text-lg leading-relaxed text-white/70">
             The goal is code that matches your system: typed theme configs and stories grounded in

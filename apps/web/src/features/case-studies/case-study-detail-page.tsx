@@ -1,6 +1,7 @@
 import { CaseStudyDetailScreen } from "@richtillman/ui"
-import type { CaseStudy } from "#/features/content/seed-data"
+
 import { getCaseStudies } from "#/features/content/queries"
+import type { CaseStudy } from "#/features/content/seed-data"
 
 type CaseStudyDetailPageProps = {
   caseStudy: CaseStudy
@@ -19,11 +20,11 @@ const DETAIL_CONTENT: Record<string, DetailSection[]> = {
     },
     {
       label: "Architecture",
-      body: "The Nx monorepo runs 38 projects — the Platform Portal frontend, a lightweight Express mock API server that replicates the real backend for local dev, and a shared design system consumed across every feature module — all under enforced module boundaries.",
+      body: "The Nx monorepo runs the Platform Portal frontend, a lightweight Express mock API server that replicates the real backend for local dev, and a shared design system consumed across every feature module — all under enforced module boundaries.",
     },
     {
       label: "Current work",
-      body: "Actively maintained, not archived: a full Chakra UI v2 → v3 migration touched 180+ files across libs/ and apps/, and React 19's useTransition now keeps paginated filter views (IP Marketplace, CEO Directory) responsive without blocking on stale data.",
+      body: "Actively maintained, not archived: a full Chakra UI v2 → v3 migration across libs/ and apps/, and React 19's useTransition now keeps paginated filter views (IP Marketplace, CEO Directory) responsive without blocking on stale data.",
     },
   ],
   "forgekit-mcp": [
@@ -33,11 +34,11 @@ const DETAIL_CONTENT: Record<string, DetailSection[]> = {
     },
     {
       label: "Approach",
-      body: "Both servers speak Model Context Protocol so Cursor, Windsurf, and Claude Desktop can query design-system truth instead of guessing from screenshots. The Figma path uses the REST API plus a custom parser for component instance resolution.",
+      body: "Both servers speak Model Context Protocol so Cursor, VS Code, Zed, Continue, and Claude Desktop can query design-system truth instead of guessing from screenshots. The Figma path uses the REST API plus a custom parser for component instance resolution.",
     },
     {
       label: "Impact",
-      body: "6,200+ npm installs validated the thesis: developers want AI tools that understand their design system, not generic code generators. CLI scaffolding at forgekit.cloud wraps the same token sync into Nx monorepo bootstraps.",
+      body: "8,000+ npm downloads in the last 12 months validated the thesis: developers want AI tools that understand their design system, not generic code generators. CLI scaffolding at forgekit.cloud wraps the same token sync into Nx monorepo bootstraps.",
     },
   ],
   tokencast: [
@@ -65,7 +66,7 @@ const DETAIL_CONTENT: Record<string, DetailSection[]> = {
     },
     {
       label: "Result",
-      body: "18 real, link-verified MCP servers, searchable and filterable, with a Lighthouse score of 100 accessibility and 97 performance.",
+      body: "18 real, link-verified MCP servers, searchable and filterable, with a Lighthouse score of 100 performance and 100 accessibility (measured Nov 2026).",
     },
   ],
   "design-system-scale": [
