@@ -29,6 +29,7 @@ playwright-browsers/
 
 # Local agent / editor state
 .cursor/
+.mcp.json
 .omc/
 .qodo/
 ContextPool/
