@@ -1,6 +1,10 @@
 import { ResumeScreen } from "@richtillman/ui"
-import { getResumeSections } from "#/features/content/queries"
+import type { ResumeModel } from "@richtillman/ui"
 
-export function ResumePage() {
-  return <ResumeScreen resume={getResumeSections()} />
+type ResumePageProps = {
+  resume: ResumeModel
+}
+
+export function ResumePage({ resume }: ResumePageProps) {
+  return <ResumeScreen resume={resume} />
 }

@@ -64,9 +64,12 @@ export type Resource = {
 // registry API, Lighthouse scores were measured with Lighthouse 12.8.2, and
 // the Freebird, Pineapple, and Redesign Health figures match the resume.
 export const METRICS = [
-  { value: "8,000+", label: "npm downloads in 12 months · ForgeKit MCP" },
+  {
+    value: "{{npm_downloads}}",
+    label: "npm downloads in 12 months · {{npm_package_count}} published packages"
+  },
   { value: "200", label: "components in the Freebird design system" },
-  { value: "100K+", label: "users on the Pineapple React Native app" },
+  { value: "100K+", label: "users on the Pineapple React Native app" }
 ] as const
 
 export const PROJECTS: Project[] = [
@@ -79,7 +82,7 @@ export const PROJECTS: Project[] = [
     metric: "Lighthouse 100 perf / 91 a11y",
     href: "https://tokencast.vercel.app",
     image: "/images/projects/tokencast.png",
-    featured: true,
+    featured: true
   },
   {
     slug: "mcp-atlas",
@@ -90,7 +93,7 @@ export const PROJECTS: Project[] = [
     metric: "18 verified servers",
     href: "https://mcp-atlas-orcin.vercel.app",
     image: "/images/projects/mcp-atlas.png",
-    featured: true,
+    featured: true
   },
   {
     slug: "forgekit-mcp",
@@ -98,10 +101,10 @@ export const PROJECTS: Project[] = [
     description:
       "MCP servers purpose-built for Figma-to-React design system workflows — forgekit-figma-mcp (tokens → typed themes) and forgekit-storybook-mcp (argTypes → agent context).",
     tags: ["MCP", "Figma", "Design Systems"],
-    metric: "8,000+ npm downloads (12 mo)",
+    metric: "{{featured_npm_downloads}} npm downloads (12 mo)",
     href: "/projects/forgekit-mcp",
     image: "/images/projects/forgekit-mcp.png",
-    featured: true,
+    featured: true
   },
   {
     slug: "storybook-system",
@@ -111,7 +114,7 @@ export const PROJECTS: Project[] = [
     tags: ["React", "Storybook", "React Native"],
     metric: "200 components",
     href: "/case-studies/design-system-scale",
-    featured: true,
+    featured: true
   },
   {
     slug: "flagship-mobile",
@@ -121,7 +124,7 @@ export const PROJECTS: Project[] = [
     tags: ["Nx", "Expo", "React Native"],
     metric: "100K+ users",
     href: "/insights/shipping-react-native-at-scale",
-    featured: false,
+    featured: false
   },
   {
     slug: "nx-monorepo-scale",
@@ -131,7 +134,7 @@ export const PROJECTS: Project[] = [
     tags: ["Nx", "Monorepo", "Platform"],
     metric: "15+ engineers",
     href: "/case-studies/nx-monorepo",
-    featured: true,
+    featured: true
   },
   {
     slug: "tidy-app",
@@ -141,7 +144,7 @@ export const PROJECTS: Project[] = [
     tags: ["React Native", "Expo", "Supabase"],
     metric: "TestFlight beta",
     href: "https://tidyapp.me",
-    featured: false,
+    featured: false
   },
   {
     slug: "forgekit-storybook-mcp",
@@ -151,8 +154,8 @@ export const PROJECTS: Project[] = [
     tags: ["MCP", "Storybook", "AI"],
     metric: "Active production use",
     href: "https://www.npmjs.com/package/forgekit-storybook-mcp",
-    featured: false,
-  },
+    featured: false
+  }
 ]
 
 export const ARTICLES: Article[] = [
@@ -168,8 +171,8 @@ export const ARTICLES: Article[] = [
     content: [
       "The Model Context Protocol (MCP) represents a fundamental shift in how frontend engineers interact with AI coding assistants. Instead of treating design assets as static screenshots, MCP exposes them as structured, queryable context.",
       "For years, the hand-off was the most friction-filled part of our work. With MCP, the hand-off disappears. Design tokens, components, and layout patterns are live nodes in a context graph that AI can traverse.",
-      "MCP represents a shift from AI as an external generator to AI as an integrated team member with direct access to your design system truth.",
-    ],
+      "MCP represents a shift from AI as an external generator to AI as an integrated team member with direct access to your design system truth."
+    ]
   },
   {
     slug: "red-teaming-frontend-models",
@@ -183,8 +186,8 @@ export const ARTICLES: Article[] = [
     content: [
       "Between February and July 2026 I ran three sequential contract engagements (Mercor, then micro1, then Handshake) evaluating, ranking, and red-teaming frontier model output against scoring rubrics built for React and TypeScript frontend-engineering tasks.",
       "Authoring the adversarial cases was the part that changed my practice. A rubric rewards one behaviour; an adversarial case is written so the wrong behaviour still passes a shallow check, and you find out which failure mode the model actually has.",
-      "I worked in ChatGPT Pro and Cursor across four frontier LLMs throughout. The gap between a model's ceiling and its daily output turned out to be about the harness around it far more often than about the model itself.",
-    ],
+      "I worked in ChatGPT Pro and Cursor across four frontier LLMs throughout. The gap between a model's ceiling and its daily output turned out to be about the harness around it far more often than about the model itself."
+    ]
   },
   {
     slug: "storybook-to-next-js-playgrounds",
@@ -197,8 +200,8 @@ export const ARTICLES: Article[] = [
     featured: false,
     content: [
       "Storybook excels at component isolation, but teams need full-page contexts to validate real integration behavior.",
-      "Next.js playgrounds provide the missing layer — letting designers and engineers preview components in realistic page layouts without leaving the design system workflow.",
-    ],
+      "Next.js playgrounds provide the missing layer — letting designers and engineers preview components in realistic page layouts without leaving the design system workflow."
+    ]
   },
   {
     slug: "the-case-for-the-t-shaped-principal-engineer",
@@ -211,8 +214,8 @@ export const ARTICLES: Article[] = [
     featured: false,
     content: [
       "The T-shaped principal engineer combines deep frontend expertise with enough breadth to connect design systems, platform engineering, and product strategy.",
-      "In 2024, the most impactful principals are those who can ship design system infrastructure while also mentoring teams on AI-native development patterns.",
-    ],
+      "In 2024, the most impactful principals are those who can ship design system infrastructure while also mentoring teams on AI-native development patterns."
+    ]
   },
   {
     slug: "onboarding-backend-engineers-to-react",
@@ -226,8 +229,8 @@ export const ARTICLES: Article[] = [
     content: [
       "At Redesign Health I built an onboarding methodology that trained backend engineers to production-level React in one month, inside an org of roughly 10 to 15 engineers working across three cross-functional teams.",
       "The design system gave those engineers one vocabulary instead of a dozen personal ones. A 50+ component Storybook and Chromatic library, which cut dev time around 30% across the org, was worth learning properly because it was already paying for itself.",
-      "This was the org where I was promoted twice to Engineering Director while staying hands-on as the frontend architecture SME. Onboarding turned out to be one of the highest-leverage parts of that job.",
-    ],
+      "This was the org where I was promoted twice to Engineering Director while staying hands-on as the frontend architecture SME. Onboarding turned out to be one of the highest-leverage parts of that job."
+    ]
   },
   {
     slug: "mastering-tanstack-start",
@@ -240,8 +243,8 @@ export const ARTICLES: Article[] = [
     featured: false,
     content: [
       "TanStack Start brings together Router, Query, and server-side rendering in a composable package that avoids the lock-in of traditional meta-frameworks.",
-      "File-based routing with type-safe params, combined with Cloudflare Workers deployment, makes it ideal for portfolio sites and SaaS MVPs.",
-    ],
+      "File-based routing with type-safe params, combined with Cloudflare Workers deployment, makes it ideal for portfolio sites and SaaS MVPs."
+    ]
   },
   {
     slug: "shipping-react-native-at-scale",
@@ -254,9 +257,9 @@ export const ARTICLES: Article[] = [
     featured: false,
     content: [
       "Shipping React Native at scale requires treating mobile as a first-class platform in your monorepo — not a fork of your web codebase.",
-      "Design system parity, shared token pipelines, and disciplined release trains are what separate prototypes from products serving 100K+ users.",
-    ],
-  },
+      "Design system parity, shared token pipelines, and disciplined release trains are what separate prototypes from products serving 100K+ users."
+    ]
+  }
 ]
 
 // Real testimonials pending: Matt, Adam, Clayton, Kurt, Anthony — add with their
@@ -269,43 +272,43 @@ export const SERVICES: Service[] = [
     title: "Design Systems Consulting",
     description:
       "End-to-end design system delivery — Figma tokens, React components, Storybook documentation, and Chromatic visual regression.",
-    icon: "layers",
+    icon: "layers"
   },
   {
     id: "react-architecture",
     title: "React Architecture & Code Review",
     description:
       "Principal-level architecture reviews, performance audits, and migration plans for enterprise React codebases.",
-    icon: "zap",
+    icon: "zap"
   },
   {
     id: "product-0-1",
     title: "0→1 Product Development",
     description:
       "Ship SaaS MVPs with TanStack Start, Supabase, and Cloudflare Workers — from design system to production deploy.",
-    icon: "cpu",
+    icon: "cpu"
   },
   {
     id: "monorepo",
     title: "Monorepo Architecture & Infrastructure",
     description:
       "Enterprise-scale monorepo architecture with Nx, shared libraries, CI optimization, and developer experience tooling.",
-    icon: "git-branch",
+    icon: "git-branch"
   },
   {
     id: "mentoring",
     title: "Team Leadership & Technical Mentoring",
     description:
       "Staff/principal-level mentoring for frontend teams — design system governance, AI-native workflows, and career growth.",
-    icon: "layers",
+    icon: "layers"
   },
   {
     id: "mcp",
     title: "MCP & AI-Native Tooling",
     description:
       "Model Context Protocol servers and AI integration layers that connect design tools to coding assistants.",
-    icon: "cpu",
-  },
+    icon: "cpu"
+  }
 ]
 
 export const CASE_STUDIES: CaseStudy[] = [
@@ -319,9 +322,9 @@ export const CASE_STUDIES: CaseStudy[] = [
     metrics: [
       { label: "Team members", value: "15+" },
       { label: "Cross-functional teams", value: "3" },
-      { label: "Design system components", value: "50+" },
+      { label: "Design system components", value: "50+" }
     ],
-    image: "/images/case-studies/nx-monorepo.png",
+    image: "/images/case-studies/nx-monorepo.png"
   },
   {
     slug: "forgekit-mcp",
@@ -329,14 +332,14 @@ export const CASE_STUDIES: CaseStudy[] = [
     subtitle: "Figma + Storybook MCP servers for design-to-code",
     tags: ["MCP", "Figma", "Storybook", "AI"],
     summary:
-      "Published forgekit-figma-mcp and forgekit-storybook-mcp — MCP servers purpose-built for Figma-to-React design system workflows. Figma package extracts variables into typed theme configs; Storybook package exposes argTypes and usage patterns to coding agents. 8,000+ npm downloads in the last 12 months, wired into Cursor, VS Code, Zed, and Continue.",
+      "Published forgekit-figma-mcp and forgekit-storybook-mcp — MCP servers purpose-built for Figma-to-React design system workflows. Figma package extracts variables into typed theme configs; Storybook package exposes argTypes and usage patterns to coding agents. {{featured_npm_downloads}} npm downloads in the last 12 months, wired into Cursor, VS Code, Zed, and Continue.",
     metrics: [
-      { label: "npm downloads (12 mo)", value: "8,000+" },
-      { label: "MCP packages", value: "2" },
-      { label: "IDE integrations", value: "4" },
+      { label: "npm downloads (12 mo)", value: "{{featured_npm_downloads}}" },
+      { label: "Figma-to-React MCP packages", value: "2" },
+      { label: "IDE integrations", value: "4" }
     ],
     image: "/images/projects/forgekit-mcp.png",
-    liveHref: "https://forgekit.cloud",
+    liveHref: "https://forgekit.cloud"
   },
   {
     slug: "tokencast",
@@ -348,10 +351,10 @@ export const CASE_STUDIES: CaseStudy[] = [
     metrics: [
       { label: "Lighthouse performance", value: "100" },
       { label: "Lighthouse accessibility", value: "91" },
-      { label: "Export targets", value: "3" },
+      { label: "Export targets", value: "3" }
     ],
     image: "/images/projects/tokencast.png",
-    liveHref: "https://tokencast.vercel.app",
+    liveHref: "https://tokencast.vercel.app"
   },
   {
     slug: "mcp-atlas",
@@ -363,10 +366,10 @@ export const CASE_STUDIES: CaseStudy[] = [
     metrics: [
       { label: "Verified servers", value: "18" },
       { label: "Lighthouse performance", value: "100" },
-      { label: "Lighthouse accessibility", value: "100" },
+      { label: "Lighthouse accessibility", value: "100" }
     ],
     image: "/images/projects/mcp-atlas.png",
-    liveHref: "https://mcp-atlas-orcin.vercel.app",
+    liveHref: "https://mcp-atlas-orcin.vercel.app"
   },
   {
     slug: "design-system-scale",
@@ -378,9 +381,9 @@ export const CASE_STUDIES: CaseStudy[] = [
     metrics: [
       { label: "Freebird components", value: "200" },
       { label: "Redesign DS components", value: "50+" },
-      { label: "Dev time reduction", value: "~30%" },
-    ],
-  },
+      { label: "Dev time reduction", value: "~30%" }
+    ]
+  }
 ]
 
 export const FAQ_ITEMS: FaqItem[] = [
@@ -388,50 +391,50 @@ export const FAQ_ITEMS: FaqItem[] = [
     id: "1",
     question: "What's your background and experience?",
     answer:
-      "Principal Frontend Engineer with 15 years shipping React at scale — design systems, Nx monorepos, a React Native app serving 100K+ users, and AI-native developer tooling like ForgeKit MCP.",
+      "Principal Frontend Engineer with 15 years shipping React at scale — design systems, Nx monorepos, a React Native app serving 100K+ users, and AI-native developer tooling like ForgeKit MCP."
   },
   {
     id: "2",
     question: "What makes you different from other React engineers?",
     answer:
-      "I operate at the intersection of design systems, platform engineering, and AI tooling. Most engineers specialize in one — I architect systems that keep design, product, and engineering shipping in lockstep.",
+      "I operate at the intersection of design systems, platform engineering, and AI tooling. Most engineers specialize in one — I architect systems that keep design, product, and engineering shipping in lockstep."
   },
   {
     id: "3",
     question: "What types of projects do you take on?",
     answer:
-      "Frontend platform engineering, design systems, Nx monorepos, and AI-native developer tooling. Ideal engagements include 0→1 SaaS products, design system builds, and MCP server development.",
+      "Frontend platform engineering, design systems, Nx monorepos, and AI-native developer tooling. Ideal engagements include 0→1 SaaS products, design system builds, and MCP server development."
   },
   {
     id: "4",
     question: "What's your current availability?",
     answer:
-      "I'm currently available for senior contract engagements (3-6 months) and advisory roles. Full-time principal/staff positions are considered for the right opportunity.",
+      "I'm currently available for senior contract engagements (3-6 months) and advisory roles. Full-time principal/staff positions are considered for the right opportunity."
   },
   {
     id: "5",
     question: "Do you do fractional or part-time roles?",
     answer:
-      "Yes — fractional principal engagements (1-2 days/week) work well for design system governance, architecture advisory, and team mentoring.",
+      "Yes — fractional principal engagements (1-2 days/week) work well for design system governance, architecture advisory, and team mentoring."
   },
   {
     id: "6",
     question: "What tech stack do you specialize in?",
     answer:
-      "React 19, TypeScript, TanStack Start/Router/Query, Tailwind CSS, Storybook, Nx, Supabase, and Cloudflare Workers. I also work extensively with React Native, Expo, and Figma MCP integrations.",
+      "React 19, TypeScript, TanStack Start/Router/Query, Tailwind CSS, Storybook, Nx, Supabase, and Cloudflare Workers. I also work extensively with React Native, Expo, and Figma MCP integrations."
   },
   {
     id: "7",
     question: "How do you approach design system projects?",
     answer:
-      "Design systems start with token architecture in Figma, flow through automated pipelines (TokenCast), and land in Storybook with Chromatic visual regression. Every component ships with accessibility tests and usage documentation.",
+      "Design systems start with token architecture in Figma, flow through automated pipelines (TokenCast), and land in Storybook with Chromatic visual regression. Every component ships with accessibility tests and usage documentation."
   },
   {
     id: "8",
     question: "Can you help with AI/LLM integration in our codebase?",
     answer:
-      "Yes — I build MCP servers, RAG pipelines for monorepo context, and AI agent workflows for automated migrations and code generation. See ForgeKit MCP and my LLM Agents case study.",
-  },
+      "Yes — I build MCP servers, RAG pipelines for monorepo context, and AI agent workflows for automated migrations and code generation. See ForgeKit MCP and my LLM Agents case study."
+  }
 ]
 
 export const RESOURCES: Resource[] = [
@@ -440,70 +443,85 @@ export const RESOURCES: Resource[] = [
     title: "Design System Starter Kit",
     description: "Token architecture, Storybook setup, and Chromatic config for new systems",
     category: "Design Systems",
-    href: "/case-studies/design-system-scale",
+    href: "/case-studies/design-system-scale"
   },
   {
     id: "nx-guide",
     title: "Nx Monorepo Architecture Guide",
     description: "Nx monorepo architecture with enforced boundaries and a shared UI library",
     category: "Platform",
-    href: "/case-studies/nx-monorepo",
+    href: "/case-studies/nx-monorepo"
   },
   {
     id: "react-checklist",
     title: "React Onboarding Curriculum",
     description: "A one-month methodology for taking backend engineers to production React",
     category: "Tooling",
-    href: "/insights/onboarding-backend-engineers-to-react",
+    href: "/insights/onboarding-backend-engineers-to-react"
   },
   {
     id: "forgekit",
     title: "ForgeKit MCP",
     description: "Figma-to-code MCP server for AI coding assistants",
     category: "Open Source",
-    href: "https://forgekit.cloud",
+    href: "https://forgekit.cloud"
   },
   {
     id: "tokencast",
     title: "TokenCast",
     description: "Design token pipeline from Figma to code",
     category: "Tooling",
-    href: "/work",
+    href: "/work"
   },
   {
     id: "performance-audit",
     title: "Performance Audit Framework",
     description: "Lighthouse 100 performance on an SSR token pipeline, measured Nov 2026",
     category: "Testing",
-    href: "/case-studies/tokencast",
+    href: "/case-studies/tokencast"
   },
   {
     id: "storybook",
     title: "Storybook 10+",
     description: "Component development and visual testing",
     category: "Design Systems",
-    href: "https://storybook.js.org",
+    href: "https://storybook.js.org"
   },
   {
     id: "tanstack",
     title: "TanStack Start",
     description: "Full-stack React framework with file-based routing",
     category: "Frameworks",
-    href: "https://tanstack.com/start",
-  },
+    href: "https://tanstack.com/start"
+  }
 ]
 
-export const RESUME_SECTIONS = {
+export type ResumeContent = {
+  summary: string
+  experience: {
+    title: string
+    company: string
+    period: string
+    highlights: string[]
+  }[]
+  projects: {
+    title: string
+    detail: string
+  }[]
+  skills: string[]
+}
+
+export const RESUME_SECTIONS: ResumeContent = {
   summary:
-    "Principal Frontend Engineer, 15 years — founding/architecture-level engineer across five 0-to-1 startups, IC to Engineering Director, with real experience running teams, not just shipping UI. The throughline across every role: Nx monorepo architecture, structural and lint tooling (now Oxlint), and the design-system to shared-UI-library to frontend to BFF to backend pattern, built repeatedly at Freebird, Pineapple, PHC Global, and Redesign Health. Early, genuine adopter of React and Storybook (2016 — still active in both communities' Discords), and pioneered browser-based AR for NARS Cosmetics years before WebAR went mainstream. Deeply agent-native: creator of ForgeKit, an open-source CLI + MCP server suite (8,000+ npm downloads in the last 12 months across two published packages) that is itself harness/spec tooling for AI coding agents — I design what context an agent needs to do a task right, not just prompt it. Claude Code and Cursor daily, including production use of Cursor's background agent. Seeking Principal / Staff Frontend, Product Engineer, or engineering-leadership roles where architecture, AI-native tooling, and real ownership meet.",
+    "Principal Frontend Engineer, 15 years — founding/architecture-level engineer across five 0-to-1 startups, IC to Engineering Director, with real experience running teams, not just shipping UI. The throughline across every role: Nx monorepo architecture, structural and lint tooling (now Oxlint), and the design-system to shared-UI-library to frontend to BFF to backend pattern, built repeatedly at Freebird, Pineapple, PHC Global, and Redesign Health. Early, genuine adopter of React and Storybook (2016 — still active in both communities' Discords), and pioneered browser-based AR for NARS Cosmetics years before WebAR went mainstream. Deeply agent-native: creator of ForgeKit, an open-source CLI + MCP server suite ({{featured_npm_downloads}} npm downloads in the last 12 months across two published Figma-to-React MCP packages) that is itself harness/spec tooling for AI coding agents — I design what context an agent needs to do a task right, not just prompt it. Claude Code and Cursor daily, including production use of Cursor's background agent. Seeking Principal / Staff Frontend, Product Engineer, or engineering-leadership roles where architecture, AI-native tooling, and real ownership meet.",
   experience: [
     {
       title: "Consultant, AI Model Evaluation & Red-Teaming",
       company: "Independent (Mercor, micro1, Handshake)",
       period: "Feb 2026 — Jul 2026",
       highlights: [
-        "Evaluated, ranked, and red-teamed frontier AI model outputs against scoring rubrics on React/TypeScript frontend-engineering tasks across three sequential contract engagements (Mercor, then micro1, then Handshake); authored adversarial test cases to expose model failure modes and break outputs. Worked in ChatGPT Pro and Cursor across four frontier LLMs throughout.",
-      ],
+        "Evaluated, ranked, and red-teamed frontier AI model outputs against scoring rubrics on React/TypeScript frontend-engineering tasks across three sequential contract engagements (Mercor, then micro1, then Handshake); authored adversarial test cases to expose model failure modes and break outputs. Worked in ChatGPT Pro and Cursor across four frontier LLMs throughout."
+      ]
     },
     {
       title: "Staff Frontend Engineer & Tech Lead to Engineering Director",
@@ -515,8 +533,8 @@ export const RESUME_SECTIONS = {
         "Engineered 20+ data-visualization components with custom hooks and Zustand: 40% rendering-overhead reduction on large datasets; established a Chromatic visual-regression workflow.",
         "Adopted Ponicode for AI-generated React unit-test scaffolding, raising test coverage on new components with less manual boilerplate.",
         "Built an onboarding methodology that trained backend engineers to production-level React in one month.",
-        "Drove build-tooling modernization: migrated to Vite (became the org's default bundler by early 2023) and to Tailwind CSS for an internal sister app to the client portal; migrated the team's default e2e suite from Cypress to Playwright; generated type-safe React Query hooks from OpenAPI/Swagger specs; collaborated with backend on JWT auth and authored the specs for an OIDC migration that was shelved when the team was restructured.",
-      ],
+        "Drove build-tooling modernization: migrated to Vite (became the org's default bundler by early 2023) and to Tailwind CSS for an internal sister app to the client portal; migrated the team's default e2e suite from Cypress to Playwright; generated type-safe React Query hooks from OpenAPI/Swagger specs; collaborated with backend on JWT auth and authored the specs for an OIDC migration that was shelved when the team was restructured."
+      ]
     },
     {
       title: "Senior Frontend Engineer & Tech Lead",
@@ -524,8 +542,8 @@ export const RESUME_SECTIONS = {
       period: "Jan 2022 — Jul 2022",
       highlights: [
         "Architected Nx monorepo with a design-system-based shared UI library, a cross-platform (iOS, Android, web) application, and a NestJS backend.",
-        "Built cross-platform architecture with Expo, Nx, and React Native (25% mobile performance gain for 100K+ users).",
-      ],
+        "Built cross-platform architecture with Expo, Nx, and React Native (25% mobile performance gain for 100K+ users)."
+      ]
     },
     {
       title: "Founding Frontend Engineer",
@@ -534,8 +552,8 @@ export const RESUME_SECTIONS = {
       highlights: [
         "Founding frontend architect for a healthtech/biosecurity startup: built the core product for enterprise clients (including Facebook and Amex, our first two customers) — a Mapbox GL heatmap of active COVID risk zones that clients used to schedule ground teams, plus flight/travel-arrangement suggestions and a separate interactive map for simulating alternate entry routes.",
         "Set up the foundational architecture: Nx monorepo with 30+ shared libraries and gRPC middleware (40% developer-experience improvement); lifted NPS-measured satisfaction 35%; cut infrastructure costs 30% via GCP, gRPC, and Kubernetes.",
-        "Standardized client state with Redux Toolkit (RTK) and server state with React Query across the platform.",
-      ],
+        "Standardized client state with Redux Toolkit (RTK) and server state with React Query across the platform."
+      ]
     },
     {
       title: "Lead Frontend Engineer",
@@ -544,8 +562,8 @@ export const RESUME_SECTIONS = {
       highlights: [
         "Built one of the earliest production React UI libraries on Storybook: a 200-component design system spanning B2B, B2C, and React Native, eliminating the need for separate iOS and Android teams.",
         "Migrated the team's Redux + Redux-Saga boilerplate to Redux Toolkit (RTK) in 2019, cutting state-management boilerplate and standardizing patterns across the design system.",
-        "Served as design-engineering liaison across client, sales, and marketing; shipped B2B/B2C and internal dashboards (React, NestJS, D3.js) and a React Native app with real-time data views.",
-      ],
+        "Served as design-engineering liaison across client, sales, and marketing; shipped B2B/B2C and internal dashboards (React, NestJS, D3.js) and a React Native app with real-time data views."
+      ]
     },
     {
       title: "Lead Web Developer",
@@ -553,66 +571,66 @@ export const RESUME_SECTIONS = {
       period: "Oct 2010 — Sep 2016",
       highlights: [
         "Pioneered browser-based AR try-on for NARS, one of the first of its kind: compiled OpenCV to JavaScript via Emscripten for real-time client-side computer vision over getUserMedia, with Pixi.js, WebGL, and Three.js powering real-time face-tracking and makeup-rendering. Worked directly with Pixi.js's creator on techniques no one had attempted before, years ahead of mainstream WebAR.",
-        "Shipped the NARS virtual try-on web app (~$400K/month revenue lift) backed by a real-time CMS on Firebase Realtime Database; owned the full lifecycle end-to-end.",
-      ],
-    },
+        "Shipped the NARS virtual try-on web app (~$400K/month revenue lift) backed by a real-time CMS on Firebase Realtime Database; owned the full lifecycle end-to-end."
+      ]
+    }
   ],
   projects: [
     {
       title: "ForgeKit",
       detail:
-        "Independent open-source developer-tooling venture (2024 — 2026) — Open-source CLI + MCP server suite bridging Figma to React to Storybook for design-system teams — itself a harness/spec-tooling product for AI coding agents (Claude Code, Cursor). 8,000+ npm downloads in the last 12 months across two published packages, with active production adoption. forgekit.cloud, github.com/effinrich, npmjs.com.",
+        "Independent open-source developer-tooling venture (2024 — 2026) — Open-source CLI + MCP server suite bridging Figma to React to Storybook for design-system teams — itself a harness/spec-tooling product for AI coding agents (Claude Code, Cursor). {{featured_npm_downloads}} npm downloads in the last 12 months across two published Figma-to-React MCP packages, with active production adoption. forgekit.cloud, github.com/effinrich, npmjs.com."
     },
     {
       title: "ForgeKit Core CLI",
       detail:
-        "TypeScript CLI scaffolding production-ready Nx monorepos with React 18, Storybook 10+, Vitest, Playwright, and GitHub Actions CI/CD; targets Chakra UI, shadcn/ui, and Tamagui across web and universal React Native. Used recursively to scaffold ForgeKit itself.",
+        "TypeScript CLI scaffolding production-ready Nx monorepos with React 18, Storybook 10+, Vitest, Playwright, and GitHub Actions CI/CD; targets Chakra UI, shadcn/ui, and Tamagui across web and universal React Native. Used recursively to scaffold ForgeKit itself."
     },
     {
       title: "ForgeKit Figma MCP",
       detail:
-        "MCP server extracting Figma variables and design tokens; generates typed theme configs for Chakra UI, Tailwind, and shadcn — enabling AI-driven design-to-code workflows.",
+        "MCP server extracting Figma variables and design tokens; generates typed theme configs for Chakra UI, Tailwind, and shadcn — enabling AI-driven design-to-code workflows."
     },
     {
       title: "ForgeKit Storybook MCP",
       detail:
-        "MCP server exposing Storybook metadata, argTypes, and usage patterns to AI coding agents — automating story generation, docs scaffolding, and component-testing workflows. Direct, hands-on experience designing what context an AI agent needs to do a task correctly.",
+        "MCP server exposing Storybook metadata, argTypes, and usage patterns to AI coding agents — automating story generation, docs scaffolding, and component-testing workflows. Direct, hands-on experience designing what context an AI agent needs to do a task correctly."
     },
     {
       title: "Perch",
       detail:
-        "Open-source voice-assistant widget — Drop-in voice AI for any website (one script tag + React SDK) built on ElevenLabs Conversational AI: dependency-free Shadow-DOM core, React SDK, and a serverless signed-URL proxy that keeps the API key server-side. Built end-to-end with Claude Code.",
+        "Open-source voice-assistant widget — Drop-in voice AI for any website (one script tag + React SDK) built on ElevenLabs Conversational AI: dependency-free Shadow-DOM core, React SDK, and a serverless signed-URL proxy that keeps the API key server-side. Built end-to-end with Claude Code."
     },
     {
       title: "Santa Chat AI",
       detail:
-        "AI-powered Santa Claus experience — Real-time chat, live phone calls, and SMS with Santa via ElevenLabs text-to-speech and Twilio, an LLM chat backend, and Stable Diffusion image generation; Stripe-based subscription tokens. Per-user personalization (parents added their child's name so Santa could address them by name) and analytics instrumentation (Amplitude, Google Analytics 4) tracked engagement in production. Next.js frontend/BFF layer proxying to a dedicated backend service. Selected by ElevenLabs for a 300K-token grant. Next.js, React, Chakra UI, Zustand, MongoDB, NextAuth.",
+        "AI-powered Santa Claus experience — Real-time chat, live phone calls, and SMS with Santa via ElevenLabs text-to-speech and Twilio, an LLM chat backend, and Stable Diffusion image generation; Stripe-based subscription tokens. Per-user personalization (parents added their child's name so Santa could address them by name) and analytics instrumentation (Amplitude, Google Analytics 4) tracked engagement in production. Next.js frontend/BFF layer proxying to a dedicated backend service. Selected by ElevenLabs for a 300K-token grant. Next.js, React, Chakra UI, Zustand, MongoDB, NextAuth."
     },
     {
       title: "Textation",
       detail:
-        "AI character chat and avatar platform — Pivoted from Santa Chat AI into a general AI-companion product: custom AI characters with LLM chat, ElevenLabs text-to-speech, Deepgram speech-to-text, image generation, SadTalker talking-head video, and live WebSocket voice chat; Stripe payments, Twilio SMS/voice. Next.js, React, Chakra UI, Zustand, MongoDB.",
+        "AI character chat and avatar platform — Pivoted from Santa Chat AI into a general AI-companion product: custom AI characters with LLM chat, ElevenLabs text-to-speech, Deepgram speech-to-text, image generation, SadTalker talking-head video, and live WebSocket voice chat; Stripe payments, Twilio SMS/voice. Next.js, React, Chakra UI, Zustand, MongoDB."
     },
     {
       title: "MCP Atlas",
       detail:
-        "Curated, link-verified directory of Model Context Protocol servers (18 official + community, searchable and filterable). Built with Claude Code. Astro (Zod-validated content collections + islands architecture), TypeScript, Vitest, and Playwright; Lighthouse 100 accessibility, 100 performance (measured Nov 2026). mcp-atlas-orcin.vercel.app.",
+        "Curated, link-verified directory of Model Context Protocol servers (18 official + community, searchable and filterable). Built with Claude Code. Astro (Zod-validated content collections + islands architecture), TypeScript, Vitest, and Playwright; Lighthouse 100 accessibility, 100 performance (measured Nov 2026). mcp-atlas-orcin.vercel.app."
     },
     {
       title: "TokenCast",
       detail:
-        "Paste design tokens (Figma variables, CSS custom properties, or a Tailwind config) and get a live preview plus exportable theme code for Tailwind, Chakra, and shadcn/ui, with server-rendered Save & Share links. Built with Cursor. React Router (framework mode: SSR, loaders, actions), React 19, TypeScript, Tailwind CSS 4, Supabase (RLS + SECURITY DEFINER RPCs, IP rate-limiting), Vitest + Playwright; Lighthouse 100 performance, 91 accessibility (measured Nov 2026). tokencast.vercel.app.",
+        "Paste design tokens (Figma variables, CSS custom properties, or a Tailwind config) and get a live preview plus exportable theme code for Tailwind, Chakra, and shadcn/ui, with server-rendered Save & Share links. Built with Cursor. React Router (framework mode: SSR, loaders, actions), React 19, TypeScript, Tailwind CSS 4, Supabase (RLS + SECURITY DEFINER RPCs, IP rate-limiting), Vitest + Playwright; Lighthouse 100 performance, 91 accessibility (measured Nov 2026). tokencast.vercel.app."
     },
     {
       title: "Tidy App",
       detail:
-        "Offline-first React Native + Expo app; Zustand + TanStack Query; Supabase; Figma Code Connect; 90% test coverage. Built with both Claude Code and Cursor, including production use of Cursor's background agent (verified via git co-author trailers on merged PRs). tidyapp.me.",
+        "Offline-first React Native + Expo app; Zustand + TanStack Query; Supabase; Figma Code Connect; 90% test coverage. Built with both Claude Code and Cursor, including production use of Cursor's background agent (verified via git co-author trailers on merged PRs). tidyapp.me."
     },
     {
       title: "Serial One",
       detail:
-        "Dec 2021 — Jan 2022 — Turborepo monorepo browsing live Candy Digital NFT sale listings (MLB-licensed digital trading cards), pulling data from MongoDB and filterable by player name and rarity tier, rendered in a masonry grid (price, sale date, edition number per card). Coinbase Commerce crypto-donation checkout integrated in the nav. Next.js, React, Chakra UI, MongoDB, axios, SWR. app.serialone.io.",
-    },
+        "Dec 2021 — Jan 2022 — Turborepo monorepo browsing live Candy Digital NFT sale listings (MLB-licensed digital trading cards), pulling data from MongoDB and filterable by player name and rarity tier, rendered in a masonry grid (price, sale date, edition number per card). Coinbase Commerce crypto-donation checkout integrated in the nav. Next.js, React, Chakra UI, MongoDB, axios, SWR. app.serialone.io."
+    }
   ],
   skills: [
     "JavaScript (15 yrs) / TypeScript (strict)",
@@ -630,6 +648,6 @@ export const RESUME_SECTIONS = {
     "Redux Toolkit / Zustand",
     "Supabase / PostgreSQL",
     "Vitest / Playwright / RTL",
-    "WCAG 2.1 AA",
-  ],
+    "WCAG 2.1 AA"
+  ]
 }

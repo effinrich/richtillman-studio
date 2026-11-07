@@ -1,12 +1,19 @@
-import { ArrowRight, ArrowUpRight } from "lucide-react"
 import { ButtonAnchor, HomeScreen } from "@richtillman/ui"
-import { METRICS } from "#/features/content/seed-data"
+import type { Metric } from "@richtillman/ui"
+import { ArrowRight, ArrowUpRight } from "lucide-react"
+
 import { ButtonLink } from "#/features/ui/button-link"
 
-export function HomePage() {
+type HomePageProps = {
+  metrics: readonly Metric[]
+  metricsNote?: string
+}
+
+export function HomePage({ metrics, metricsNote }: HomePageProps) {
   return (
     <HomeScreen
-      metrics={[...METRICS]}
+      metrics={metrics}
+      metricsNote={metricsNote}
       actions={
         <>
           <ButtonLink to="/work" variant="primary" fullWidth>

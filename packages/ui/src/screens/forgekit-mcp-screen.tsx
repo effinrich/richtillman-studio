@@ -1,8 +1,11 @@
 import { ArrowLeft, ExternalLink } from "lucide-react"
 
 import { Badge } from "../badge"
+import { formatCount } from "../format"
 import { GlassPanel } from "../glass-panel"
 import { PortfolioLayout } from "../layout/portfolio-layout"
+import type { NpmDownloadsModel } from "../models"
+import { FEATURED_MCP_PACKAGES, sumDownloads } from "../npm-packages"
 import { Tag } from "../tag"
 
 const PACKAGES = [
@@ -12,7 +15,7 @@ const PACKAGES = [
       "MCP server that extracts Figma variables and design tokens programmatically. Generates typed theme configs for Chakra UI, Tailwind, and shadcn — enabling AI-driven design-to-code workflows.",
     npmCmd: "npm install forgekit-figma-mcp",
     npmUrl: "https://npmjs.com/package/forgekit-figma-mcp",
-    features: ["Figma variables", "Design tokens", "Chakra · Tailwind · shadcn"],
+    features: ["Figma variables", "Design tokens", "Chakra · Tailwind · shadcn"]
   },
   {
     name: "forgekit-storybook-mcp",
@@ -20,15 +23,18 @@ const PACKAGES = [
       "MCP server exposing Storybook metadata, argTypes, and usage patterns to AI coding agents. Automates story generation, documentation scaffolding, and component testing workflows.",
     npmCmd: "npm install forgekit-storybook-mcp",
     npmUrl: "https://npmjs.com/package/forgekit-storybook-mcp",
-    features: ["Storybook metadata", "Story generation", "a11y automation"],
-  },
+    features: ["Storybook metadata", "Story generation", "a11y automation"]
+  }
 ] as const
 
 type ForgekitMcpScreenProps = {
   backHref?: string
+  npmDownloads: NpmDownloadsModel
 }
 
-export function ForgekitMcpScreen({ backHref = "/work" }: ForgekitMcpScreenProps) {
+export function ForgekitMcpScreen({ backHref = "/work", npmDownloads }: ForgekitMcpScreenProps) {
+  const featuredDownloads = sumDownloads(npmDownloads, FEATURED_MCP_PACKAGES)
+
   return (
     <PortfolioLayout activeItem="work">
       <main className="relative z-10 mx-auto max-w-4xl px-6 pt-32 pb-24">
@@ -54,9 +60,9 @@ export function ForgekitMcpScreen({ backHref = "/work" }: ForgekitMcpScreenProps
 
         <div className="mb-12 grid grid-cols-3 gap-4">
           {[
-            { value: "8,000+", label: "npm downloads (12 mo)" },
-            { value: "2", label: "MCP packages" },
-            { value: "4", label: "IDE integrations" },
+            { value: formatCount(featuredDownloads), label: "npm downloads (12 mo)" },
+            { value: String(PACKAGES.length), label: "Figma-to-React MCPs" },
+            { value: "4", label: "IDE integrations" }
           ].map((metric) => (
             <GlassPanel key={metric.label} className="rounded-xl p-4 text-center">
               <p className="text-2xl font-bold text-gold">{metric.value}</p>
@@ -108,6 +114,48 @@ export function ForgekitMcpScreen({ backHref = "/work" }: ForgekitMcpScreenProps
             </GlassPanel>
           ))}
         </div>
+
+        <GlassPanel className="mb-12 rounded-2xl p-6 md:p-8">
+          <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-white/50">
+            Published packages
+          </p>
+          <h2 className="mb-1 text-xl font-bold">npm downloads, last 12 months</h2>
+          <p className="mb-6 text-sm text-white/50">
+            {npmDownloads.live
+              ? `Measured ${npmDownloads.measuredAt} · npm downloads API`
+              : `Measured ${npmDownloads.measuredAt} · npm API unreachable, bundled measurement`}
+          </p>
+
+          <ul className="mb-4 space-y-2">
+            {npmDownloads.packages.map((entry) => (
+              <li
+                key={entry.name}
+                className="flex items-baseline justify-between gap-4 border-b border-white/5 pb-2"
+              >
+                <a
+                  href={`https://www.npmjs.com/package/${entry.name}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-xs text-cyan transition-colors hover:text-white"
+                >
+                  {entry.name}
+                </a>
+                <span className="font-mono text-xs text-white/70">
+                  {formatCount(entry.downloads)}
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          <div className="flex items-baseline justify-between gap-4 pt-2">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-white/50">
+              All published packages
+            </span>
+            <span className="font-mono text-sm font-bold text-gold">
+              {formatCount(sumDownloads(npmDownloads))}
+            </span>
+          </div>
+        </GlassPanel>
 
         <GlassPanel className="rounded-2xl border-l-4 border-l-cyan p-8">
           <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-white/50">Also</p>

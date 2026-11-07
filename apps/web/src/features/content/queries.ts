@@ -1,31 +1,52 @@
+import { CASE_STUDY_DETAIL_SECTIONS } from "#/features/content/case-study-details"
+import {
+  applyNpmDownloads,
+  getNpmDownloads,
+  npmDownloadsNote
+} from "#/features/content/npm-downloads"
 import {
   ARTICLES,
   CASE_STUDIES,
   FAQ_ITEMS,
+  METRICS,
   PROJECTS,
   RESUME_SECTIONS,
   RESOURCES,
   SERVICES,
-  TESTIMONIALS,
+  TESTIMONIALS
 } from "#/features/content/seed-data"
 import { supabase } from "#/features/supabase/client"
 
 export async function getProjects() {
-  if (!supabase) return PROJECTS
+  const model = await getNpmDownloads()
+
+  if (!supabase) return applyNpmDownloads(PROJECTS, model)
 
   const { data, error } = await supabase.from("projects").select("*").order("created_at")
-  if (error || !data?.length) return PROJECTS
+  if (error || !data?.length) return applyNpmDownloads(PROJECTS, model)
 
-  return data.map((row) => ({
-    slug: row.slug,
-    title: row.title,
-    description: row.description,
-    tags: row.tags,
-    metric: row.metric ?? undefined,
-    href: row.href,
-    image: row.image ?? undefined,
-    featured: row.featured,
-  }))
+  return applyNpmDownloads(
+    data.map((row) => ({
+      slug: row.slug,
+      title: row.title,
+      description: row.description,
+      tags: row.tags,
+      metric: row.metric ?? undefined,
+      href: row.href,
+      image: row.image ?? undefined,
+      featured: row.featured
+    })),
+    model
+  )
+}
+
+export async function getHomeMetrics() {
+  const model = await getNpmDownloads()
+
+  return {
+    metrics: applyNpmDownloads(METRICS, model),
+    metricsNote: npmDownloadsNote(model)
+  }
 }
 
 export async function getProjectBySlug(slug: string) {
@@ -50,7 +71,7 @@ export async function getArticles() {
     publishedAt: row.published_at,
     readTime: row.read_time,
     featured: row.featured,
-    content: row.content,
+    content: row.content
   }))
 }
 
@@ -70,7 +91,7 @@ export async function getArticleBySlug(slug: string) {
     publishedAt: data.published_at,
     readTime: data.read_time,
     featured: data.featured,
-    content: data.content,
+    content: data.content
   }
 }
 
@@ -85,7 +106,7 @@ export async function getTestimonials() {
     quote: row.quote,
     author: row.author,
     role: row.role,
-    company: row.company,
+    company: row.company
   }))
 }
 
@@ -93,12 +114,18 @@ export function getServices() {
   return SERVICES
 }
 
-export function getCaseStudies() {
-  return CASE_STUDIES
+export async function getCaseStudies() {
+  return applyNpmDownloads(CASE_STUDIES, await getNpmDownloads())
 }
 
-export function getCaseStudyBySlug(slug: string) {
-  return CASE_STUDIES.find((cs) => cs.slug === slug) ?? null
+export async function getCaseStudyBySlug(slug: string) {
+  const studies = await getCaseStudies()
+  return studies.find((cs) => cs.slug === slug) ?? null
+}
+
+export async function getCaseStudyDetailSections(slug: string) {
+  const sections = CASE_STUDY_DETAIL_SECTIONS[slug] ?? []
+  return applyNpmDownloads(sections, await getNpmDownloads())
 }
 
 export function getFaqItems() {
@@ -109,8 +136,8 @@ export function getResources() {
   return RESOURCES
 }
 
-export function getResumeSections() {
-  return RESUME_SECTIONS
+export async function getResumeSections() {
+  return applyNpmDownloads(RESUME_SECTIONS, await getNpmDownloads())
 }
 
 export async function submitContactForm(input: {
@@ -131,7 +158,7 @@ export async function submitContactForm(input: {
       email: input.email,
       company: input.company ?? null,
       project_type: input.projectType,
-      message: input.message,
+      message: input.message
     })
     .select("id")
     .single()

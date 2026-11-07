@@ -1,15 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
+
 import { ButtonAnchor } from "../button"
 import {
   SAMPLE_ARTICLES,
   SAMPLE_CASE_STUDIES,
   SAMPLE_FAQ,
+  SAMPLE_NPM_DOWNLOADS,
   SAMPLE_PROJECTS,
   SAMPLE_RESOURCES,
   SAMPLE_RESUME,
   SAMPLE_SERVICES,
   SAMPLE_SITE_MAP,
-  SAMPLE_TESTIMONIALS,
+  SAMPLE_TESTIMONIALS
 } from "../fixtures"
 import { ArticleDetailScreen } from "./article-detail-screen"
 import { CaseStudiesScreen } from "./case-studies-screen"
@@ -26,25 +28,27 @@ import { TestimonialsScreen } from "./testimonials-screen"
 
 const meta: Meta = {
   title: "Screens/Catalog",
-  parameters: { layout: "fullscreen" },
+  parameters: { layout: "fullscreen" }
 }
 
 export default meta
 
 export const Faq: StoryObj<typeof FaqScreen> = {
-  render: () => <FaqScreen items={SAMPLE_FAQ} />,
+  render: () => <FaqScreen items={SAMPLE_FAQ} />
 }
 
 export const Testimonials: StoryObj<typeof TestimonialsScreen> = {
-  render: () => <TestimonialsScreen testimonials={SAMPLE_TESTIMONIALS} />,
+  render: () => (
+    <TestimonialsScreen testimonials={SAMPLE_TESTIMONIALS} npmDownloads={SAMPLE_NPM_DOWNLOADS} />
+  )
 }
 
 export const Services: StoryObj<typeof ServicesScreen> = {
-  render: () => <ServicesScreen services={SAMPLE_SERVICES} />,
+  render: () => <ServicesScreen services={SAMPLE_SERVICES} />
 }
 
 export const Resources: StoryObj<typeof ResourcesScreen> = {
-  render: () => <ResourcesScreen resources={SAMPLE_RESOURCES} />,
+  render: () => <ResourcesScreen resources={SAMPLE_RESOURCES} />
 }
 
 export const Insights: StoryObj<typeof InsightsScreen> = {
@@ -57,11 +61,11 @@ export const Insights: StoryObj<typeof InsightsScreen> = {
         </ButtonAnchor>
       }
     />
-  ),
+  )
 }
 
 export const ArticleDetail: StoryObj<typeof ArticleDetailScreen> = {
-  render: () => <ArticleDetailScreen article={SAMPLE_ARTICLES[0]!} />,
+  render: () => <ArticleDetailScreen article={SAMPLE_ARTICLES[0]!} />
 }
 
 export const CaseStudies: StoryObj<typeof CaseStudiesScreen> = {
@@ -74,7 +78,7 @@ export const CaseStudies: StoryObj<typeof CaseStudiesScreen> = {
         </ButtonAnchor>
       )}
     />
-  ),
+  )
 }
 
 export const CaseStudyDetail: StoryObj<typeof CaseStudyDetailScreen> = {
@@ -84,19 +88,19 @@ export const CaseStudyDetail: StoryObj<typeof CaseStudyDetailScreen> = {
       sections={[{ label: "Overview", body: SAMPLE_CASE_STUDIES[0]!.summary }]}
       related={[]}
     />
-  ),
+  )
 }
 
 export const Resume: StoryObj<typeof ResumeScreen> = {
-  render: () => <ResumeScreen resume={SAMPLE_RESUME} />,
+  render: () => <ResumeScreen resume={SAMPLE_RESUME} />
 }
 
 export const SiteMap: StoryObj<typeof SiteMapScreen> = {
-  render: () => <SiteMapScreen sections={SAMPLE_SITE_MAP} />,
+  render: () => <SiteMapScreen sections={SAMPLE_SITE_MAP} />
 }
 
 export const ForgekitMcp: StoryObj<typeof ForgekitMcpScreen> = {
-  render: () => <ForgekitMcpScreen />,
+  render: () => <ForgekitMcpScreen npmDownloads={SAMPLE_NPM_DOWNLOADS} />
 }
 
 export const DesignSystem: StoryObj<typeof DesignSystemScreen> = {
@@ -109,5 +113,5 @@ export const DesignSystem: StoryObj<typeof DesignSystemScreen> = {
         </ButtonAnchor>
       }
     />
-  ),
+  )
 }

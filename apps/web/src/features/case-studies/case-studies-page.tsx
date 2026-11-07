@@ -1,16 +1,19 @@
-import { ArrowRight } from "lucide-react"
 import { CaseStudiesScreen } from "@richtillman/ui"
-import { getCaseStudies } from "#/features/content/queries"
+import { ArrowRight } from "lucide-react"
+
+import type { CaseStudy } from "#/features/content/seed-data"
 import { ButtonLink } from "#/features/ui/button-link"
 
-export function CaseStudiesPage() {
-  const caseStudies = getCaseStudies()
+type CaseStudiesPageProps = {
+  caseStudies: CaseStudy[]
+}
 
+export function CaseStudiesPage({ caseStudies }: CaseStudiesPageProps) {
   return (
     <CaseStudiesScreen
       caseStudies={caseStudies.map((study) => ({
         ...study,
-        href: `/case-studies/${study.slug}`,
+        href: `/case-studies/${study.slug}`
       }))}
       renderCta={(study) => (
         <ButtonLink to="/case-studies/$slug" params={{ slug: study.slug }} variant="ghost">

@@ -1,23 +1,26 @@
 import { Quote } from "lucide-react"
 
+import { formatCount } from "../format"
 import { GlassPanel } from "../glass-panel"
 import { PortfolioLayout } from "../layout/portfolio-layout"
 import type { Metric } from "../models"
-import type { TestimonialModel } from "../models"
+import type { NpmDownloadsModel, TestimonialModel } from "../models"
+import { sumDownloads } from "../npm-packages"
 import { SectionHeader } from "../section-header"
-
-const SOCIAL_PROOF: Metric[] = [
-  { value: "15", label: "Years shipping React" },
-  { value: "100K+", label: "Users on the shipped RN app" },
-  { value: "200", label: "Components in the Freebird system" },
-  { value: "8,000+", label: "npm downloads in 12 months" }
-]
 
 export type TestimonialsScreenProps = {
   testimonials: TestimonialModel[]
+  npmDownloads: NpmDownloadsModel
 }
 
-export function TestimonialsScreen({ testimonials }: TestimonialsScreenProps) {
+export function TestimonialsScreen({ testimonials, npmDownloads }: TestimonialsScreenProps) {
+  const socialProof: Metric[] = [
+    { value: "15", label: "Years shipping React" },
+    { value: "100K+", label: "Users on the shipped RN app" },
+    { value: "200", label: "Components in the Freebird system" },
+    { value: formatCount(sumDownloads(npmDownloads)), label: "npm downloads in 12 months" }
+  ]
+
   return (
     <PortfolioLayout activeItem="testimonials">
       <main className="relative z-10 mx-auto max-w-7xl px-6 pt-32 pb-24">
@@ -32,7 +35,7 @@ export function TestimonialsScreen({ testimonials }: TestimonialsScreenProps) {
         />
 
         <div className="mb-16 grid grid-cols-2 gap-4 md:grid-cols-4">
-          {SOCIAL_PROOF.map((stat, index) => (
+          {socialProof.map((stat, index) => (
             <GlassPanel
               key={stat.label}
               className={`rounded-2xl p-6 text-center stagger-${index + 1}`}

@@ -1,5 +1,6 @@
 import { MousePointerClick } from "lucide-react"
 import type { ReactNode } from "react"
+
 import { Chip } from "../chip"
 import { GlassPanel } from "../glass-panel"
 import { PortfolioLayout } from "../layout/portfolio-layout"
@@ -8,9 +9,11 @@ import type { Metric } from "../models"
 type HomeScreenProps = {
   metrics: readonly Metric[]
   actions: ReactNode
+  /** Source note rendered under the metrics panel, for measured figures. */
+  metricsNote?: string
 }
 
-export function HomeScreen({ metrics, actions }: HomeScreenProps) {
+export function HomeScreen({ metrics, actions, metricsNote }: HomeScreenProps) {
   return (
     <PortfolioLayout activeItem="home" showTicker>
       <main className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-6 pt-32 pb-24">
@@ -66,6 +69,12 @@ export function HomeScreen({ metrics, actions }: HomeScreenProps) {
             </div>
           ))}
         </GlassPanel>
+
+        {metricsNote ? (
+          <p className="mt-4 font-mono text-[10px] uppercase tracking-widest text-white/40">
+            {metricsNote}
+          </p>
+        ) : null}
       </div>
     </PortfolioLayout>
   )

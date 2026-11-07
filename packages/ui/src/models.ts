@@ -5,6 +5,15 @@ export type Metric = {
   label: string
 }
 
+export type NpmDownloadsModel = {
+  /** Last day counted by the npm downloads API, as an ISO date. */
+  measuredAt: string
+  /** False when the counts came from the bundled fallback rather than the API. */
+  live: boolean
+  /** Download count per published npm package, over the last 12 months. */
+  packages: { name: string; downloads: number }[]
+}
+
 export type ProjectCardModel = {
   slug: string
   title: string
