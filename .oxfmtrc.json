@@ -10,6 +10,7 @@
   "bracketSpacing": true,
   "arrowParens": "always",
   "endOfLine": "lf",
+  "sortImports": true,
   "ignorePatterns": [
     "node_modules",
     "dist",
