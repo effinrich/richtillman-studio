@@ -60,7 +60,7 @@ runtime, injecting a third-party script that costs 203.7 KiB of transfer, 7,722 
 main-thread scripting and 243.6 ms of blocking time on every page view. Implement a deferred
 load that starts after first paint, skips the network entirely on a constrained device or
 under `prefers-reduced-motion`, and keeps the existing timeout and fallback so the page still
-renders when the library never arrives. Add a test that asserts the canvas script is not
+renders when the library never arrives. Assert the canvas script is not
 requested during the first paint.
 
 **Acceptance criteria**:
@@ -71,7 +71,7 @@ requested during the first paint.
 - With the network request blocked, the home route renders without a console error and the
   canvas degrades to its fallback background.
 
-**Out of scope**: Redesigning the canvas visual, changing its colours, or removing the effect.
+**Out of scope**: The canvas visual, its colours, and the effect itself stay as they are.
 
 ## Step 2 — Unblock the font and stylesheet chain
 
@@ -79,7 +79,7 @@ requested during the first paint.
 render-blocking application CSS, so the browser serialises application CSS, then the Google
 Fonts CSS, then two woff2 files, before the first paint. Implement the stylesheet as a
 preloaded `<link>` in the document head and self-host the woff2 files so the font request no
-longer depends on a third-party origin. Add a test that asserts the font stylesheet is not
+longer depends on a third-party origin. Assert the font stylesheet is not
 inside the CSS bundle.
 
 **Acceptance criteria**:
@@ -89,7 +89,7 @@ inside the CSS bundle.
 - Inter and JetBrains Mono still render with `font-display: swap`, and no layout shift is
   introduced (CLS stays at 0).
 
-**Out of scope**: Changing the typefaces, weights, or the type scale.
+**Out of scope**: The typefaces, weights, and the type scale stay as they are.
 
 ## Step 3 — Import screens directly instead of through the UI barrel
 
@@ -97,7 +97,7 @@ inside the CSS bundle.
 `PortfolioLayout`, so Rollup hoists the whole export surface into one shared chunk of 99,496 B
 that every route modulepreloads. Refactor the web app to import screen modules by their direct
 path, leaving the barrel for Storybook only, so each route pulls only the screens it renders.
-Add a test that asserts the home route's preload list contains no module from a screen the
+Assert the home route's preload list contains no module from a screen the
 route does not render.
 
 **Acceptance criteria**:
@@ -107,15 +107,15 @@ route does not render.
 - Lighthouse mobile unused JavaScript savings are under 40 KiB.
 - Every route still renders, and Storybook still works with the barrel intact.
 
-**Out of scope**: Splitting `PortfolioLayout` itself, and moving the design system into a
-separate package.
+**Out of scope**: `PortfolioLayout` itself, and a separate package for the design system, stay
+out of scope.
 
 ## Step 4 — Ship only the content the route needs
 
 **Intent**: `seed-data.ts` is 26,901 B and is modulepreloaded on every route, while the home
 route uses only the six-entry `METRICS` list. Refactor the content module into per-route
 modules so the client receives only the collection its route renders, while the server keeps
-the full seed as the fallback when Supabase is not configured. Add a test that asserts the
+the full seed as the fallback when Supabase is not configured. Assert the
 seed chunk on the home route carries only the metrics collection.
 
 **Acceptance criteria**:
@@ -124,7 +124,7 @@ seed chunk on the home route carries only the metrics collection.
 - Every route still falls back to the seed data when `VITE_SUPABASE_URL` is unset.
 - No loader performs a network call during server rendering in the production bundle.
 
-**Out of scope**: Enabling Supabase, adding new content collections, or changing any copy.
+**Out of scope**: Supabase, new content collections, and copy edits stay out of scope.
 
 ## Step 5 — Share the npm download snapshot across Worker isolates
 
@@ -132,7 +132,7 @@ seed chunk on the home route carries only the metrics collection.
 every cold isolate in every colo issues its own six requests to the npm downloads API. Design
 and implement a shared cache using the Cloudflare Cache API, so the snapshot is fetched at
 most once per hour per colo rather than once per isolate, while keeping the measured seed as
-the fallback when the API is unreachable. Add a test that asserts two reads inside the cache
+the fallback when the API is unreachable. Assert two reads inside the cache
 window make one set of upstream requests.
 
 **Acceptance criteria**:
@@ -141,16 +141,16 @@ window make one set of upstream requests.
 - When the npm API fails, the site still renders the measured seed with its measurement date.
 - The page never renders an unresolved token or a partially summed total.
 
-**Out of scope**: Adding a KV binding or a new Worker, and changing the package set or the
-twelve-month measurement window.
+**Out of scope**: A KV binding, a new Worker, the package set, and the twelve-month measurement
+window stay as they are.
 
 ## Step 6 — Set cache headers and add a bundle budget
 
 **Intent**: The document carries no `Cache-Control` and hashed assets carry
 `public, max-age=0, must-revalidate`, so every repeat view re-renders in the Worker and pays
 seven conditional round trips for content that is already content-hashed. Implement immutable
-caching for hashed assets and a short, explicit policy for the document, and add a CI check
-that fails when the client bundle grows past a budget. The budget also guards the TanStack
+caching for hashed assets and a short, explicit policy for the document, and add a CI gate
+that rejects a client bundle over 160 KiB gzip. The budget also guards the TanStack
 devtools packages, which cost zero bytes today only because the devtools Vite plugin strips
 them; removing that plugin would add 244,686 B.
 
@@ -159,18 +159,18 @@ them; removing that plugin would add 244,686 B.
 - Hashed assets return `Cache-Control: public, max-age=31536000, immutable`, and a repeat
   view transfers 0 bytes for them without a revalidation round trip.
 - The document is either not cached or cached for under 300 seconds.
-- CI fails when the client JavaScript exceeds 160 KiB gzip, and the current bundle passes.
+- CI rejects a client JavaScript bundle over 160 KiB gzip, and the current bundle passes.
 
-**Out of scope**: Moving the site off Cloudflare, and changing the Worker runtime or the
-deployment pipeline.
+**Out of scope**: The hosting provider, the Worker runtime, and the deployment pipeline stay as
+they are.
 
 ## Step 7 — Re-measure the published numbers and refresh the copy
 
 **Intent**: The Lighthouse scores and the npm download counts on the site decay, and the site
 quotes them with a measurement date. After the changes above land, verify every published
-figure against its source, update the copy with the new numbers and the new measurement date,
-and confirm the whole site still passes the production integration checks: every route returns
-200, no console errors, no stale strings.
+figure against its source, modify the site copy with the new numbers and the new measurement date,
+and confirm the whole site still returns 200 on every route with no console errors and no stale
+strings.
 
 **Acceptance criteria**:
 
@@ -180,5 +180,5 @@ and confirm the whole site still passes the production integration checks: every
 - Every route returns 200 with zero console errors, and no stale figure remains anywhere in
   the rendered HTML.
 
-**Out of scope**: Deploying to production, recording video or screenshots, and changing the
-design system.
+**Out of scope**: Deploying to production, video or screenshot recording, and the design system
+stay out of scope.
