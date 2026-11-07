@@ -53,19 +53,19 @@ bun run mcp:setup
 
 Root `package.json` delegates to Turbo except Chromatic, which cds into `packages/ui`. Run from the repo root:
 
-| Task       | Command                                                                         |
-| ---------- | ------------------------------------------------------------------------------- |
-| Dev        | `bun run dev` (`turbo run dev`)                                                 |
-| Typecheck  | `bun run typecheck`                                                             |
-| Lint       | `bun run lint`                                                                  |
-| Test       | `bun run test` (MCP + web unit tests; UI uses Storybook `play` + Chromatic)     |
-| Build      | `bun run build` (web + compiled MCP; UI is JIT and has no `build`)              |
-| Storybook  | `bun run storybook`                                                             |
-| Chromatic  | `bun run chromatic` (`bun run --cwd packages/ui chromatic`)                     |
-| Deploy     | `bun run deploy` (`turbo run deploy` → `wrangler deploy` in apps/web)           |
+| Task       | Command                                                                            |
+| ---------- | ---------------------------------------------------------------------------------- |
+| Dev        | `bun run dev` (`turbo run dev`)                                                    |
+| Typecheck  | `bun run typecheck`                                                                |
+| Lint       | `bun run lint`                                                                     |
+| Test       | `bun run test` (MCP + web unit tests; UI uses Storybook `play` + Chromatic)        |
+| Build      | `bun run build` (web + compiled MCP; UI is JIT and has no `build`)                 |
+| Storybook  | `bun run storybook`                                                                |
+| Chromatic  | `bun run chromatic` (`bun run --cwd packages/ui chromatic`)                        |
+| Deploy     | `bun run deploy` (`turbo run deploy` → `wrangler deploy` in apps/web)              |
 | MCP setup  | `bun run mcp:setup` (writes `.cursor/mcp.json`; Cursor launches via Bun, no build) |
-| MCP stdio  | `bun run start` (`turbo run start` → MCP `dist/cli.js`, depends on MCP `build`) |
-| Boundaries | `bun run boundaries` (`turbo boundaries`)                                       |
+| MCP stdio  | `bun run start` (`turbo run start` → MCP `dist/cli.js`, depends on MCP `build`)    |
+| Boundaries | `bun run boundaries` (`turbo boundaries`)                                          |
 
 ## Storybook + Chromatic
 
@@ -103,7 +103,7 @@ Nine tools: `list_components`, `analyze_component`, `generate_story`, `update_st
 
 ## Deploy (Cloudflare Workers)
 
-Same target style as portfolio-1: `@cloudflare/vite-plugin` + `wrangler.jsonc` + `nodejs_compat`. This repo ships a **new** Worker named `richtillman-studio`. It does not overwrite the live `portfolio` Worker or attach `richtillman.xyz`.
+Same target style as portfolio-1: `@cloudflare/vite-plugin` + `wrangler.jsonc` + `nodejs_compat`. This repo ships the Worker named `richtillman-studio`, which **is** the Worker behind `richtillman.xyz` (verified via the Cloudflare API: the `richtillman-studio` service holds the `richtillman.xyz` custom domain). The separate `portfolio` Worker still exists in the account but serves no domain.
 
 From the repo root (requires `wrangler login` once):
 
