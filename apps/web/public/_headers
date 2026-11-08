@@ -1,8 +1,12 @@
 # Static asset cache policy for the Cloudflare Worker.
 #
-# The font files are self-hosted and never change under the same name. If a
-# font is ever updated, rename the file and its reference in fonts.css so the
-# cached copy is replaced rather than pinned for a year.
+# The built assets are content hashed, so they can be cached for a year and
+# never revalidated. The font files are self-hosted and never change under
+# the same name. If a font is ever updated, rename the file and its reference
+# in fonts.css so the cached copy is replaced rather than pinned for a year.
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
 
 /fonts/*.woff2
   Cache-Control: public, max-age=31536000, immutable

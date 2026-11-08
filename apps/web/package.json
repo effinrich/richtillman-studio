@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "vite dev --port 3000",
     "build": "vite build",
+    "budget": "node scripts/check-bundle-budget.mjs",
     "preview": "vite preview",
     "preview:worker": "wrangler dev",
     "lint": "oxlint src",
