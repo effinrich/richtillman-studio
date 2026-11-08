@@ -8,7 +8,7 @@ import { readFileSync } from "node:fs"
 import { join } from "node:path"
 
 const CLIENT_DIR = join(process.cwd(), "dist", "client")
-const MANIFEST_PATH = join(CLIENT_DIR, ".vite", "manifest.json")
+const MANIFEST_PATH = join(process.cwd(), "dist", "client-manifest.json")
 
 // The home route, as the TanStack Start plugin splits it. The lookup tolerates
 // a change to the query suffix, but not a route that moves or disappears.
