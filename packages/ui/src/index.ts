@@ -67,6 +67,7 @@ export {
   isValidEmail,
   validateField
 } from "./composites/contact-validation"
+export { OptimizedImage } from "./composites/optimized-image"
 export { ProjectCard } from "./composites/project-card"
 export { SiteMapCard } from "./composites/site-map-card"
 export { TokenSwatch } from "./composites/token-swatch"

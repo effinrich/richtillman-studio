@@ -1,4 +1,6 @@
 import type { ReactNode } from "react"
+
+import { OptimizedImage } from "../composites/optimized-image"
 import { GlassPanel } from "../glass-panel"
 import { PortfolioLayout } from "../layout/portfolio-layout"
 import type { CaseStudyModel } from "../models"
@@ -33,11 +35,11 @@ export function CaseStudiesScreen({ caseStudies, renderCta }: CaseStudiesScreenP
               <div className="md:col-span-2">
                 {study.image ? (
                   <div className="mb-6 overflow-hidden rounded-xl border border-white/10">
-                    <img
+                    <OptimizedImage
                       src={study.image}
                       alt={`${study.title} screenshot`}
                       className="h-48 w-full object-cover object-top"
-                      loading="lazy"
+                      sizes="(min-width: 768px) 800px, 100vw"
                     />
                   </div>
                 ) : null}

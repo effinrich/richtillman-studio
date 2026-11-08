@@ -1,6 +1,8 @@
 import { BarChart3, Box, FileText } from "lucide-react"
-import { Tag } from "../tag"
+
 import type { ProjectCardModel } from "../models"
+import { Tag } from "../tag"
+import { OptimizedImage } from "./optimized-image"
 
 type ProjectCardProps = {
   project: ProjectCardModel
@@ -11,7 +13,7 @@ type CardKind = "project" | "case-study" | "article"
 const KIND_META: Record<CardKind, { label: string; Icon: typeof Box }> = {
   project: { label: "Project", Icon: Box },
   "case-study": { label: "Case Study", Icon: BarChart3 },
-  article: { label: "Article", Icon: FileText },
+  article: { label: "Article", Icon: FileText }
 }
 
 function kindFor(href: string): CardKind {
@@ -36,14 +38,17 @@ export function ProjectCard({ project }: ProjectCardProps) {
     >
       <div className="relative flex h-48 items-center justify-center overflow-hidden bg-gradient-to-br from-white/5 to-transparent">
         {project.image ? (
-          <img
+          <OptimizedImage
             src={project.image}
             alt={`${project.title} screenshot`}
             className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-            loading="lazy"
+            sizes="(min-width: 1024px) 405px, (min-width: 768px) 50vw, 100vw"
           />
         ) : (
-          <Icon className="project-icon h-12 w-12 text-white/30 transition-all duration-500 group-hover:scale-110 group-hover:text-gold" aria-hidden />
+          <Icon
+            className="project-icon h-12 w-12 text-white/30 transition-all duration-500 group-hover:scale-110 group-hover:text-gold"
+            aria-hidden
+          />
         )}
         <div className="project-img-overlay pointer-events-none absolute inset-0 bg-gold/10 opacity-0 transition-opacity duration-500" />
         <span className="absolute top-4 right-4">

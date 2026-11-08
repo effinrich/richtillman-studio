@@ -1,5 +1,7 @@
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react"
+
 import { ButtonAnchor } from "../button"
+import { OptimizedImage } from "../composites/optimized-image"
 import { GlassPanel } from "../glass-panel"
 import { PortfolioLayout } from "../layout/portfolio-layout"
 import type { CaseStudyModel, CaseStudySection } from "../models"
@@ -16,7 +18,7 @@ export function CaseStudyDetailScreen({
   caseStudy,
   sections,
   related,
-  backHref = "/case-studies",
+  backHref = "/case-studies"
 }: CaseStudyDetailScreenProps) {
   return (
     <PortfolioLayout activeItem="case-studies">
@@ -52,11 +54,11 @@ export function CaseStudyDetailScreen({
 
         {caseStudy.image ? (
           <GlassPanel className="mb-12 overflow-hidden rounded-2xl">
-            <img
+            <OptimizedImage
               src={caseStudy.image}
               alt={`${caseStudy.title} screenshot`}
               className="w-full object-cover object-top"
-              loading="lazy"
+              sizes="(min-width: 1280px) 1280px, 100vw"
             />
           </GlassPanel>
         ) : null}
@@ -94,7 +96,10 @@ export function CaseStudyDetailScreen({
                       <p className="font-bold text-white group-hover:text-gold">{study.title}</p>
                       <p className="text-sm text-white/50">{study.subtitle}</p>
                     </div>
-                    <ArrowRight className="h-4 w-4 shrink-0 text-white/30 group-hover:text-gold" aria-hidden />
+                    <ArrowRight
+                      className="h-4 w-4 shrink-0 text-white/30 group-hover:text-gold"
+                      aria-hidden
+                    />
                   </GlassPanel>
                 </a>
               ))}
