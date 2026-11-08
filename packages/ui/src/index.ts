@@ -47,8 +47,8 @@ export type {
   TypeSpecimen
 } from "./models"
 
-export { CanvasBackground } from "./layout/canvas-background"
-export type { CanvasIntensity } from "./layout/canvas-background"
+export { CanvasBackground, shouldLoadTubesCursor } from "./layout/canvas-background"
+export type { CanvasIntensity, TubesEnvironment } from "./layout/canvas-background"
 export { InPageTabs } from "./in-page-tabs"
 export type { InPageTab } from "./in-page-tabs"
 export { NavigationBar } from "./layout/navigation-bar"
