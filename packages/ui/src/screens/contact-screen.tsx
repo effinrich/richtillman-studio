@@ -1,7 +1,9 @@
 import { useState } from "react"
+
 import { ContactForm } from "../composites/contact-form"
 import { ContactInfo } from "../composites/contact-info"
 import { ContactSuccess } from "../composites/contact-success"
+import { CONTACT_AVAILABILITY } from "../contact-copy"
 import { PortfolioLayout } from "../layout/portfolio-layout"
 import type { ContactSubmitHandler } from "../models"
 import { SectionHeader } from "../section-header"
@@ -23,7 +25,7 @@ export function ContactScreen({ onSubmit }: ContactScreenProps) {
               Let&apos;s build <span className="neon-text">something</span>
             </>
           }
-          description="Available for senior contract engagements, design system builds, and AI-native tooling projects."
+          description={CONTACT_AVAILABILITY}
         />
 
         {submitted ? <ContactSuccess /> : null}

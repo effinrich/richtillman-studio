@@ -1,4 +1,5 @@
 export { cn } from "./cn"
+export { CONTACT_AVAILABILITY, CONTACT_ENGAGEMENT_OPTIONS, ENQUIRY_TYPES } from "./contact-copy"
 export { formatCount } from "./format"
 export {
   FEATURED_MCP_PACKAGES,

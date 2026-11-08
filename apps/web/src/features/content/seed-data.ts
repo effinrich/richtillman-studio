@@ -403,19 +403,19 @@ export const FAQ_ITEMS: FaqItem[] = [
     id: "3",
     question: "What types of projects do you take on?",
     answer:
-      "Frontend platform engineering, design systems, Nx monorepos, and AI-native developer tooling. Ideal engagements include 0→1 SaaS products, design system builds, and MCP server development."
+      "Frontend platform engineering, design systems, Nx monorepos, and AI-native developer tooling. The work I take on includes 0→1 SaaS products, design system builds, and MCP server development."
   },
   {
     id: "4",
     question: "What's your current availability?",
     answer:
-      "I'm currently available for senior contract engagements (3-6 months) and advisory roles. Full-time principal/staff positions are considered for the right opportunity."
+      "I'm open to Principal and Staff Frontend roles, product engineering, and engineering leadership. Contract (3-6 months), advisory, and fractional engagements are welcome too."
   },
   {
     id: "5",
     question: "Do you do fractional or part-time roles?",
     answer:
-      "Yes — fractional principal engagements (1-2 days/week) work well for design system governance, architecture advisory, and team mentoring."
+      "Yes. Fractional principal engagements (1-2 days/week) work well for design system governance, architecture advisory, and team mentoring, and can complement a full-time role."
   },
   {
     id: "6",

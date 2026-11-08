@@ -1,8 +1,9 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest"
+import { isValidEmail, isNonEmpty, validateField } from "@richtillman/ui"
 import { render, screen, fireEvent, cleanup } from "@testing-library/react"
 import React from "react"
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest"
+
 import { ContactPage } from "./contact-page"
-import { isValidEmail, isNonEmpty, validateField } from "@richtillman/ui"
 
 const mockSubmitContactForm = vi.fn()
 
@@ -135,7 +136,7 @@ describe("ContactPage form submission", () => {
     renderPage()
 
     const emailInput = screen.getByPlaceholderText("you@company.com")
-    const messageTextarea = screen.getByPlaceholderText("Tell me about your project...")
+    const messageTextarea = screen.getByPlaceholderText("Tell me about the role or project...")
     const submitButton = screen.getByRole("button", { name: /send message/i })
 
     fireEvent.change(emailInput, { target: { value: "test@example.com" } })
@@ -150,7 +151,7 @@ describe("ContactPage form submission", () => {
 
     const nameInput = screen.getByPlaceholderText("Your name")
     const emailInput = screen.getByPlaceholderText("you@company.com")
-    const messageTextarea = screen.getByPlaceholderText("Tell me about your project...")
+    const messageTextarea = screen.getByPlaceholderText("Tell me about the role or project...")
     const submitButton = screen.getByRole("button", { name: /send message/i })
 
     fireEvent.change(nameInput, { target: { value: "John Doe" } })
@@ -180,7 +181,7 @@ describe("ContactPage form submission", () => {
 
     const nameInput = screen.getByPlaceholderText("Your name")
     const emailInput = screen.getByPlaceholderText("you@company.com")
-    const messageTextarea = screen.getByPlaceholderText("Tell me about your project...")
+    const messageTextarea = screen.getByPlaceholderText("Tell me about the role or project...")
     const submitButton = screen.getByRole("button", { name: /send message/i })
 
     fireEvent.change(nameInput, { target: { value: "John Doe" } })

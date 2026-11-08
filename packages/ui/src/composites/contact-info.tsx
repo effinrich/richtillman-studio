@@ -1,5 +1,7 @@
 import { Mail, MapPin } from "lucide-react"
+
 import { Chip } from "../chip"
+import { CONTACT_ENGAGEMENT_OPTIONS } from "../contact-copy"
 import { GlassPanel } from "../glass-panel"
 
 export function ContactInfo() {
@@ -29,13 +31,10 @@ export function ContactInfo() {
       <GlassPanel className="rounded-2xl p-6">
         <div className="mb-2 flex items-center gap-2">
           <Chip variant="status" dot pulse>
-            Available for new projects
+            Available for new work
           </Chip>
         </div>
-        <p className="text-sm text-white/50">
-          Typical engagement: 3-6 month contracts for design systems, monorepo architecture, or MCP
-          tooling.
-        </p>
+        <p className="text-sm text-white/50">{CONTACT_ENGAGEMENT_OPTIONS}</p>
       </GlassPanel>
     </div>
   )
