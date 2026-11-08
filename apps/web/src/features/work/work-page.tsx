@@ -1,5 +1,6 @@
+import { WorkScreen } from "@richtillman/ui/screens/work-screen.tsx"
 import { ArrowRight } from "lucide-react"
-import { WorkScreen } from "@richtillman/ui"
+
 import type { Project } from "#/features/content/seed-data"
 import { ButtonLink } from "#/features/ui/button-link"
 

@@ -1,4 +1,4 @@
-import { CaseStudiesScreen } from "@richtillman/ui"
+import { CaseStudiesScreen } from "@richtillman/ui/screens/case-studies-screen.tsx"
 import { ArrowRight } from "lucide-react"
 
 import type { CaseStudy } from "#/features/content/seed-data"

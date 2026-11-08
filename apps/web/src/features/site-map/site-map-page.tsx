@@ -1,4 +1,5 @@
-import { SiteMapScreen, type SiteMapSectionModel } from "@richtillman/ui"
+import type { SiteMapSectionModel } from "@richtillman/ui/models.ts"
+import { SiteMapScreen } from "@richtillman/ui/screens/site-map-screen.tsx"
 
 const SECTIONS: SiteMapSectionModel[] = [
   {
@@ -9,16 +10,16 @@ const SECTIONS: SiteMapSectionModel[] = [
       {
         title: "Interactive Neon Hero",
         href: "/",
-        description: "Home with tubes cursor background",
+        description: "Home with tubes cursor background"
       },
       { title: "Work Portfolio", href: "/work", description: "TokenCast, MCP Atlas, ForgeKit" },
       { title: "Contact Form", href: "/contact", description: "Project inquiry + availability" },
       {
         title: "Professional Resume",
         href: "/resume",
-        description: "Experience, skills, open source",
-      },
-    ],
+        description: "Experience, skills, open source"
+      }
+    ]
   },
   {
     id: "02",
@@ -28,22 +29,22 @@ const SECTIONS: SiteMapSectionModel[] = [
       {
         title: "ForgeKit MCP Detail",
         href: "/projects/forgekit-mcp",
-        description: "MCP server deep dive",
+        description: "MCP server deep dive"
       },
       {
         title: "Case Studies Hub",
         href: "/case-studies",
-        description: "Architecture impact stories",
+        description: "Architecture impact stories"
       },
       {
         title: "Nx Monorepo Architecture",
         href: "/case-studies/nx-monorepo",
-        description: "15+ engineers, 3 teams",
+        description: "15+ engineers, 3 teams"
       },
       { title: "Services & Expertise", href: "/services", description: "Engagement offerings" },
       { title: "Resources & Stack", href: "/resources", description: "Tools and guides" },
-      { title: "Design System", href: "/design-system", description: "Tokens and live components" },
-    ],
+      { title: "Design System", href: "/design-system", description: "Tokens and live components" }
+    ]
   },
   {
     id: "03",
@@ -51,8 +52,8 @@ const SECTIONS: SiteMapSectionModel[] = [
     accent: "gold",
     links: [
       { title: "Testimonials", href: "/testimonials", description: "Engineering leader quotes" },
-      { title: "FAQ", href: "/faq", description: "Engagement & process answers" },
-    ],
+      { title: "FAQ", href: "/faq", description: "Engagement & process answers" }
+    ]
   },
   {
     id: "04",
@@ -63,40 +64,40 @@ const SECTIONS: SiteMapSectionModel[] = [
       {
         title: "Model Context Protocol",
         href: "/insights/the-model-context-protocol",
-        description: "Featured analysis",
+        description: "Featured analysis"
       },
       {
         title: "Red-Teaming Frontier Models",
         href: "/insights/red-teaming-frontend-models",
-        description: "AI evaluation notes",
+        description: "AI evaluation notes"
       },
       {
         title: "Storybook Playgrounds",
         href: "/insights/storybook-to-next-js-playgrounds",
-        description: "Design system DX",
+        description: "Design system DX"
       },
       {
         title: "T-Shaped Principal",
         href: "/insights/the-case-for-the-t-shaped-principal-engineer",
-        description: "Leadership essay",
+        description: "Leadership essay"
       },
       {
         title: "Onboarding Backend Engineers",
         href: "/insights/onboarding-backend-engineers-to-react",
-        description: "One-month React curriculum",
+        description: "One-month React curriculum"
       },
       {
         title: "Mastering TanStack Start",
         href: "/insights/mastering-tanstack-start",
-        description: "Framework deep dive",
+        description: "Framework deep dive"
       },
       {
         title: "React Native at Scale",
         href: "/insights/shipping-react-native-at-scale",
-        description: "100K+ users lessons",
-      },
-    ],
-  },
+        description: "100K+ users lessons"
+      }
+    ]
+  }
 ]
 
 export function SiteMapPage() {

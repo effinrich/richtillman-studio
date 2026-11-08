@@ -1,5 +1,6 @@
-import { ButtonAnchor, HomeScreen } from "@richtillman/ui"
-import type { Metric } from "@richtillman/ui"
+import { ButtonAnchor } from "@richtillman/ui/button.tsx"
+import type { Metric } from "@richtillman/ui/models.ts"
+import { HomeScreen } from "@richtillman/ui/screens/home-screen.tsx"
 import { ArrowRight, ArrowUpRight } from "lucide-react"
 
 import { ButtonLink } from "#/features/ui/button-link"

@@ -1,9 +1,9 @@
+import type { NpmDownloadsModel } from "@richtillman/ui/models.ts"
 import {
   FEATURED_MCP_PACKAGES,
   NPM_DOWNLOADS_SEED,
-  PUBLISHED_PACKAGES,
-  type NpmDownloadsModel
-} from "@richtillman/ui"
+  PUBLISHED_PACKAGES
+} from "@richtillman/ui/npm-packages.ts"
 import { describe, expect, it, beforeEach } from "vitest"
 
 import { CASE_STUDY_DETAIL_SECTIONS } from "./case-study-details"

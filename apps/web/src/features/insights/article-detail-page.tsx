@@ -1,4 +1,5 @@
-import { ArticleDetailScreen } from "@richtillman/ui"
+import { ArticleDetailScreen } from "@richtillman/ui/screens/article-detail-screen.tsx"
+
 import type { Article } from "#/features/content/seed-data"
 
 type ArticleDetailPageProps = {

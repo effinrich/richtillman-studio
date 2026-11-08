@@ -1,5 +1,5 @@
-import { ForgekitMcpScreen } from "@richtillman/ui"
-import type { NpmDownloadsModel } from "@richtillman/ui"
+import type { NpmDownloadsModel } from "@richtillman/ui/models.ts"
+import { ForgekitMcpScreen } from "@richtillman/ui/screens/forgekit-mcp-screen.tsx"
 
 type ForgekitMcpPageProps = {
   npmDownloads: NpmDownloadsModel

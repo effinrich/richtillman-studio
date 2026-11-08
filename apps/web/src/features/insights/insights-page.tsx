@@ -1,4 +1,5 @@
-import { InsightsScreen } from "@richtillman/ui"
+import { InsightsScreen } from "@richtillman/ui/screens/insights-screen.tsx"
+
 import type { Article } from "#/features/content/seed-data"
 import { ButtonLink } from "#/features/ui/button-link"
 
@@ -13,7 +14,7 @@ export function InsightsPage({ articles }: InsightsPageProps) {
     <InsightsScreen
       articles={articles.map((article) => ({
         ...article,
-        href: `/insights/${article.slug}`,
+        href: `/insights/${article.slug}`
       }))}
       featuredCta={
         featured ? (

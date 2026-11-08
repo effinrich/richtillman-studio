@@ -1,4 +1,8 @@
-import { isValidEmail, isNonEmpty, validateField } from "@richtillman/ui"
+import {
+  isNonEmpty,
+  isValidEmail,
+  validateField
+} from "@richtillman/ui/composites/contact-validation.ts"
 import { render, screen, fireEvent, cleanup } from "@testing-library/react"
 import React from "react"
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest"

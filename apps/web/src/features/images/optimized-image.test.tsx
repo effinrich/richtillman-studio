@@ -1,4 +1,4 @@
-import { OptimizedImage } from "@richtillman/ui"
+import { OptimizedImage } from "@richtillman/ui/composites/optimized-image.tsx"
 import { render } from "@testing-library/react"
 import { describe, expect, it } from "vitest"
 

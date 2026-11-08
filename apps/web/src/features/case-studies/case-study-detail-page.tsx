@@ -1,5 +1,5 @@
-import { CaseStudyDetailScreen } from "@richtillman/ui"
-import type { CaseStudySection } from "@richtillman/ui"
+import type { CaseStudySection } from "@richtillman/ui/models.ts"
+import { CaseStudyDetailScreen } from "@richtillman/ui/screens/case-study-detail-screen.tsx"
 
 import type { CaseStudy } from "#/features/content/seed-data"
 

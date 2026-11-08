@@ -1,5 +1,5 @@
-import { ResumeScreen } from "@richtillman/ui"
-import type { ResumeModel } from "@richtillman/ui"
+import type { ResumeModel } from "@richtillman/ui/models.ts"
+import { ResumeScreen } from "@richtillman/ui/screens/resume-screen.tsx"
 
 type ResumePageProps = {
   resume: ResumeModel

@@ -1,4 +1,4 @@
-import { DesignSystemScreen } from "@richtillman/ui"
+import { DesignSystemScreen } from "@richtillman/ui/screens/design-system-screen.tsx"
 import { ArrowRight } from "lucide-react"
 
 import type { Project } from "#/features/content/seed-data"

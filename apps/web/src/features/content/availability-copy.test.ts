@@ -1,4 +1,8 @@
-import { CONTACT_AVAILABILITY, CONTACT_ENGAGEMENT_OPTIONS, ENQUIRY_TYPES } from "@richtillman/ui"
+import {
+  CONTACT_AVAILABILITY,
+  CONTACT_ENGAGEMENT_OPTIONS,
+  ENQUIRY_TYPES
+} from "@richtillman/ui/contact-copy.ts"
 import { describe, expect, it } from "vitest"
 
 import { FAQ_ITEMS } from "#/features/content/seed-data"

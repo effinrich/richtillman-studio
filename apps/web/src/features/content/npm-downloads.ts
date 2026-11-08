@@ -1,12 +1,12 @@
+import { formatCount } from "@richtillman/ui/format.ts"
+import type { NpmDownloadsModel } from "@richtillman/ui/models.ts"
+import type { Metric } from "@richtillman/ui/models.ts"
 import {
   FEATURED_MCP_PACKAGES,
   NPM_DOWNLOADS_SEED,
   PUBLISHED_PACKAGES,
-  formatCount,
-  sumDownloads,
-  type NpmDownloadsModel
-} from "@richtillman/ui"
-import type { Metric } from "@richtillman/ui"
+  sumDownloads
+} from "@richtillman/ui/npm-packages.ts"
 
 import type { CaseStudyDetailSection } from "#/features/content/case-study-details"
 import type { CaseStudy, Project, ResumeContent } from "#/features/content/seed-data"
@@ -53,8 +53,13 @@ export function resetNpmDownloadsCache(): void {
   lastFailureAt = null
 }
 
+// The Worker runtime adds `default` to the cache storage. The DOM library
+// that the app type-checks against does not have it, so the scope is widened
+// rather than narrowed.
+type EdgeCacheScope = typeof globalThis & { caches?: { default?: EdgeCache } }
+
 function defaultEdgeCache(): EdgeCache | undefined {
-  const scope = globalThis as { caches?: { default?: EdgeCache } }
+  const scope: EdgeCacheScope = globalThis
   const edgeCache = scope.caches?.default
 
   if (!edgeCache) return undefined
