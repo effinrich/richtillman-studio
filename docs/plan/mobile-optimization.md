@@ -53,43 +53,59 @@ inspection.
 | 11  | npm snapshot freshness              | the counts on the site match `api.npmjs.org` within 24 hours              |
 | 12  | Number provenance                   | every measured figure on the site carries its measurement date            |
 
-## Results after steps 1 and 2
+## Results after steps 1 to 6
 
 Measured 2026-11-08 against the deployed Worker `richtillman-studio`, version
-`82c4e810-2689-4a10-bba7-ca5a0b7b8af1`, with Lighthouse 12.8.2 and the mobile preset. Five runs,
+`2dfb952f-5476-44c8-bb24-d62521f069b2`, with Lighthouse 12.8.2 and the mobile preset. Five runs,
 because the score moves a few points between runs on a shared connection.
 
-| Metric                   | Baseline (2026-11-07) | After steps 1 and 2 (2026-11-08) | Target         | Result             |
-| ------------------------ | --------------------- | -------------------------------- | -------------- | ------------------ |
-| Lighthouse performance   | 69                    | 88, 89, 90, 91, 91               | 90 or higher   | met in 3 of 5 runs |
-| Accessibility            | 100                   | 100 in every run                 | 100            | met                |
-| First contentful paint   | 4,178 ms              | 2,446 to 2,516 ms                | under 2,500 ms | met in 3 of 5 runs |
-| Largest contentful paint | 4,855 ms              | 3,082 to 3,404 ms                | under 2,500 ms | not met            |
-| Total blocking time      | 184 ms                | 0 to 42 ms                       | under 100 ms   | met                |
-| Cumulative layout shift  | 0                     | 0                                | 0              | met                |
-| Bootup time              | 7,400 ms              | 312 ms                           | under 1.5 s    | met                |
-| Total byte weight        | 488 KiB               | 287 KiB                          | under 200 KiB  | not met            |
-| Third-party bytes        | 300,295 B             | 10,478 B                         | 0              | not met            |
-| Render-blocking savings  | 1,200 ms              | 150 ms                           | under 200 ms   | met                |
-| Unused JavaScript        | 166 KiB               | 50.2 KiB                         | under 40 KiB   | not met            |
+| Metric                   | Baseline (2026-11-07) | After steps 1 and 2 (2026-11-08) | After steps 3 to 6 (2026-11-08) | Target         | Result            |
+| ------------------------ | --------------------- | -------------------------------- | ------------------------------- | -------------- | ----------------- |
+| Lighthouse performance   | 69                    | 88, 89, 90, 91, 91               | 91, 93, 93, 91, 93              | 90 or higher   | met in all 5 runs |
+| Accessibility            | 100                   | 100 in every run                 | 100 in every run                | 100            | met               |
+| Best practices           | 82                    | 82                               | 82                              |                | unchanged         |
+| First contentful paint   | 4,178 ms              | 2,446 to 2,516 ms                | 1,681 to 1,732 ms               | under 2,500 ms | met               |
+| Largest contentful paint | 4,855 ms              | 3,082 to 3,404 ms                | 3,070 to 3,432 ms               | under 2,500 ms | not met           |
+| Total blocking time      | 184 ms                | 0 to 42 ms                       | 7 to 26 ms                      | under 100 ms   | met               |
+| Cumulative layout shift  | 0                     | 0                                | 0                               | 0              | met               |
+| Speed index              | 4,092 ms              | 2,446 to 2,516 ms                | 1,692 to 2,002 ms               |                |                   |
+| Total byte weight        | 488 KiB               | 287 KiB                          | 268 KiB                         | under 200 KiB  | not met           |
+| Third-party bytes        | 300,295 B             | 10,478 B                         | 10,478 B                        | 0              | not met           |
+| Render-blocking savings  | 1,200 ms              | 150 ms                           | 0 ms                            | under 200 ms   | met               |
+| Unused JavaScript        | 166 KiB               | 50.2 KiB                         | 51.1 KiB                        | under 40 KiB   | not met           |
+| Bootup time              | 7,400 ms              | 312 ms                           | 263 to 360 ms                   | under 1.5 s    | met               |
+
+The client JavaScript the home route loads fell from 138.2 KiB to 129.0 KiB gzip across steps 3
+and 4, and the entry chunk from 372,978 B to 235,325 B raw.
 
 ### What the remaining gap is
 
-The first paint is now gated by the client JavaScript. In the trace the deferred module
-scripts finish at 363 ms and the first paint lands at 583 ms, so the bundle is fetched, parsed
-and executed before the page paints. Under the simulated 4G and the 4x CPU slowdown that is
-where the FCP and the LCP come from. Two A/B runs against a local Worker build with the same
-bundle changed neither number: removing the webfont entirely and removing the heading's
-drop-shadow both left the FCP and the LCP identical to the millisecond. The remaining lever is
-the bundle itself, which is what steps 3 and 4 cut.
+The first paint is gated by the client JavaScript, and it still is. The deferred module scripts
+finish after the document and the stylesheet are in, and Chrome holds the first paint until they
+have run, so the first paint lands on the far side of the script download. Under the simulated 4G
+that download is about 950 ms, and the measured first contentful paint of 1,681 to 1,732 ms sits
+just after it. Cutting the bundle in steps 3 and 4 moved the first paint from 2,446 to 2,516 ms
+down to 1,681 to 1,732 ms without moving the download time much, because what is left is React
+itself: the entry chunk is 76,908 B transferred and the chunk holding react-dom and the Start
+client runtime is 38,212 B.
+
+The largest contentful paint is the same story seen from the other side. It is the `h1` of the
+home page, and 85% of its time is render delay. In an unthrottled browser the `h1` is painted
+with the first paint, so the delay is not the element waiting for a resource: it is the element
+waiting for a main thread that the module scripts are holding.
+
+The 268 KiB of total byte weight is 142 KiB of JavaScript, 79 KiB of the two self-hosted web
+fonts, 27 KiB of the two scripts Cloudflare injects at the edge, 10 KiB of CSS, and 7 KiB of
+document. The fonts are the second largest item on the page and the only one of the five that
+the repository controls.
 
 The 10,478 B of third-party bytes are Cloudflare's own Web Analytics beacon and Bot Fight Mode
 script. Neither request exists in the repository source, so turning them off is a dashboard
 change rather than a code change.
 
-The total byte weight and the unused JavaScript are both waiting on steps 3 and 4. The unused
-JavaScript is now the entry chunk alone: the 118 KiB that the third-party cursor contributed is
-gone.
+The unused JavaScript is the entry chunk and react-dom. Both are code the page runs, not code
+the page throws away: 23 KiB of the react-dom chunk is the hydration path, which the audit
+counts as unused because it has not run by the time of the first paint.
 
 ### What changed for the visitor
 
@@ -100,6 +116,12 @@ The cursor is a pointer affordance that follows a mouse, and it cost 203.7 KiB o
 
 The fonts are now served from the site origin instead of two Google origins. Inter and JetBrains
 Mono render exactly as before, at the same weights, with the same latin subset.
+
+The screenshots are now served as AVIF and WebP with responsive widths, with the PNG kept as the
+fallback. The project cards on the home route pick the 640 B AVIF variant on a phone.
+
+The home route now downloads no seed content at all. It used to receive the whole corpus of
+projects, articles, case studies and resume copy so that it could render six metrics.
 
 ## Step 1: Move the three.js tubes cursor off the critical path
 
@@ -162,11 +184,13 @@ out of scope.
 
 ## Step 4: Ship only the content the route needs
 
-**Intent**: `seed-data.ts` is 26,901 B and is modulepreloaded on every route, while the home
-route uses only the six-entry `METRICS` list. Refactor the content module into per-route
-modules so the client receives only the collection its route renders, while the server keeps
-the full seed as the fallback when Supabase is not configured. Assert the
-seed chunk on the home route carries only the metrics collection.
+**Intent**: `seed-data.ts` is 32,842 B and is modulepreloaded on every route, while the home
+route uses only the six-entry `METRICS` list. Split the seed into one module per collection and
+the content layer into one accessor per collection, and make the accessors a route loader calls
+server functions, so the compiler keeps their implementation out of the client bundle. The
+server keeps the full seed as the fallback when Supabase is not configured, and a collection a
+page renders directly still ships in that page's own chunk. Assert the home route ships no seed
+content at all.
 
 **Acceptance criteria**:
 
@@ -232,3 +256,55 @@ strings.
 
 **Out of scope**: Deploying to production, video or screenshot recording, and the design system
 stay out of scope.
+
+## Step 7 results
+
+Measured 2026-11-08 against the deployed Worker `richtillman-studio`, version
+`2dfb952f-5476-44c8-bb24-d62521f069b2`.
+
+**The Lighthouse run**: five mobile runs against production, scores 91, 93, 93, 91 and 93 with
+accessibility 100 in every run. The full table is above. The site does not quote its own
+Lighthouse score, so there is no figure on the page to correct. The Lighthouse figures the site
+does quote belong to other projects, TokenCast, MCP Atlas and the design system case study, and
+they are dated in the resume copy.
+
+**The npm counts**: `api.npmjs.org` was read directly for the same twelve-month window the site
+uses, 2025-11-08 to 2026-11-07, on 2026-11-08.
+
+| Package                   | Downloads |
+| ------------------------- | --------- |
+| forgekit-figma-mcp        | 330       |
+| forgekit-storybook-mcp    | 7,675     |
+| forgekit-radix-mcp        | 367       |
+| @effinrich/figma-drift    | 292       |
+| @effinrich/nx-storybook   | 256       |
+| @effinrich/ui             | 488       |
+| Total across the six      | 9,408     |
+| The two featured MCP ones | 8,005     |
+
+The deployed site rendered 8,005 for the featured figure and 9,408 for the total, so the live
+counts match the registry exactly. The bundled fallback seed was refreshed to the same numbers
+with the same measurement date, so the site agrees with itself when the API cannot be reached.
+
+**The routes**: every route returns 200 with zero console errors and no failed request. The
+unresolved token check passes on every route, so no page renders a raw `{{npm_downloads}}`.
+
+## Acceptance criteria status
+
+| Step | Criterion                                                                   | Result                                                                                                                                                                                                                                               |
+| ---- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 3    | The home route preloads no screen it does not render                        | met. The list is index, jsx-runtime, preload-helper, routes, portfolio-layout, arrow-right, arrow-up-right, button, glass-panel and button-link                                                                                                      |
+| 3    | Lighthouse mobile unused JavaScript savings under 40 KiB                    | not met, 51.1 KiB. The unused part is react-dom's hydration path, which the audit counts as unused because it has not run at the first paint                                                                                                         |
+| 3    | Every route still renders, and Storybook still works with the barrel intact | met. Storybook 10.6.2 builds with the barrel unchanged                                                                                                                                                                                               |
+| 4    | The home route ships no more than 5 KiB gzip of content module              | met. It ships none, and a CI check fails the build if it starts to                                                                                                                                                                                   |
+| 4    | Every route falls back to the seed when `VITE_SUPABASE_URL` is unset        | met. Every route rendered its content from a local build with no Supabase configured                                                                                                                                                                 |
+| 4    | No loader performs a network call during server rendering                   | not met. The npm downloads API is still called during rendering, which is what step 5 caches for an hour at the edge and what the measured seed covers when it fails. No other loader calls out, and the content itself resolves from the local seed |
+| 5    | Two reads inside the cache window produce one set of upstream requests      | met, covered by the edge cache test                                                                                                                                                                                                                  |
+| 5    | When the npm API fails, the site still renders the measured seed            | met, covered by the fallback test                                                                                                                                                                                                                    |
+| 5    | The page never renders an unresolved token or a partially summed total      | met, covered by the token tests and checked on every route                                                                                                                                                                                           |
+| 6    | Hashed assets return `public, max-age=31536000, immutable`                  | met, verified on the deployed assets                                                                                                                                                                                                                 |
+| 6    | The document is either not cached or cached for under 300 seconds           | met, the document carries no `Cache-Control`                                                                                                                                                                                                         |
+| 6    | CI rejects a client bundle over 160 KiB gzip, and the current one passes    | met, 129.0 KiB                                                                                                                                                                                                                                       |
+| 7    | The Lighthouse run is recorded with its date                                | met, above                                                                                                                                                                                                                                           |
+| 7    | The npm counts rendered match `api.npmjs.org` for the same window           | met, 8,005 and 9,408 against the registry                                                                                                                                                                                                            |
+| 7    | Every route returns 200 with zero console errors and no stale figure        | met                                                                                                                                                                                                                                                  |

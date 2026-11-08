@@ -21,18 +21,18 @@ export const PUBLISHED_PACKAGES = [
 
 /**
  * Last measured counts from the npm downloads API, 12 months ending
- * 2026-11-06. Used as the fallback when the API cannot be reached.
+ * 2026-11-07. Used as the fallback when the API cannot be reached.
  */
 export const NPM_DOWNLOADS_SEED: NpmDownloadsModel = {
-  measuredAt: "2026-11-06",
+  measuredAt: "2026-11-07",
   live: false,
   packages: [
-    { name: "forgekit-figma-mcp", downloads: 327 },
-    { name: "forgekit-storybook-mcp", downloads: 7670 },
-    { name: "forgekit-radix-mcp", downloads: 364 },
-    { name: "@effinrich/figma-drift", downloads: 286 },
+    { name: "forgekit-figma-mcp", downloads: 330 },
+    { name: "forgekit-storybook-mcp", downloads: 7675 },
+    { name: "forgekit-radix-mcp", downloads: 367 },
+    { name: "@effinrich/figma-drift", downloads: 292 },
     { name: "@effinrich/nx-storybook", downloads: 256 },
-    { name: "@effinrich/ui", downloads: 489 }
+    { name: "@effinrich/ui", downloads: 488 }
   ]
 }
 
