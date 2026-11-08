@@ -24,7 +24,21 @@ export type NpmDownloadsOptions = {
   fetchImpl?: typeof fetch
   now?: () => number
   timeoutMs?: number
+  edgeCache?: EdgeCache | null
 }
+
+/**
+ * The edge cache is the Cloudflare Cache API, which is shared by every
+ * isolate in a colo. The module level cache below only lives inside one
+ * isolate, so a cold isolate in a new colo would otherwise ask the npm API
+ * for the counts all over again.
+ */
+export type EdgeCache = {
+  match: (request: Request) => Promise<Response | undefined>
+  put: (request: Request, response: Response) => Promise<void>
+}
+
+const EDGE_CACHE_KEY = "https://richtillman.xyz/.cache/npm-downloads.json"
 
 type CacheEntry = {
   model: NpmDownloadsModel
@@ -37,6 +51,77 @@ let lastFailureAt: number | null = null
 export function resetNpmDownloadsCache(): void {
   cache = null
   lastFailureAt = null
+}
+
+function defaultEdgeCache(): EdgeCache | undefined {
+  const scope = globalThis as { caches?: { default?: EdgeCache } }
+  const edgeCache = scope.caches?.default
+
+  if (!edgeCache) return undefined
+
+  return {
+    match: (request) => edgeCache.match(request),
+    put: (request, response) => edgeCache.put(request, response)
+  }
+}
+
+function parseSnapshot(body: unknown): NpmDownloadsModel | null {
+  if (typeof body !== "object" || body === null) return null
+
+  const measuredAt = Reflect.get(body, "measuredAt")
+  const packages = Reflect.get(body, "packages")
+
+  if (typeof measuredAt !== "string") return null
+  if (!Array.isArray(packages)) return null
+
+  const entries = packages.flatMap((entry) => {
+    if (typeof entry !== "object" || entry === null) return []
+
+    const name = Reflect.get(entry, "name")
+    const downloads = Reflect.get(entry, "downloads")
+
+    if (typeof name !== "string" || typeof downloads !== "number") return []
+
+    return [{ name, downloads }]
+  })
+
+  if (entries.length !== packages.length) return null
+
+  return { measuredAt, live: true, packages: entries }
+}
+
+async function readEdgeCache(edgeCache: EdgeCache | undefined): Promise<NpmDownloadsModel | null> {
+  if (!edgeCache) return null
+
+  try {
+    const response = await edgeCache.match(new Request(EDGE_CACHE_KEY))
+    if (!response) return null
+
+    const body: unknown = await response.json()
+    return parseSnapshot(body)
+  } catch {
+    return null
+  }
+}
+
+async function writeEdgeCache(
+  edgeCache: EdgeCache | undefined,
+  model: NpmDownloadsModel
+): Promise<void> {
+  if (!edgeCache) return
+
+  try {
+    const response = new Response(JSON.stringify(model), {
+      headers: {
+        "content-type": "application/json",
+        "cache-control": `public, max-age=${Math.floor(CACHE_TTL_MS / 1000)}`
+      }
+    })
+
+    await edgeCache.put(new Request(EDGE_CACHE_KEY), response)
+  } catch {
+    // The edge cache is an optimisation. Never a reason to fail a read.
+  }
 }
 
 function readPointResponse(body: unknown, name: string): { downloads: number; end: string } {
@@ -109,6 +194,16 @@ export async function getNpmDownloads(
 
   if (cache && now - cache.fetchedAt < CACHE_TTL_MS) return cache.model
 
+  const edgeCache =
+    options.edgeCache === undefined ? defaultEdgeCache() : (options.edgeCache ?? undefined)
+
+  const shared = await readEdgeCache(edgeCache)
+  if (shared) {
+    cache = { model: shared, fetchedAt: now }
+    lastFailureAt = null
+    return shared
+  }
+
   if (lastFailureAt !== null && now - lastFailureAt < FAILURE_BACKOFF_MS) {
     return cache?.model ?? NPM_DOWNLOADS_SEED
   }
@@ -117,6 +212,7 @@ export async function getNpmDownloads(
     const model = await fetchNpmDownloads(options)
     cache = { model, fetchedAt: now }
     lastFailureAt = null
+    await writeEdgeCache(edgeCache, model)
     return model
   } catch {
     lastFailureAt = now

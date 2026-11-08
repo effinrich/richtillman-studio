@@ -13,7 +13,8 @@ import {
   applyNpmDownloads,
   fetchNpmDownloads,
   getNpmDownloads,
-  resetNpmDownloadsCache
+  resetNpmDownloadsCache,
+  type EdgeCache
 } from "./npm-downloads"
 import * as seed from "./seed-data"
 
@@ -121,6 +122,56 @@ describe("npm downloads", () => {
     await getNpmDownloads({ fetchImpl, now: currentTime })
 
     expect(calls).toBe(PUBLISHED_PACKAGES.length * 2)
+  })
+
+  it("shares one snapshot across isolates through the edge cache", async () => {
+    let calls = 0
+    const fetchImpl = async () => {
+      calls += 1
+      return pointResponse(100)
+    }
+
+    const stored = new Map<string, string>()
+    const edgeCache: EdgeCache = {
+      match: async (request) => {
+        const body = stored.get(request.url)
+        return body
+          ? new Response(body, { headers: { "content-type": "application/json" } })
+          : undefined
+      },
+      put: async (request, response) => {
+        stored.set(request.url, await response.text())
+      }
+    }
+
+    const first = await getNpmDownloads({ fetchImpl, now: currentTime, edgeCache })
+    expect(calls).toBe(PUBLISHED_PACKAGES.length)
+
+    // A cold isolate starts with no module cache and must reuse the snapshot.
+    resetNpmDownloadsCache()
+    const second = await getNpmDownloads({ fetchImpl, now: currentTime, edgeCache })
+
+    expect(calls).toBe(PUBLISHED_PACKAGES.length)
+    expect(second).toEqual(first)
+  })
+
+  it("ignores an unreadable edge cache entry and reads the API", async () => {
+    let calls = 0
+    const fetchImpl = async () => {
+      calls += 1
+      return pointResponse(100)
+    }
+
+    const edgeCache: EdgeCache = {
+      match: async () =>
+        new Response("not json", { headers: { "content-type": "application/json" } }),
+      put: async () => {}
+    }
+
+    const result = await getNpmDownloads({ fetchImpl, now: currentTime, edgeCache })
+
+    expect(calls).toBe(PUBLISHED_PACKAGES.length)
+    expect(result.live).toBe(true)
   })
 
   it("interpolates download counts into nested content", () => {

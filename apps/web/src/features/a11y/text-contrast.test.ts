@@ -39,6 +39,26 @@ function sourceFiles(directory: string): string[] {
 
 const DIMMED_TEXT = /text-white\/(\d{1,3})/
 
+/**
+ * The class may sit on its own line, so the check follows the element it
+ * belongs to rather than the line it was written on.
+ */
+function elementIsDecorative(lines: string[], index: number): boolean {
+  const line = lines[index] ?? ""
+  const match = DIMMED_TEXT.exec(line)
+  if (!match) return false
+
+  const afterClass = line.slice(match.index + match[0].length)
+
+  if (afterClass.includes(">")) return line.includes("aria-hidden")
+
+  const rest = lines.slice(index + 1)
+  const end = rest.findIndex((candidate) => /^\s*\/?>/.test(candidate))
+  const attributes = (end === -1 ? rest : rest.slice(0, end + 1)).join("\n")
+
+  return attributes.includes("aria-hidden")
+}
+
 describe("text contrast", () => {
   it("keeps text at or above a 5.3:1 contrast ratio on the black background", () => {
     const offenders: string[] = []
@@ -52,7 +72,7 @@ describe("text contrast", () => {
 
         const opacity = Number(match[1])
         if (opacity >= MINIMUM_TEXT_OPACITY) continue
-        if (line.includes("aria-hidden")) continue
+        if (elementIsDecorative(lines, index)) continue
 
         offenders.push(
           `${relative(ROOT, file)}:${index + 1} uses text-white/${opacity} on text that is not aria-hidden`
