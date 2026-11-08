@@ -42,3 +42,5 @@ jobs:
         run: bunx turbo run build --filter=@richtillman/web
       - name: Check the client bundle budget
         run: bun run --cwd apps/web budget
+      - name: Check the client content
+        run: bun run --cwd apps/web content

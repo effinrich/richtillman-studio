@@ -5,15 +5,15 @@ import {
   getCaseStudies,
   getCaseStudyBySlug,
   getCaseStudyDetailSections
-} from "#/features/content/queries"
+} from "#/features/content/queries/case-studies"
 
 export const Route = createFileRoute("/case-studies/$slug")({
   loader: async ({ params }) => {
-    const caseStudy = await getCaseStudyBySlug(params.slug)
+    const caseStudy = await getCaseStudyBySlug({ data: params.slug })
     if (!caseStudy) throw notFound()
 
     const [sections, allCaseStudies] = await Promise.all([
-      getCaseStudyDetailSections(params.slug),
+      getCaseStudyDetailSections({ data: params.slug }),
       getCaseStudies()
     ])
 

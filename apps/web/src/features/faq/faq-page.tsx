@@ -1,5 +1,6 @@
-import { FaqScreen } from "@richtillman/ui"
-import { getFaqItems } from "#/features/content/queries"
+import { FaqScreen } from "@richtillman/ui/screens/faq-screen.tsx"
+
+import { getFaqItems } from "#/features/content/queries/faq"
 
 export function FaqPage() {
   return <FaqScreen items={getFaqItems()} />

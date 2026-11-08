@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router"
 
 import { CaseStudiesPage } from "#/features/case-studies/case-studies-page"
-import { getCaseStudies } from "#/features/content/queries"
+import { getCaseStudies } from "#/features/content/queries/case-studies"
 
 export const Route = createFileRoute("/case-studies/")({
   loader: () => getCaseStudies(),

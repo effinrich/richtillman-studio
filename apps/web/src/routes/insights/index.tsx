@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router"
-import { getArticles } from "#/features/content/queries"
+
+import { getArticles } from "#/features/content/queries/articles"
 import { InsightsPage } from "#/features/insights/insights-page"
 
 export const Route = createFileRoute("/insights/")({
   loader: () => getArticles(),
-  component: InsightsRoute,
+  component: InsightsRoute
 })
 
 function InsightsRoute() {

@@ -21,7 +21,7 @@ const SRC_ROOT = findSrcRoot()
 const CONTENT_DIR = join(SRC_ROOT, "features", "content")
 
 const SEED_IMPORT =
-  /import\s+(type\s+)?(\{[^}]*\}|\*\s+as\s+\w+|\w+)\s+from\s+["'][^"']*seed-data["']/g
+  /import\s+(type\s+)?(\{[^}]*\}|\*\s+as\s+\w+|\w+)\s+from\s+["'][^"']*(seed-data|content\/seed\/[^"']*)["']/g
 
 function sourceFiles(directory: string): string[] {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {

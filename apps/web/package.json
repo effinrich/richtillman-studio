@@ -9,6 +9,7 @@
     "dev": "vite dev --port 3000",
     "build": "vite build",
     "budget": "node scripts/check-bundle-budget.mjs",
+    "content": "node scripts/check-client-content.mjs",
     "preview": "vite preview",
     "preview:worker": "wrangler dev",
     "lint": "oxlint src",

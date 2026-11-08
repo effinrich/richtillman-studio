@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router"
 
-import { getSpecimenProject } from "#/features/content/queries"
+import { getSpecimenProject } from "#/features/content/queries/projects"
 import { DesignSystemPage } from "#/features/design-system/design-system-page"
 
 export const Route = createFileRoute("/design-system")({

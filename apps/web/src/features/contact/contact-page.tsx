@@ -1,7 +1,13 @@
-import { ContactScreen, type ContactSubmitHandler } from "@richtillman/ui"
-import { submitContactForm as submitContactFormDefault } from "#/features/content/queries"
+import type { ContactSubmitHandler } from "@richtillman/ui/models.ts"
+import { ContactScreen } from "@richtillman/ui/screens/contact-screen.tsx"
 
-export { isValidEmail, isNonEmpty, validateField } from "@richtillman/ui"
+import { submitContactForm as submitContactFormDefault } from "#/features/content/queries/contact"
+
+export {
+  isNonEmpty,
+  isValidEmail,
+  validateField
+} from "@richtillman/ui/composites/contact-validation.ts"
 
 type ContactPageProps = {
   submitContactForm?: ContactSubmitHandler

@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router"
 
-import { getHomeMetrics } from "#/features/content/queries"
+import { getHomeMetrics } from "#/features/content/queries/metrics"
 import { HomePage } from "#/features/home/home-page"
 
 export const Route = createFileRoute("/")({

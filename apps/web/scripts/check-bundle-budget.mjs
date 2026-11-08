@@ -1,45 +1,32 @@
-// Fails the build when the client JavaScript grows past the budget.
+// Fails the build when the client JavaScript the home route loads grows past
+// the budget.
 //
-// The budget is the total gzip size of every JavaScript file the browser can
-// be asked to download from the built client. It is the number that decides
-// how long the site takes to become usable on a slow connection.
+// The metric comes from the Vite manifest, so it is the browser's own module
+// graph: the home route chunk plus everything it imports statically. Lazily
+// imported route chunks are not counted, because a visitor who never opens
+// those routes never downloads them.
 import { gzipSync } from "node:zlib"
-import { readdirSync, readFileSync, statSync } from "node:fs"
-import { join } from "node:path"
+import { readFileSync } from "node:fs"
+
+import { homeRouteFiles, readClientManifest } from "./client-graph.mjs"
 
 const BUDGET_BYTES = 160 * 1024
 
-const ASSET_DIR = join(process.cwd(), "dist", "client", "assets")
+const manifest = readClientManifest()
+const files = homeRouteFiles(manifest)
 
-function clientScripts(directory) {
-  return readdirSync(directory, { withFileTypes: true })
-    .filter((entry) => entry.isFile() && entry.name.endsWith(".js"))
-    .map((entry) => join(directory, entry.name))
-}
-
-let assets
-try {
-  assets = clientScripts(ASSET_DIR)
-} catch {
-  console.error(`No client assets at ${ASSET_DIR}. Build the app first.`)
-  process.exit(1)
-}
-
-const files = assets.map((path) => ({
-  name: path.split(/[\\/]/).pop(),
-  gzip: gzipSync(readFileSync(path)).length
+const measured = files.map((file) => ({
+  name: file.file,
+  gzip: gzipSync(readFileSync(file.path)).length
 }))
 
-const total = files.reduce((sum, file) => sum + file.gzip, 0)
-const largest = [...files].sort((a, b) => b.gzip - a.gzip).slice(0, 5)
+const total = measured.reduce((sum, file) => sum + file.gzip, 0)
 
-console.log("Client JavaScript, gzip:")
-for (const file of largest) {
+console.log("Client JavaScript the home route loads, gzip:")
+for (const file of measured.sort((a, b) => b.gzip - a.gzip)) {
   console.log(`  ${(file.gzip / 1024).toFixed(1).padStart(7)} KiB  ${file.name}`)
 }
-console.log(
-  `  ${(total / 1024).toFixed(1).padStart(7)} KiB  total across ${files.length} files`
-)
+console.log(`  ${(total / 1024).toFixed(1).padStart(7)} KiB  total across ${measured.length} files`)
 console.log(`Budget: ${(BUDGET_BYTES / 1024).toFixed(0)} KiB`)
 
 if (total > BUDGET_BYTES) {
