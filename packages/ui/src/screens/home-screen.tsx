@@ -71,7 +71,7 @@ export function HomeScreen({ metrics, actions, metricsNote }: HomeScreenProps) {
         </GlassPanel>
 
         {metricsNote ? (
-          <p className="mt-4 font-mono text-[10px] uppercase tracking-widest text-white/40">
+          <p className="mt-4 font-mono text-[10px] uppercase tracking-widest text-white/50">
             {metricsNote}
           </p>
         ) : null}
