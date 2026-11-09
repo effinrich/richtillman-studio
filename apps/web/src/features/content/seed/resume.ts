@@ -2,14 +2,14 @@ import type { ResumeContent } from "./types"
 
 export const RESUME_SECTIONS: ResumeContent = {
   summary:
-    "Principal Frontend Engineer, 15 years — founding/architecture-level engineer across five 0-to-1 startups, IC to Engineering Director, with real experience running teams, not just shipping UI. The throughline across every role: Nx monorepo architecture, structural and lint tooling (now Oxlint), and the design-system to shared-UI-library to frontend to BFF to backend pattern, built repeatedly at Freebird, Pineapple, PHC Global, and Redesign Health. Early, genuine adopter of React and Storybook (2016 — still active in both communities' Discords), and pioneered browser-based AR for NARS Cosmetics years before WebAR went mainstream. Deeply agent-native: creator of ForgeKit, an open-source CLI + MCP server suite ({{featured_npm_downloads}} npm downloads in the last 12 months across two published Figma-to-React MCP packages) that is itself harness/spec tooling for AI coding agents — I design what context an agent needs to do a task right, not just prompt it. Claude Code and Cursor daily, including production use of Cursor's background agent. Seeking Principal / Staff Frontend, Product Engineer, or engineering-leadership roles where architecture, AI-native tooling, and real ownership meet.",
+    "Principal Frontend Engineer, 15 years across five 0-to-1 startups, IC to Engineering Director. The throughline: Nx monorepo architecture, design systems from Figma to backend, and lint tooling now shipped as Oxlint. Creator of ForgeKit, an open-source CLI and MCP suite with {{featured_npm_downloads}} npm downloads in 12 months. Seeking Principal, Staff Frontend, or Product Engineer roles.",
   experience: [
     {
       title: "Consultant, AI Model Evaluation & Red-Teaming",
       company: "Independent (Mercor, micro1, Handshake)",
       period: "Feb 2026 — Jul 2026",
       highlights: [
-        "Evaluated, ranked, and red-teamed frontier AI model outputs against scoring rubrics on React/TypeScript frontend-engineering tasks across three sequential contract engagements (Mercor, then micro1, then Handshake); authored adversarial test cases to expose model failure modes and break outputs. Worked in ChatGPT Pro and Cursor across four frontier LLMs throughout."
+        "Evaluated, ranked, and red-teamed frontier AI model output against React and TypeScript rubrics across three contract engagements (Mercor, micro1, Handshake), authoring adversarial cases to expose model failure modes."
       ]
     },
     {
@@ -22,7 +22,7 @@ export const RESUME_SECTIONS: ResumeContent = {
         "Engineered 20+ data-visualization components with custom hooks and Zustand: 40% rendering-overhead reduction on large datasets; established a Chromatic visual-regression workflow.",
         "Adopted Ponicode for AI-generated React unit-test scaffolding, raising test coverage on new components with less manual boilerplate.",
         "Built an onboarding methodology that trained backend engineers to production-level React in one month.",
-        "Drove build-tooling modernization: migrated to Vite (became the org's default bundler by early 2023) and to Tailwind CSS for an internal sister app to the client portal; migrated the team's default e2e suite from Cypress to Playwright; generated type-safe React Query hooks from OpenAPI/Swagger specs; collaborated with backend on JWT auth and authored the specs for an OIDC migration that was shelved when the team was restructured."
+        "Drove build-tooling modernization: migrated to Vite (org default bundler by early 2023) and Tailwind CSS, moved e2e from Cypress to Playwright, generated typed React Query hooks from OpenAPI specs, and wrote OIDC specs."
       ]
     },
     {
@@ -39,8 +39,8 @@ export const RESUME_SECTIONS: ResumeContent = {
       company: "PHC Global",
       period: "Jul 2021 — Jan 2022",
       highlights: [
-        "Founding frontend architect for a healthtech/biosecurity startup: built the core product for enterprise clients (including Facebook and Amex, our first two customers) — a Mapbox GL heatmap of active COVID risk zones that clients used to schedule ground teams, plus flight/travel-arrangement suggestions and a separate interactive map for simulating alternate entry routes.",
-        "Set up the foundational architecture: Nx monorepo with 30+ shared libraries and gRPC middleware (40% developer-experience improvement); lifted NPS-measured satisfaction 35%; cut infrastructure costs 30% via GCP, gRPC, and Kubernetes.",
+        "Founding frontend architect for a healthtech startup: built the core product for enterprise clients including Facebook and Amex, our first two customers, with a Mapbox GL risk heatmap clients used to schedule teams.",
+        "Set up the foundational architecture: Nx monorepo with 30+ shared libraries and gRPC middleware (40% developer-experience improvement), NPS satisfaction up 35%, infrastructure costs down 30%.",
         "Standardized client state with Redux Toolkit (RTK) and server state with React Query across the platform."
       ]
     },
@@ -59,7 +59,7 @@ export const RESUME_SECTIONS: ResumeContent = {
       company: "FaceCake Marketing Technologies (Los Angeles, CA)",
       period: "Oct 2010 — Sep 2016",
       highlights: [
-        "Pioneered browser-based AR try-on for NARS, one of the first of its kind: compiled OpenCV to JavaScript via Emscripten for real-time client-side computer vision over getUserMedia, with Pixi.js, WebGL, and Three.js powering real-time face-tracking and makeup-rendering. Worked directly with Pixi.js's creator on techniques no one had attempted before, years ahead of mainstream WebAR.",
+        "Pioneered AR try-on for NARS, one of the first of its kind: compiled OpenCV to JavaScript via Emscripten for client-side computer vision over getUserMedia, with Pixi.js and Three.js, years ahead of mainstream WebAR.",
         "Shipped the NARS virtual try-on web app (~$400K/month revenue lift) backed by a real-time CMS on Firebase Realtime Database; owned the full lifecycle end-to-end."
       ]
     }
@@ -68,7 +68,7 @@ export const RESUME_SECTIONS: ResumeContent = {
     {
       title: "ForgeKit",
       detail:
-        "Independent open-source developer-tooling venture (2024 — 2026) — Open-source CLI + MCP server suite bridging Figma to React to Storybook for design-system teams — itself a harness/spec-tooling product for AI coding agents (Claude Code, Cursor). {{featured_npm_downloads}} npm downloads in the last 12 months across two published Figma-to-React MCP packages, with active production adoption. forgekit.cloud, github.com/effinrich, npmjs.com."
+        "Independent open-source developer-tooling venture (2024 to 2026): a CLI and MCP server suite bridging Figma to React to Storybook, itself harness and spec tooling for AI coding agents. {{featured_npm_downloads}} npm downloads in 12 months across two published Figma-to-React MCP packages."
     },
     {
       title: "ForgeKit Core CLI",
@@ -93,22 +93,22 @@ export const RESUME_SECTIONS: ResumeContent = {
     {
       title: "Santa Chat AI",
       detail:
-        "AI-powered Santa Claus experience — Real-time chat, live phone calls, and SMS with Santa via ElevenLabs text-to-speech and Twilio, an LLM chat backend, and Stable Diffusion image generation; Stripe-based subscription tokens. Per-user personalization (parents added their child's name so Santa could address them by name) and analytics instrumentation (Amplitude, Google Analytics 4) tracked engagement in production. Next.js frontend/BFF layer proxying to a dedicated backend service. Selected by ElevenLabs for a 300K-token grant. Next.js, React, Chakra UI, Zustand, MongoDB, NextAuth."
+        "AI-powered Santa Claus experience: real-time chat, live phone calls, and SMS with Santa via ElevenLabs text-to-speech and Twilio, Stable Diffusion images, Stripe subscription tokens, and per-user personalization (parents’ child’s name). An ElevenLabs 300K-token grant. Next.js, React, Chakra UI, Zustand, MongoDB."
     },
     {
       title: "Textation",
       detail:
-        "AI character chat and avatar platform — Pivoted from Santa Chat AI into a general AI-companion product: custom AI characters with LLM chat, ElevenLabs text-to-speech, Deepgram speech-to-text, image generation, SadTalker talking-head video, and live WebSocket voice chat; Stripe payments, Twilio SMS/voice. Next.js, React, Chakra UI, Zustand, MongoDB."
+        "AI character chat and avatar platform, pivoted from Santa Chat AI: custom characters with LLM chat, ElevenLabs text-to-speech, Deepgram speech-to-text, image generation, SadTalker talking-head video, and live WebSocket voice, with Stripe payments and Twilio SMS. Next.js, React, Chakra UI, Zustand, MongoDB."
     },
     {
       title: "MCP Atlas",
       detail:
-        "Curated, link-verified directory of Model Context Protocol servers (18 official + community, searchable and filterable). Built with Claude Code. Astro (Zod-validated content collections + islands architecture), TypeScript, Vitest, and Playwright; Lighthouse 100 accessibility, 100 performance (measured Nov 2026). mcp-atlas-orcin.vercel.app."
+        "Curated, link-verified directory of Model Context Protocol servers, 18 official plus community, searchable and filterable. Built with Claude Code. Astro with Zod-validated content collections and islands architecture; Lighthouse 100 accessibility, 100 performance (measured Nov 2026)."
     },
     {
       title: "TokenCast",
       detail:
-        "Paste design tokens (Figma variables, CSS custom properties, or a Tailwind config) and get a live preview plus exportable theme code for Tailwind, Chakra, and shadcn/ui, with server-rendered Save & Share links. Built with Cursor. React Router (framework mode: SSR, loaders, actions), React 19, TypeScript, Tailwind CSS 4, Supabase (RLS + SECURITY DEFINER RPCs, IP rate-limiting), Vitest + Playwright; Lighthouse 100 performance, 91 accessibility (measured Nov 2026). tokencast.vercel.app."
+        "Paste design tokens (Figma variables, CSS custom properties, or a Tailwind config), get a live preview and exportable theme code for Tailwind, Chakra, and shadcn/ui, with server-rendered Save and Share links. React Router, React 19, Supabase; Lighthouse 100 performance, 91 accessibility (measured Nov 2026)."
     },
     {
       title: "Tidy App",
@@ -118,7 +118,7 @@ export const RESUME_SECTIONS: ResumeContent = {
     {
       title: "Serial One",
       detail:
-        "Dec 2021 — Jan 2022 — Turborepo monorepo browsing live Candy Digital NFT sale listings (MLB-licensed digital trading cards), pulling data from MongoDB and filterable by player name and rarity tier, rendered in a masonry grid (price, sale date, edition number per card). Coinbase Commerce crypto-donation checkout integrated in the nav. Next.js, React, Chakra UI, MongoDB, axios, SWR. app.serialone.io."
+        "Dec 2021 to Jan 2022: Turborepo monorepo browsing live Candy Digital NFT sale listings (MLB-licensed digital trading cards), filterable by player name and rarity tier, with Coinbase Commerce crypto-donation checkout. Next.js, React, Chakra UI, MongoDB, SWR. app.serialone.io."
     }
   ],
   skills: [

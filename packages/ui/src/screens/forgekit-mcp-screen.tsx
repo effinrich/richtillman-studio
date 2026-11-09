@@ -75,8 +75,7 @@ export function ForgekitMcpScreen({ backHref = "/work", npmDownloads }: Forgekit
           <p className="text-lg leading-relaxed text-white/70">
             ForgeKit MCP integrates directly with AI coding assistants like Cursor, VS Code, Zed,
             Continue, and Claude Desktop. Instead of screenshot interpretation, the servers return
-            structured design-system context — tokens, component trees, and Storybook metadata
-            agents can act on.
+            structured design-system context: tokens, component trees, and Storybook metadata.
           </p>
           <p className="text-lg leading-relaxed text-white/70">
             The goal is code that matches your system: typed theme configs and stories grounded in

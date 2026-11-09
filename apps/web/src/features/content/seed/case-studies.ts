@@ -35,7 +35,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     subtitle: "Figma + Storybook MCP servers for design-to-code",
     tags: ["MCP", "Figma", "Storybook", "AI"],
     summary:
-      "Published forgekit-figma-mcp and forgekit-storybook-mcp — MCP servers purpose-built for Figma-to-React design system workflows. Figma package extracts variables into typed theme configs; Storybook package exposes argTypes and usage patterns to coding agents. {{featured_npm_downloads}} npm downloads in the last 12 months, wired into Cursor, VS Code, Zed, and Continue.",
+      "Published forgekit-figma-mcp and forgekit-storybook-mcp, MCP servers purpose-built for Figma-to-React design system workflows. {{featured_npm_downloads}} npm downloads in the last 12 months, wired into Cursor, VS Code, Zed, and Continue.",
     metrics: [
       { label: "npm downloads (12 mo)", value: "{{featured_npm_downloads}}" },
       { label: "Figma-to-React MCP packages", value: "2" },

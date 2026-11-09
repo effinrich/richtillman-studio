@@ -39,7 +39,7 @@ export const CASE_STUDY_DETAIL_SECTIONS: Record<string, CaseStudyDetailSection[]
     },
     {
       label: "Architecture",
-      body: "Built on React Router in framework mode (loaders, actions, SSR) rather than a client-rendered stub. Save & Share persists to Supabase through two SECURITY DEFINER RPCs — there is no direct anon table access, and both tables run RLS with zero policies. Rate limiting (5 saves per 60s per IP) is enforced in the database, not in-memory, so it survives across Vercel's serverless instances."
+      body: "Built on React Router in framework mode (loaders, actions, SSR) rather than a client-rendered stub. Save and Share persists to Supabase through two SECURITY DEFINER RPCs, so no anon table access, and both tables run RLS with zero policies. Rate limiting (5 saves per 60s per IP) lives in the database, not in memory."
     },
     {
       label: "Security",

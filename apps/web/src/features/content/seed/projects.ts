@@ -5,7 +5,7 @@ export const PROJECTS: Project[] = [
     slug: "tokencast",
     title: "TokenCast",
     description:
-      "Paste design tokens — Figma variables, CSS custom properties, or a Tailwind config — get a live preview and exportable theme code (Tailwind, Chakra, shadcn/ui), with server-rendered Save & Share links.",
+      "Paste design tokens (Figma variables, CSS custom properties, or a Tailwind config), get a live preview and exportable theme code for Tailwind, Chakra, and shadcn/ui, with server-rendered share links.",
     tags: ["React Router", "Supabase", "Design Tokens"],
     metric: "Lighthouse 100 perf / 91 a11y",
     href: "https://tokencast.vercel.app",
