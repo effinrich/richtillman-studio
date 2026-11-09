@@ -1,9 +1,9 @@
 import { useCallback, useState, type FormEvent } from "react"
 
 import { Button } from "../button"
-import { ENQUIRY_TYPES } from "../contact-copy"
+import { buildContactMailto, CONTACT_DELIVERY_FAILED, ENQUIRY_TYPES } from "../contact-copy"
 import { Field, Input, Select, Textarea } from "../field"
-import type { ContactSubmitHandler } from "../models"
+import type { ContactSubmitHandler, ContactSubmitInput } from "../models"
 import { getFieldErrors, validateField } from "./contact-validation"
 
 function readFormString(form: FormData, name: string): string {
@@ -20,6 +20,7 @@ export function ContactForm({ onSubmit, onSubmitted }: ContactFormProps) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [errors, setErrors] = useState<Record<string, string>>({})
+  const [failedSubmission, setFailedSubmission] = useState<ContactSubmitInput | null>(null)
 
   const handleFieldBlur = useCallback((fieldName: string, value: string) => {
     const newErrors = validateField(fieldName, value)
@@ -59,7 +60,11 @@ export function ContactForm({ onSubmit, onSubmitted }: ContactFormProps) {
     setLoading(true)
     setError(null)
 
-    const form = new FormData(event.currentTarget)
+    // React clears `event.currentTarget` once the dispatch finishes, and the
+    // await below suspends past that point. The element is captured here so
+    // the form can still be reset after the submission settles.
+    const formElement = event.currentTarget
+    const form = new FormData(formElement)
     const formData = {
       name: readFormString(form, "name"),
       email: readFormString(form, "email"),
@@ -80,18 +85,17 @@ export function ContactForm({ onSubmit, onSubmitted }: ContactFormProps) {
     }
 
     try {
-      await onSubmit({
-        name: formData.name,
-        email: formData.email,
-        company: formData.company,
-        projectType: formData.projectType,
-        message: formData.message
-      })
-      event.currentTarget.reset()
+      await onSubmit(formData)
+      formElement.reset()
       setErrors({})
+      setFailedSubmission(null)
       onSubmitted?.()
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to submit")
+      // The cause goes to the console. The visitor gets a delivery path, not
+      // a stack trace and not a claim that their message arrived.
+      console.error("contact form submission failed", err)
+      setError(CONTACT_DELIVERY_FAILED)
+      setFailedSubmission(formData)
     } finally {
       setLoading(false)
     }
@@ -152,7 +156,19 @@ export function ContactForm({ onSubmit, onSubmitted }: ContactFormProps) {
         />
       </Field>
 
-      {error ? <p className="text-sm text-red-400">{error}</p> : null}
+      {error ? (
+        <div role="alert" className="rounded-xl border border-red-400/30 bg-red-500/10 px-6 py-4">
+          <p className="text-sm text-red-300">{error}</p>
+          {failedSubmission ? (
+            <a
+              href={buildContactMailto(failedSubmission)}
+              className="mt-3 inline-block text-sm font-medium text-gold underline underline-offset-4 transition-colors hover:text-white"
+            >
+              Send it by email instead
+            </a>
+          ) : null}
+        </div>
+      ) : null}
 
       <Button type="submit" variant="primary" fullWidth disabled={loading}>
         {loading ? "Sending..." : "Send message"}

@@ -1,28 +1,20 @@
-import { supabase } from "#/features/supabase/client"
+import type { ContactSubmitInput } from "@richtillman/ui/models.ts"
+import { createServerFn } from "@tanstack/react-start"
 
-export async function submitContactForm(input: {
-  name: string
-  email: string
-  company?: string
-  projectType: string
-  message: string
-}) {
-  if (!supabase) {
-    return { success: true, id: "local-dev" }
-  }
+import { saveContactMessage } from "./contact-store"
 
-  const { data, error } = await supabase
-    .from("contact_messages")
-    .insert({
-      name: input.name,
-      email: input.email,
-      company: input.company ?? null,
-      project_type: input.projectType,
-      message: input.message
-    })
-    .select("id")
-    .single()
+/**
+ * The contact form posts to a server function, so the D1 binding stays on
+ * the Worker and no database credential is ever shipped to the browser.
+ */
+const submitContactMessage = createServerFn({ method: "POST" })
+  .validator((input: ContactSubmitInput) => input)
+  .handler(async ({ data }) => saveContactMessage(data))
 
-  if (error) throw new Error(error.message)
-  return { success: true, id: data.id }
+/**
+ * The handler the contact page injects. It either resolves with the stored
+ * message, or throws. It never resolves to a fake success.
+ */
+export async function submitContactForm(input: ContactSubmitInput): Promise<unknown> {
+  return submitContactMessage({ data: input })
 }

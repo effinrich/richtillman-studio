@@ -23,6 +23,7 @@
     ".wrangler/",
     "storybook-static/**",
     "bun.lock",
-    "apps/web/src/routeTree.gen.ts"
+    "apps/web/src/routeTree.gen.ts",
+    "apps/web/worker-configuration.d.ts"
   ]
 }

@@ -1,11 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { expect, within } from "storybook/test"
+
+import { CONTACT_EMAIL } from "../contact-copy"
 import { SiteFooter } from "./site-footer"
 
 const meta: Meta<typeof SiteFooter> = {
   title: "Layout/SiteFooter",
   component: SiteFooter,
-  parameters: { layout: "fullscreen" },
+  parameters: { layout: "fullscreen" }
 }
 
 export default meta
@@ -16,7 +18,7 @@ export const Default: Story = {
     const canvas = within(canvasElement)
     await expect(canvas.getByRole("link", { name: "Email" })).toHaveAttribute(
       "href",
-      "mailto:hello@richtillman.dev",
+      `mailto:${CONTACT_EMAIL}`
     )
-  },
+  }
 }

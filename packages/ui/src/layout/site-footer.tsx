@@ -1,6 +1,8 @@
-import { Github, Linkedin, Mail } from "lucide-react";
-import { BrandMark } from "../brand-mark";
-import { SECONDARY_NAV } from "./nav";
+import { Github, Linkedin, Mail } from "lucide-react"
+
+import { BrandMark } from "../brand-mark"
+import { CONTACT_EMAIL } from "../contact-copy"
+import { SECONDARY_NAV } from "./nav"
 
 export function SiteFooter() {
   return (
@@ -42,7 +44,7 @@ export function SiteFooter() {
           </p>
           <div className="flex gap-4">
             <a
-              href="mailto:hello@richtillman.dev"
+              href={`mailto:${CONTACT_EMAIL}`}
               className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-white/50 transition-colors hover:border-gold/30 hover:text-gold"
               aria-label="Email"
             >
@@ -77,5 +79,5 @@ export function SiteFooter() {
         </span>
       </div>
     </footer>
-  );
+  )
 }

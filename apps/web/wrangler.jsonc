@@ -12,5 +12,16 @@
   },
   "traces": {
     "enabled": false
-  }
+  },
+
+  // Content storage. The contact form writes here through a server function,
+  // so no database credential ever reaches the browser.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "richtillman-studio",
+      "database_id": "a2bb23b2-21e7-40a7-91a9-3e1487096796",
+      "migrations_dir": "d1"
+    }
+  ]
 }

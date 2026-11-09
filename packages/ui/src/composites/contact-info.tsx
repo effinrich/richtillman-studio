@@ -1,7 +1,7 @@
 import { Mail, MapPin } from "lucide-react"
 
 import { Chip } from "../chip"
-import { CONTACT_ENGAGEMENT_OPTIONS } from "../contact-copy"
+import { CONTACT_EMAIL, CONTACT_ENGAGEMENT_OPTIONS } from "../contact-copy"
 import { GlassPanel } from "../glass-panel"
 
 export function ContactInfo() {
@@ -13,10 +13,10 @@ export function ContactInfo() {
           <h2 className="font-bold text-white">Email</h2>
         </div>
         <a
-          href="mailto:hello@richtillman.dev"
+          href={`mailto:${CONTACT_EMAIL}`}
           className="text-white/60 transition-colors hover:text-gold"
         >
-          hello@richtillman.dev
+          {CONTACT_EMAIL}
         </a>
       </GlassPanel>
 
