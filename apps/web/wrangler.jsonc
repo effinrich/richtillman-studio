@@ -1,7 +1,10 @@
 {
   "$schema": "../../node_modules/wrangler/config-schema.json",
   "name": "richtillman-studio",
-  "main": "@tanstack/react-start/server-entry",
+  // The Worker entry. It wraps Start's handler so the HTML document can opt
+  // out of Cloudflare's edge transforms, which is what stops the edge from
+  // injecting the Bot Fight Mode script into every page.
+  "main": "./src/server.ts",
   "compatibility_date": "2026-09-17",
   "compatibility_flags": ["nodejs_compat"],
 
