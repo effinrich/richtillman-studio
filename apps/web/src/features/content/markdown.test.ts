@@ -42,6 +42,13 @@ describe("renderMarkdown", () => {
     expect(html).toContain("<table>")
     expect(html).toContain("<th>Figure</th>")
   })
+
+  it("gives a table its own scroll, so a wide table is not clipped", () => {
+    const html = renderMarkdown(["| A | B |", "| --- | --- |", "| one | two |"].join("\n"))
+
+    expect(html).toContain('<div class="table-scroll">')
+    expect(html).toContain("<table>")
+  })
 })
 
 describe("stripTitleBlock", () => {

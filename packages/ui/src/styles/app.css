@@ -287,6 +287,10 @@
   margin: 0;
 }
 
+.article-body .table-scroll {
+  overflow-x: auto;
+}
+
 .article-body table {
   width: 100%;
   border-collapse: collapse;

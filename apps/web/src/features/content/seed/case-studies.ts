@@ -12,8 +12,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     metrics: [
       { label: "Files changed in one commit", value: "137" },
       { label: "Lines deleted in that commit", value: "10,097" },
-      { label: "Lines of enforcement", value: "453" },
-      { label: "Days observed", value: "30" }
+      { label: "Lines of enforcement", value: "453" }
     ]
   },
   {

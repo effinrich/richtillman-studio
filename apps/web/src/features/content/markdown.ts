@@ -21,6 +21,20 @@ function escapeHtml(value: string): string {
 const renderer = new Renderer()
 renderer.html = ({ text }) => escapeHtml(text)
 
+/**
+ * A table in the article is wider than a phone. The default renderer puts the
+ * table straight into the column, so the third column is clipped and cannot be
+ * read. Wrapping it gives the table its own scroll.
+ */
+renderer.table = function (this: Renderer, token) {
+  const head = token.header.map((cell) => this.tablecell(cell)).join("")
+  const body = token.rows
+    .map((row) => `<tr>${row.map((cell) => this.tablecell(cell)).join("")}</tr>`)
+    .join("")
+
+  return `<div class="table-scroll"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`
+}
+
 const parser = new Marked({ gfm: true, breaks: false, renderer })
 
 export function renderMarkdown(markdown: string): string {
