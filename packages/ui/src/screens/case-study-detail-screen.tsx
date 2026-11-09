@@ -11,6 +11,7 @@ type CaseStudyDetailScreenProps = {
   caseStudy: CaseStudyModel
   sections: CaseStudySection[]
   related: CaseStudyModel[]
+  body?: string | null
   backHref?: string
 }
 
@@ -18,6 +19,7 @@ export function CaseStudyDetailScreen({
   caseStudy,
   sections,
   related,
+  body,
   backHref = "/case-studies"
 }: CaseStudyDetailScreenProps) {
   return (
@@ -72,16 +74,20 @@ export function CaseStudyDetailScreen({
           ))}
         </div>
 
-        <article className="space-y-10">
-          {sections.map((section) => (
-            <section key={section.label}>
-              <h2 className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-gold">
-                {section.label}
-              </h2>
-              <p className="text-lg leading-relaxed text-white/70">{section.body}</p>
-            </section>
-          ))}
-        </article>
+        {body ? (
+          <article className="article-body" dangerouslySetInnerHTML={{ __html: body }} />
+        ) : (
+          <article className="space-y-10">
+            {sections.map((section) => (
+              <section key={section.label}>
+                <h2 className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-gold">
+                  {section.label}
+                </h2>
+                <p className="text-lg leading-relaxed text-white/70">{section.body}</p>
+              </section>
+            ))}
+          </article>
+        )}
 
         {related.length > 0 ? (
           <div className="mt-20 border-t border-white/10 pt-10">

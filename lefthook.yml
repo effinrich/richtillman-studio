@@ -23,6 +23,10 @@ pre-commit:
         - "*.json"
         - "*.css"
         - "*.md"
+      # The published article is verbatim text. oxfmt rewrites its emphasis
+      # markers and pads its tables, which changes what the site publishes and
+      # breaks the checks that compare it against the corpus.
+      exclude: "apps/web/src/features/content/seed/case-study-bodies/*.md"
       stage_fixed: true
 
     - name: typecheck

@@ -2,6 +2,21 @@ import type { CaseStudy } from "./types"
 
 export const CASE_STUDIES: CaseStudy[] = [
   {
+    slug: "prose-does-not-bind-agents",
+    title: "Prose Does Not Bind Agents: Four Safeguards That Fail the Build",
+    subtitle:
+      "A 30-day case study of four coding agents on one repository, and what to pin instead of writing down",
+    tags: ["AI Agents", "Guardrails", "Testing", "Nx"],
+    summary:
+      "Four coding agents, one repository, thirty days, and a rulebook that was read instead of checked. A commit deleted 137 files and 10,097 lines with the build green, because the file that said what to protect went with it. The replacement was 453 lines of enforcement that fail the build when they are broken.",
+    metrics: [
+      { label: "Files changed in one commit", value: "137" },
+      { label: "Lines deleted in that commit", value: "10,097" },
+      { label: "Lines of enforcement", value: "453" },
+      { label: "Days observed", value: "30" }
+    ]
+  },
+  {
     slug: "nx-monorepo",
     title: "Redesign Health Platform Portal",
     subtitle: "Staff Frontend → Tech Lead → Engineering Director, ~1y11mo",
