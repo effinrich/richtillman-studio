@@ -61,21 +61,26 @@ because the score moves a few points between runs on a shared connection. The We
 beacon was turned off in the Cloudflare dashboard between the two measurements on the right, so
 the last two columns are not the same build.
 
-| Metric                   | Baseline (2026-11-07) | After steps 1 and 2 (2026-11-08) | After steps 3 to 6 (2026-11-08) | After the beacon was off (2026-11-09) | Target         | Result            |
-| ------------------------ | --------------------- | -------------------------------- | ------------------------------- | ------------------------------------- | -------------- | ----------------- |
-| Lighthouse performance   | 69                    | 88, 89, 90, 91, 91               | 91, 93, 93, 91, 93              | 94 in all 5 runs                      | 90 or higher   | met in all 5 runs |
-| Accessibility            | 100                   | 100 in every run                 | 100 in every run                | 100 in every run                      | 100            | met               |
-| Best practices           | 82                    | 82                               | 82                              | 82                                    |                | unchanged         |
-| First contentful paint   | 4,178 ms              | 2,446 to 2,516 ms                | 1,681 to 1,732 ms               | 1,242 to 1,253 ms                     | under 2,500 ms | met               |
-| Largest contentful paint | 4,855 ms              | 3,082 to 3,404 ms                | 3,070 to 3,432 ms               | 3,063 to 3,080 ms                     | under 2,500 ms | not met           |
-| Total blocking time      | 184 ms                | 0 to 42 ms                       | 7 to 26 ms                      | 33 to 50 ms                           | under 100 ms   | met               |
-| Cumulative layout shift  | 0                     | 0                                | 0                               | 0                                     | 0              | met               |
-| Speed index              | 4,092 ms              | 2,446 to 2,516 ms                | 1,692 to 2,002 ms               | 1,431 to 1,587 ms                     |                |                   |
-| Total byte weight        | 488 KiB               | 287 KiB                          | 268 KiB                         | 258 KiB                               | under 200 KiB  | not met           |
-| Third-party bytes        | 300,295 B             | 10,478 B                         | 10,478 B                        | 0                                     | 0              | met               |
-| Render-blocking savings  | 1,200 ms              | 150 ms                           | 0 ms                            | 0 ms                                  | under 200 ms   | met               |
-| Unused JavaScript        | 166 KiB               | 50.2 KiB                         | 51.1 KiB                        | 39.6 KiB                              | under 40 KiB   | met by 0.4 KiB    |
-| Bootup time              | 7,400 ms              | 312 ms                           | 263 to 360 ms                   | 353 to 403 ms                         | under 1.5 s    | met               |
+The final column was measured the same day against version
+`afd2c6d5-8983-4b37-9542-e854f3a7990e`, after the Cloudflare Bot Fight Mode script stopped being
+injected into the document. The build also carries the uncommitted copy work of the other session,
+so that column is the site as it stands rather than a clean tree.
+
+| Metric                   | Baseline (2026-11-07) | After steps 1 and 2 (2026-11-08) | After steps 3 to 6 (2026-11-08) | After the beacon was off (2026-11-09) | After the injected script was removed (2026-11-09) | Target         | Result             |
+| ------------------------ | --------------------- | -------------------------------- | ------------------------------- | ------------------------------------- | -------------------------------------------------- | -------------- | ------------------ |
+| Lighthouse performance   | 69                    | 88, 89, 90, 91, 91               | 91, 93, 93, 91, 93              | 94 in all 5 runs                      | 96, 94, 95, 95, 95                                 | 90 or higher   | met in all 5 runs  |
+| Accessibility            | 100                   | 100 in every run                 | 100 in every run                | 100 in every run                      | 100 in every run                                   | 100            | met                |
+| Best practices           | 82                    | 82                               | 82                              | 82                                    | 100, 100, 96, 100, 100                             |                | met, one flaky run |
+| First contentful paint   | 4,178 ms              | 2,446 to 2,516 ms                | 1,681 to 1,732 ms               | 1,242 to 1,253 ms                     | 1,236 to 1,289 ms                                  | under 2,500 ms | met                |
+| Largest contentful paint | 4,855 ms              | 3,082 to 3,404 ms                | 3,070 to 3,432 ms               | 3,063 to 3,080 ms                     | 2,754 to 2,984 ms                                  | under 2,500 ms | not met            |
+| Total blocking time      | 184 ms                | 0 to 42 ms                       | 7 to 26 ms                      | 33 to 50 ms                           | 0 in every run                                     | under 100 ms   | met                |
+| Cumulative layout shift  | 0                     | 0                                | 0                               | 0                                     | 0                                                  | 0              | met                |
+| Speed index              | 4,092 ms              | 2,446 to 2,516 ms                | 1,692 to 2,002 ms               | 1,431 to 1,587 ms                     | 1,236 to 1,428 ms                                  |                |                    |
+| Total byte weight        | 488 KiB               | 287 KiB                          | 268 KiB                         | 258 KiB                               | 238.5 KiB                                          | under 200 KiB  | not met            |
+| Third-party bytes        | 300,295 B             | 10,478 B                         | 10,478 B                        | 0                                     | 0                                                  | 0              | met                |
+| Render-blocking savings  | 1,200 ms              | 150 ms                           | 0 ms                            | 0 ms                                  | 0 ms                                               | under 200 ms   | met                |
+| Unused JavaScript        | 166 KiB               | 50.2 KiB                         | 51.1 KiB                        | 39.6 KiB                              | 39.6 KiB                                           | under 40 KiB   | met by 0.4 KiB     |
+| Bootup time              | 7,400 ms              | 312 ms                           | 263 to 360 ms                   | 353 to 403 ms                         | 136 to 170 ms                                      | under 1.5 s    | met                |
 
 The client JavaScript the home route loads fell from 138.2 KiB to 129.0 KiB gzip across steps 3
 and 4, and the entry chunk from 372,978 B to 235,325 B raw. The final build carries 128.6 KiB.
@@ -96,15 +101,20 @@ home page, and 85% of its time is render delay. In an unthrottled browser the `h
 with the first paint, so the delay is not the element waiting for a resource: it is the element
 waiting for a main thread that the module scripts are holding.
 
-The 258 KiB of total byte weight is 134 KiB of JavaScript, 79 KiB of the two self-hosted web
-fonts, 17 KiB of the Bot Fight Mode script Cloudflare still injects, 10 KiB of CSS, and 7 KiB of
-document. The fonts are the second largest item on the page and the only one of the five that
-the repository controls.
+The 238.5 KiB of total byte weight is 138 KiB of JavaScript, 79 KiB of the two self-hosted web
+fonts, 10.5 KiB of CSS, 6.8 KiB of document and 5.7 KiB of the brand mark. The fonts are the second
+largest item on the page and the only one of the five that the repository controls.
 
-The third-party bytes are zero now. The Web Analytics beacon was turned off in the dashboard on
-2026-11-09, and the 17 KiB of Bot Fight Mode script is served from the site's own origin, so the
-audit counts it as first-party rather than third-party. It is still 17 KiB on the critical path
-and it still runs on the main thread.
+The third-party bytes are zero and the injected script is gone. The Web Analytics beacon was turned
+off in the dashboard on 2026-11-09. The Bot Fight Mode script Cloudflare was injecting into every
+document, 17 KiB and 118 ms of main thread time, stopped on 2026-11-09 as well: the origin now
+sends `Cache-Control: no-transform`, which is the documented way to stop the edge rewriting a
+document. The page lost 19.5 KiB, the blocking time went to zero, the bootup time fell by about
+215 ms, and the largest contentful paint came down by 130 to 300 ms.
+
+The document is sent gzip rather than brotli now, because `no-transform` also stops the edge
+compressing. The response declares the encoding and the runtime compresses it once: 6,945 B for a
+client that accepts gzip, and the plain document for a client that accepts no encoding at all.
 
 The unused JavaScript is the entry chunk, 40 KiB of 99 KiB. It is code the page runs, not code
 the page throws away: the audit counts what has not run by the time of the first paint. It is
@@ -128,6 +138,11 @@ projects, articles, case studies and resume copy so that it could render six met
 
 The page no longer loads the Cloudflare Web Analytics beacon, so a third-party script is gone
 from the critical path.
+
+The page no longer loads the Cloudflare Bot Fight Mode script either. The edge was injecting
+17 KiB of its own JavaScript into every document, which the visitor paid for in transfer and in
+main-thread time. The document now opts out of edge transforms, so the page the visitor gets is
+the page the repository built.
 
 ## Step 1: Move the three.js tubes cursor off the critical path
 
@@ -309,7 +324,7 @@ unresolved token check passes on every route, so no page renders a raw `{{npm_do
 | 5    | When the npm API fails, the site still renders the measured seed            | met, covered by the fallback test                                                                                                                                                                                                                    |
 | 5    | The page never renders an unresolved token or a partially summed total      | met, covered by the token tests and checked on every route                                                                                                                                                                                           |
 | 6    | Hashed assets return `public, max-age=31536000, immutable`                  | met, verified on the deployed assets                                                                                                                                                                                                                 |
-| 6    | The document is either not cached or cached for under 300 seconds           | met, the document carries no `Cache-Control`                                                                                                                                                                                                         |
+| 6    | The document is either not cached or cached for under 300 seconds           | met, the document carries `Cache-Control: no-transform`, which has no max-age, so it is not cached                                                                                                                                                   |
 | 6    | CI rejects a client bundle over 160 KiB gzip, and the current one passes    | met, 128.6 KiB                                                                                                                                                                                                                                       |
 | 7    | The Lighthouse run is recorded with its date                                | met, above                                                                                                                                                                                                                                           |
 | 7    | The npm counts rendered match `api.npmjs.org` for the same window           | met, 8,005 and 9,408 against the registry                                                                                                                                                                                                            |
