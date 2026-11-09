@@ -76,3 +76,21 @@ export type ResumeContent = {
   }[]
   skills: string[]
 }
+
+/**
+ * One published article, measured from the dev.to public API. The index links
+ * out to dev.to: the post is the entry, this site is the directory.
+ */
+export type WritingEntry = {
+  id: number
+  title: string
+  description: string
+  url: string
+  publishedAt: string
+  readingTimeMinutes: number
+  tags: string[]
+  reactions: number
+  comments: number
+  coverImage: string | null
+  aiDisclosure: string | null
+}

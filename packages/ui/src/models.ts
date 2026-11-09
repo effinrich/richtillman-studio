@@ -36,6 +36,22 @@ export type ArticleCardModel = {
   content?: string[]
 }
 
+/**
+ * One published article, as the writing index renders it. The link points at
+ * the post on DEV Community, not at a copy of it.
+ */
+export type WritingEntryModel = {
+  id: number
+  title: string
+  description: string
+  url: string
+  publishedAt: string
+  readingTime: string
+  tags: string[]
+  reactions: number
+  comments: number
+}
+
 export type TestimonialModel = {
   id: string
   quote: string
@@ -155,6 +171,7 @@ export type NavItem =
   | "faq"
   | "resume"
   | "design-system"
+  | "writing"
 
 export type NavLink = {
   label: string

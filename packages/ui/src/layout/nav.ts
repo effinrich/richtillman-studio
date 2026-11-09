@@ -6,15 +6,16 @@ export const PRIMARY_NAV: NavLink[] = [
   { label: "Stack", href: "/resources", item: "stack" },
   { label: "Design System", href: "/design-system", item: "design-system" },
   { label: "Resume", href: "/resume", item: "resume" },
-  { label: "Contact", href: "/contact", item: "contact" },
+  { label: "Contact", href: "/contact", item: "contact" }
 ]
 
 export const SECONDARY_NAV: NavLink[] = [
+  { label: "Writing", href: "/writing", item: "writing" },
   { label: "Insights", href: "/insights", item: "insights" },
   { label: "Services", href: "/services", item: "services" },
   { label: "Case Studies", href: "/case-studies", item: "case-studies" },
   { label: "Testimonials", href: "/testimonials", item: "testimonials" },
   { label: "FAQ", href: "/faq", item: "faq" },
   { label: "Resume", href: "/resume", item: "resume" },
-  { label: "Site Map", href: "/site-map", item: "home" },
+  { label: "Site Map", href: "/site-map", item: "home" }
 ]

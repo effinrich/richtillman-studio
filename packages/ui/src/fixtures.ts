@@ -9,7 +9,8 @@ import type {
   ResumeModel,
   ServiceModel,
   SiteMapSectionModel,
-  TestimonialModel
+  TestimonialModel,
+  WritingEntryModel
 } from "./models"
 import { NPM_DOWNLOADS_SEED } from "./npm-packages"
 
@@ -87,6 +88,33 @@ export const SAMPLE_ARTICLES: ArticleCardModel[] = [
     publishedAt: "Jan 2026",
     readTime: "6 min",
     href: "/insights/shipping-react-native-at-scale"
+  }
+]
+
+export const SAMPLE_WRITING_ENTRIES: WritingEntryModel[] = [
+  {
+    id: 5001125,
+    title: "Prose Does Not Bind Agents: Four Safeguards That Fail the Build",
+    description:
+      "Four safeguards that fail a build when coding agents break them, from a 30-day case study on one repository.",
+    url: "https://dev.to/effinrich/prose-does-not-bind-agents-four-safeguards-that-fail-the-build-34b1",
+    publishedAt: "2026-11-09",
+    readingTime: "35 min",
+    tags: ["ai", "testing", "devops"],
+    reactions: 0,
+    comments: 0
+  },
+  {
+    id: 4998315,
+    title: "Design Tokens as a Compile-Time Contract",
+    description:
+      "Five rules for making a design token a compile-time contract in a pnpm and Nx monorepo, with the commands to reproduce it.",
+    url: "https://dev.to/effinrich/design-tokens-as-a-compile-time-contract-figma-variables-to-a-typed-typescript-api-1fnn",
+    publishedAt: "2026-11-08",
+    readingTime: "23 min",
+    tags: ["typescript", "nx", "figma", "designtokens"],
+    reactions: 0,
+    comments: 0
   }
 ]
 

@@ -20,6 +20,7 @@ import { Route as ServicesRouteImport } from './routes/services'
 import { Route as SiteMapRouteImport } from './routes/site-map'
 import { Route as TestimonialsRouteImport } from './routes/testimonials'
 import { Route as WorkRouteImport } from './routes/work'
+import { Route as WritingRouteImport } from './routes/writing'
 import { Route as CaseStudiesIndexRouteImport } from './routes/case-studies/index'
 import { Route as CaseStudiesSlugRouteImport } from './routes/case-studies/$slug'
 import { Route as InsightsIndexRouteImport } from './routes/insights/index'
@@ -81,6 +82,11 @@ const WorkRoute = WorkRouteImport.update({
   path: '/work',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WritingRoute = WritingRouteImport.update({
+  id: '/writing',
+  path: '/writing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CaseStudiesIndexRoute = CaseStudiesIndexRouteImport.update({
   id: '/case-studies/',
   path: '/case-studies/',
@@ -119,6 +125,7 @@ export interface FileRoutesByFullPath {
   '/site-map': typeof SiteMapRoute
   '/testimonials': typeof TestimonialsRoute
   '/work': typeof WorkRoute
+  '/writing': typeof WritingRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/insights/$slug': typeof InsightsSlugRoute
   '/projects/forgekit-mcp': typeof ProjectsForgekitMcpRoute
@@ -137,6 +144,7 @@ export interface FileRoutesByTo {
   '/site-map': typeof SiteMapRoute
   '/testimonials': typeof TestimonialsRoute
   '/work': typeof WorkRoute
+  '/writing': typeof WritingRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/insights/$slug': typeof InsightsSlugRoute
   '/projects/forgekit-mcp': typeof ProjectsForgekitMcpRoute
@@ -156,6 +164,7 @@ export interface FileRoutesById {
   '/site-map': typeof SiteMapRoute
   '/testimonials': typeof TestimonialsRoute
   '/work': typeof WorkRoute
+  '/writing': typeof WritingRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/insights/$slug': typeof InsightsSlugRoute
   '/projects/forgekit-mcp': typeof ProjectsForgekitMcpRoute
@@ -176,6 +185,7 @@ export interface FileRouteTypes {
     | '/site-map'
     | '/testimonials'
     | '/work'
+    | '/writing'
     | '/case-studies/$slug'
     | '/insights/$slug'
     | '/projects/forgekit-mcp'
@@ -194,6 +204,7 @@ export interface FileRouteTypes {
     | '/site-map'
     | '/testimonials'
     | '/work'
+    | '/writing'
     | '/case-studies/$slug'
     | '/insights/$slug'
     | '/projects/forgekit-mcp'
@@ -212,6 +223,7 @@ export interface FileRouteTypes {
     | '/site-map'
     | '/testimonials'
     | '/work'
+    | '/writing'
     | '/case-studies/$slug'
     | '/insights/$slug'
     | '/projects/forgekit-mcp'
@@ -231,6 +243,7 @@ export interface RootRouteChildren {
   SiteMapRoute: typeof SiteMapRoute
   TestimonialsRoute: typeof TestimonialsRoute
   WorkRoute: typeof WorkRoute
+  WritingRoute: typeof WritingRoute
   CaseStudiesSlugRoute: typeof CaseStudiesSlugRoute
   InsightsSlugRoute: typeof InsightsSlugRoute
   CaseStudiesIndexRoute: typeof CaseStudiesIndexRoute
@@ -316,6 +329,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/writing': {
+      id: '/writing'
+      path: '/writing'
+      fullPath: '/writing'
+      preLoaderRoute: typeof WritingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/case-studies/': {
       id: '/case-studies/'
       path: '/case-studies'
@@ -378,6 +398,7 @@ const rootRouteChildren: RootRouteChildren = {
   SiteMapRoute: SiteMapRoute,
   TestimonialsRoute: TestimonialsRoute,
   WorkRoute: WorkRoute,
+  WritingRoute: WritingRoute,
   CaseStudiesSlugRoute: CaseStudiesSlugRoute,
   InsightsSlugRoute: InsightsSlugRoute,
   CaseStudiesIndexRoute: CaseStudiesIndexRoute,

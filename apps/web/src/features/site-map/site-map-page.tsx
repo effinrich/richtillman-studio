@@ -65,6 +65,11 @@ const SECTIONS: SiteMapSectionModel[] = [
     label: "04 — Knowledge Base",
     accent: "magenta",
     links: [
+      {
+        title: "Writing",
+        href: "/writing",
+        description: "Articles published on DEV Community"
+      },
       { title: "Insights & Articles", href: "/insights", description: "Blog index" },
       {
         title: "Red-Teaming Frontier Models",

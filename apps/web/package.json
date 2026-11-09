@@ -17,7 +17,8 @@
     "format": "oxfmt src",
     "test": "vitest run --config vitest.config.ts",
     "deploy": "vite build && wrangler deploy",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "writing:sync": "bun scripts/sync-devto-writing.ts"
   },
   "dependencies": {
     "@cloudflare/vite-plugin": "^1.26.0",
