@@ -8,6 +8,12 @@
   "compatibility_date": "2026-09-17",
   "compatibility_flags": ["nodejs_compat"],
 
+  // The local dev server's port. 8788 belongs to the ForgeKit Studio on this
+  // machine, and its Figma plugin manifests allow only http://localhost:8788,
+  // so that port cannot move. Cloudflare's default is 8787, which another dev
+  // server holds, and wrangler then picks a port at random and only prints it.
+  "dev": { "port": 8790 },
+
   // Workers Logs — same as portfolio-1. Secrets via `wrangler secret put`, never here.
   "observability": {
     "enabled": true,
