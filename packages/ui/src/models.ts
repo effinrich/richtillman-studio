@@ -119,6 +119,11 @@ export type ContactSubmitInput = {
   company?: string
   projectType: string
   message: string
+  /**
+   * The hidden field the form carries for bots. It is empty for every real
+   * submission, and the server refuses the ones that filled it.
+   */
+  companyWebsite?: string
 }
 
 export type ContactSubmitHandler = (input: ContactSubmitInput) => Promise<unknown>

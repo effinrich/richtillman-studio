@@ -4,6 +4,7 @@ import { Button } from "../button"
 import { buildContactMailto, CONTACT_DELIVERY_FAILED, ENQUIRY_TYPES } from "../contact-copy"
 import { Field, Input, Select, Textarea } from "../field"
 import type { ContactSubmitHandler, ContactSubmitInput } from "../models"
+import { CONTACT_HONEYPOT_FIELD } from "./contact-honeypot"
 import { getFieldErrors, validateField } from "./contact-validation"
 
 function readFormString(form: FormData, name: string): string {
@@ -70,7 +71,8 @@ export function ContactForm({ onSubmit, onSubmitted }: ContactFormProps) {
       email: readFormString(form, "email"),
       company: readFormString(form, "company") || undefined,
       projectType: readFormString(form, "projectType"),
-      message: readFormString(form, "message")
+      message: readFormString(form, "message"),
+      companyWebsite: readFormString(form, CONTACT_HONEYPOT_FIELD)
     }
 
     const validationErrors = getFieldErrors({
@@ -155,6 +157,22 @@ export function ContactForm({ onSubmit, onSubmitted }: ContactFormProps) {
           onChange={(e) => handleFieldChange("message", e.currentTarget.value)}
         />
       </Field>
+
+      {/*
+        A field no visitor can see or reach. A bot that fills every input in
+        the form fills this one, and the server refuses that submission.
+      */}
+      <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+        <label htmlFor={CONTACT_HONEYPOT_FIELD}>Company website</label>
+        <input
+          id={CONTACT_HONEYPOT_FIELD}
+          name={CONTACT_HONEYPOT_FIELD}
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          defaultValue=""
+        />
+      </div>
 
       {error ? (
         <div role="alert" className="rounded-xl border border-red-400/30 bg-red-500/10 px-6 py-4">

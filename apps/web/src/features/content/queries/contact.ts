@@ -1,7 +1,7 @@
 import type { ContactSubmitInput } from "@richtillman/ui/models.ts"
 import { createServerFn } from "@tanstack/react-start"
 
-import { saveContactMessage } from "./contact-store"
+import { handleContactSubmission } from "./contact-handler"
 
 /**
  * The contact form posts to a server function, so the D1 binding stays on
@@ -9,7 +9,7 @@ import { saveContactMessage } from "./contact-store"
  */
 const submitContactMessage = createServerFn({ method: "POST" })
   .validator((input: ContactSubmitInput) => input)
-  .handler(async ({ data }) => saveContactMessage(data))
+  .handler(async ({ data }) => handleContactSubmission(data))
 
 /**
  * The handler the contact page injects. It either resolves with the stored
