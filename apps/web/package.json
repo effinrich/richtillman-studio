@@ -16,7 +16,7 @@
     "lint:fix": "oxlint src --fix",
     "format": "oxfmt src",
     "test": "vitest run --config vitest.config.ts",
-    "deploy": "wrangler deploy",
+    "deploy": "vite build && wrangler deploy",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
