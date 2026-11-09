@@ -11,7 +11,7 @@
     "budget": "node scripts/check-bundle-budget.mjs",
     "content": "node scripts/check-client-content.mjs",
     "preview": "vite preview",
-    "preview:worker": "wrangler dev",
+    "preview:worker": "wrangler dev --port 8790",
     "lint": "oxlint src",
     "lint:fix": "oxlint src --fix",
     "format": "oxfmt src",
