@@ -41,6 +41,11 @@ const SECTIONS: SiteMapSectionModel[] = [
         href: "/case-studies/nx-monorepo",
         description: "15+ engineers, 3 teams"
       },
+      {
+        title: "Prose Does Not Bind Agents",
+        href: "/case-studies/prose-does-not-bind-agents",
+        description: "30-day case study, every figure reproducible"
+      },
       { title: "Services & Expertise", href: "/services", description: "Engagement offerings" },
       { title: "Resources & Stack", href: "/resources", description: "Tools and guides" },
       { title: "Design System", href: "/design-system", description: "Tokens and live components" }
@@ -62,34 +67,14 @@ const SECTIONS: SiteMapSectionModel[] = [
     links: [
       { title: "Insights & Articles", href: "/insights", description: "Blog index" },
       {
-        title: "Model Context Protocol",
-        href: "/insights/the-model-context-protocol",
-        description: "Featured analysis"
-      },
-      {
         title: "Red-Teaming Frontier Models",
         href: "/insights/red-teaming-frontend-models",
         description: "AI evaluation notes"
       },
       {
-        title: "Storybook Playgrounds",
-        href: "/insights/storybook-to-next-js-playgrounds",
-        description: "Design system DX"
-      },
-      {
-        title: "T-Shaped Principal",
-        href: "/insights/the-case-for-the-t-shaped-principal-engineer",
-        description: "Leadership essay"
-      },
-      {
         title: "Onboarding Backend Engineers",
         href: "/insights/onboarding-backend-engineers-to-react",
         description: "One-month React curriculum"
-      },
-      {
-        title: "Mastering TanStack Start",
-        href: "/insights/mastering-tanstack-start",
-        description: "Framework deep dive"
       },
       {
         title: "React Native at Scale",
