@@ -70,3 +70,4 @@ export function ServicesScreen({ services }: ServicesScreenProps) {
       </main>
     </PortfolioLayout>
   )
+}
