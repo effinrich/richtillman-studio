@@ -12,7 +12,7 @@ const PACKAGES = [
   {
     name: "forgekit-figma-mcp",
     description:
-      "MCP server that extracts Figma variables and design tokens programmatically. Generates typed theme configs for Chakra UI, Tailwind, and shadcn — enabling AI-driven design-to-code workflows.",
+      "MCP server that extracts Figma variables and design tokens programmatically. Generates typed theme configs for Chakra UI, Tailwind, and shadcn, enabling AI-driven design-to-code workflows.",
     npmCmd: "npm install forgekit-figma-mcp",
     npmUrl: "https://npmjs.com/package/forgekit-figma-mcp",
     features: ["Figma variables", "Design tokens", "Chakra · Tailwind · shadcn"]
@@ -161,8 +161,8 @@ export function ForgekitMcpScreen({ backHref = "/work", npmDownloads }: Forgekit
           <h2 className="mb-3 text-xl font-bold">ForgeKit Core CLI</h2>
           <p className="mb-4 text-sm leading-relaxed text-white/60">
             Scaffolds production-ready Nx monorepos with React, Storybook, Vitest, Playwright, and
-            CI/CD — Figma token sync baked in from day one. Targets Chakra UI, shadcn/ui, Tamagui,
-            and React Native.
+            CI/CD, with Figma token sync baked in from day one. Targets Chakra UI, shadcn/ui,
+            Tamagui, and React Native.
           </p>
           <a
             href="https://forgekit.cloud"

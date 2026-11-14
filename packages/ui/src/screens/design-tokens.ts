@@ -32,7 +32,7 @@ export const SURFACE_TOKENS: ColorToken[] = [
     name: "glass",
     cssVar: "--color-glass",
     value: "rgba(20, 20, 20, 0.4)",
-    usage: "Panels, nav, chips — with 16px blur"
+    usage: "Panels, nav, chips with 16px blur"
   },
   {
     name: "border-glass",

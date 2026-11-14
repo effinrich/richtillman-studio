@@ -5,7 +5,7 @@ export const SERVICES: Service[] = [
     id: "design-systems",
     title: "Design Systems Consulting",
     description:
-      "End-to-end design system delivery — Figma tokens, React components, Storybook documentation, and Chromatic visual regression.",
+      "End-to-end design system delivery: Figma tokens, React components, Storybook documentation, and Chromatic visual regression.",
     icon: "layers"
   },
   {
@@ -19,7 +19,7 @@ export const SERVICES: Service[] = [
     id: "product-0-1",
     title: "0→1 Product Development",
     description:
-      "Ship SaaS MVPs with TanStack Start, Supabase, and Cloudflare Workers — from design system to production deploy.",
+      "Ship SaaS MVPs with TanStack Start, Supabase, and Cloudflare Workers, from design system to production deploy.",
     icon: "cpu"
   },
   {

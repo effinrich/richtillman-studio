@@ -41,7 +41,7 @@ export const ARTICLES: Article[] = [
     readTime: "1 min",
     featured: false,
     content: [
-      "Shipping React Native at scale requires treating mobile as a first-class platform in your monorepo — not a fork of your web codebase.",
+      "Shipping React Native at scale requires treating mobile as a first-class platform in your monorepo, not a fork of your web codebase.",
       "Design system parity, shared token pipelines, and disciplined release trains are what separate prototypes from products serving 100K+ users."
     ]
   }

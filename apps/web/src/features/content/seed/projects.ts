@@ -16,7 +16,7 @@ export const PROJECTS: Project[] = [
     slug: "mcp-atlas",
     title: "MCP Atlas",
     description:
-      "A curated, link-verified directory of real Model Context Protocol servers — official and community — searchable and filterable, built with Astro islands.",
+      "A curated, link-verified directory of real Model Context Protocol servers (official and community), searchable and filterable, built with Astro islands.",
     tags: ["Astro", "MCP", "TypeScript"],
     metric: "18 verified servers",
     href: "https://mcp-atlas-orcin.vercel.app",
@@ -27,7 +27,7 @@ export const PROJECTS: Project[] = [
     slug: "forgekit-mcp",
     title: "ForgeKit MCP",
     description:
-      "MCP servers purpose-built for Figma-to-React design system workflows — forgekit-figma-mcp (tokens → typed themes) and forgekit-storybook-mcp (argTypes → agent context).",
+      "MCP servers purpose-built for Figma-to-React design system workflows: forgekit-figma-mcp (tokens → typed themes) and forgekit-storybook-mcp (argTypes → agent context).",
     tags: ["MCP", "Figma", "Design Systems"],
     metric: "{{featured_npm_downloads}} npm downloads (12 mo)",
     href: "/projects/forgekit-mcp",
@@ -38,7 +38,7 @@ export const PROJECTS: Project[] = [
     slug: "storybook-system",
     title: "Freebird Design System",
     description:
-      "Built one of the earliest production React component libraries backed by Storybook — 200 components spanning B2B, B2C, and React Native from a single system, eliminating separate iOS/Android teams.",
+      "Built one of the earliest production React component libraries backed by Storybook: 200 components spanning B2B, B2C, and React Native from a single system, eliminating separate iOS/Android teams.",
     tags: ["React", "Storybook", "React Native"],
     metric: "200 components",
     href: "/case-studies/design-system-scale",

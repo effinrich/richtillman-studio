@@ -11,7 +11,7 @@ export const Route = createRootRoute({
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "theme-color", content: "#000000" },
       {
-        title: "Rich Tillman — Principal Frontend Engineer"
+        title: "Rich Tillman · Principal Frontend Engineer"
       },
       {
         name: "description",

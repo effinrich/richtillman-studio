@@ -21,7 +21,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     subtitle: "Staff Frontend → Tech Lead → Engineering Director, Jul 2022–May 2024",
     tags: ["Nx", "Monorepo", "React 19", "Chakra UI v3"],
     summary:
-      "Double-promoted to Engineering Director while staying hands-on. Led frontend strategy for an Nx monorepo running the Platform Portal, a mock API server, and a shared design system — coordinating async delivery across three cross-functional teams (15+ people).",
+      "Double-promoted to Engineering Director while staying hands-on. Led frontend strategy for an Nx monorepo running the Platform Portal, a mock API server, and a shared design system, coordinating async delivery across three cross-functional teams (15+ people).",
     metrics: [
       { label: "Team members", value: "15+" },
       { label: "Cross-functional teams", value: "3" },
@@ -50,7 +50,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     subtitle: "Design tokens in, live theme preview and export out",
     tags: ["React Router", "Supabase", "Security"],
     summary:
-      "A design-token pipeline built on React Router in framework mode (SSR, loaders, actions) — paste Figma variables or a Tailwind config, get a live preview, export to Tailwind/Chakra/shadcn, and save a server-rendered shareable link.",
+      "A design-token pipeline built on React Router in framework mode (SSR, loaders, actions): paste Figma variables or a Tailwind config, get a live preview, export to Tailwind/Chakra/shadcn, and save a server-rendered shareable link.",
     metrics: [
       { label: "Lighthouse performance", value: "100" },
       { label: "Lighthouse accessibility", value: "91" },
@@ -80,7 +80,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     subtitle: "Freebird 200-component library → Redesign Health Chromatic workflow",
     tags: ["Storybook", "Chromatic", "React Native", "Figma"],
     summary:
-      "At Freebird (2016–2021), built one of the earliest production React UI libraries on Storybook — 200 components across B2B, B2C, and React Native. At Redesign Health, spearheaded a 50+ component React design system with Storybook + Chromatic that cut dev time ~30% across a 10–15 engineer org.",
+      "At Freebird (2016–2021), built one of the earliest production React UI libraries on Storybook: 200 components across B2B, B2C, and React Native. At Redesign Health, spearheaded a 50+ component React design system with Storybook + Chromatic that cut dev time ~30% across a 10–15 engineer org.",
     metrics: [
       { label: "Freebird components", value: "200" },
       { label: "Redesign DS components", value: "50+" },

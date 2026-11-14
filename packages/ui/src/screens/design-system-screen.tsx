@@ -1,5 +1,6 @@
-import type { ReactNode } from "react"
 import { ArrowRight, ArrowUpRight } from "lucide-react"
+import type { ReactNode } from "react"
+
 import { Badge } from "../badge"
 import { Button, ButtonAnchor } from "../button"
 import { Chip } from "../chip"
@@ -19,7 +20,7 @@ const JUMP_LINKS = [
   { href: "#type", label: "Type" },
   { href: "#effects", label: "Effects" },
   { href: "#primitives", label: "Primitives" },
-  { href: "#composites", label: "Composites" },
+  { href: "#composites", label: "Composites" }
 ] as const
 
 function DocsSection({
@@ -27,7 +28,7 @@ function DocsSection({
   eyebrow,
   title,
   description,
-  children,
+  children
 }: {
   id: string
   eyebrow: string
@@ -87,7 +88,7 @@ export function DesignSystemScreen({ specimenProject, actions }: DesignSystemScr
             id="color"
             eyebrow="Foundations"
             title="Color"
-            description="Named in @theme. Gold is the only primary action color. Cyan and magenta are accents — never the only way to tell two things apart."
+            description="Named in @theme. Gold is the only primary action color. Cyan and magenta are accents. Never the only way to tell two things apart."
           >
             <h3 className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-white/50">
               Brand
@@ -141,7 +142,7 @@ export function DesignSystemScreen({ specimenProject, actions }: DesignSystemScr
             id="effects"
             eyebrow="Foundations"
             title="Effects"
-            description="Glass, neon rails, and a restrained gold glow. Blur marks a dismissed background or a raised surface — it is not decoration."
+            description="Glass, neon rails, and a restrained gold glow. Blur marks a dismissed background or a raised surface. It is not decoration."
           >
             <div className="grid gap-4 md:grid-cols-3">
               <GlassPanel className="rounded-2xl p-8">
@@ -256,7 +257,7 @@ export function DesignSystemScreen({ specimenProject, actions }: DesignSystemScr
             id="composites"
             eyebrow="Composites"
             title="Page pieces"
-            description="SectionHeader, GlassPanel, and ProjectCard are shared across routes. This page renders the live modules — not copies."
+            description="SectionHeader, GlassPanel, and ProjectCard are shared across routes. This page renders the live modules, not copies."
           >
             <div className="space-y-8">
               <Specimen title="SectionHeader">
@@ -269,7 +270,7 @@ export function DesignSystemScreen({ specimenProject, actions }: DesignSystemScr
                       Portfolio <span className="neon-text">projects</span>
                     </>
                   }
-                  description="TokenCast, ForgeKit MCP, MCP Atlas — tools at the intersection of design systems and AI-native development."
+                  description="TokenCast, ForgeKit MCP, MCP Atlas: tools at the intersection of design systems and AI-native development."
                 />
               </Specimen>
 

@@ -7,7 +7,7 @@ export const RESUME_SECTIONS: ResumeContent = {
     {
       title: "Consultant, AI Model Evaluation & Red-Teaming",
       company: "Independent (Mercor, micro1, Handshake)",
-      period: "Feb 2026 — Jul 2026",
+      period: "Feb 2026 – Jul 2026",
       highlights: [
         "Evaluated, ranked, and red-teamed frontier AI model output against React and TypeScript rubrics across three contract engagements (Mercor, micro1, Handshake), authoring adversarial cases to expose model failure modes."
       ]
@@ -15,7 +15,7 @@ export const RESUME_SECTIONS: ResumeContent = {
     {
       title: "Staff Frontend Engineer & Tech Lead to Engineering Director",
       company: "Redesign Health",
-      period: "Jul 2022 — May 2024",
+      period: "Jul 2022 – May 2024",
       highlights: [
         "Promoted twice to Engineering Director; led delivery across three cross-functional teams (15+ members) while staying hands-on as a frontend architecture SME.",
         "Spearheaded a React design system of 50+ reusable components (Storybook + Chromatic) adopted across teams: 30% dev-time reduction across a 10-15 engineer org.",
@@ -28,7 +28,7 @@ export const RESUME_SECTIONS: ResumeContent = {
     {
       title: "Senior Frontend Engineer & Tech Lead",
       company: "Pineapple Corporation",
-      period: "Jan 2022 — Jul 2022",
+      period: "Jan 2022 – Jul 2022",
       highlights: [
         "Architected Nx monorepo with a design-system-based shared UI library, a cross-platform (iOS, Android, web) application, and a NestJS backend.",
         "Built cross-platform architecture with Expo, Nx, and React Native (25% mobile performance gain for 100K+ users)."
@@ -37,7 +37,7 @@ export const RESUME_SECTIONS: ResumeContent = {
     {
       title: "Founding Frontend Engineer",
       company: "PHC Global",
-      period: "Jul 2021 — Jan 2022",
+      period: "Jul 2021 – Jan 2022",
       highlights: [
         "Founding frontend architect for a healthtech startup: built the core product for enterprise clients including Facebook and Amex, our first two customers, with a Mapbox GL risk heatmap clients used to schedule teams.",
         "Set up the foundational architecture: Nx monorepo with 30+ shared libraries and gRPC middleware (40% developer-experience improvement), NPS satisfaction up 35%, infrastructure costs down 30%.",
@@ -47,7 +47,7 @@ export const RESUME_SECTIONS: ResumeContent = {
     {
       title: "Lead Frontend Engineer",
       company: "Freebird",
-      period: "Sep 2016 — Jan 2021",
+      period: "Sep 2016 – Jan 2021",
       highlights: [
         "Built one of the earliest production React UI libraries on Storybook: a 200-component design system spanning B2B, B2C, and React Native, eliminating the need for separate iOS and Android teams.",
         "Migrated the team's Redux + Redux-Saga boilerplate to Redux Toolkit (RTK) in 2019, cutting state-management boilerplate and standardizing patterns across the design system.",
@@ -57,7 +57,7 @@ export const RESUME_SECTIONS: ResumeContent = {
     {
       title: "Lead Web Developer",
       company: "FaceCake Marketing Technologies (Los Angeles, CA)",
-      period: "Oct 2010 — Sep 2016",
+      period: "Oct 2010 – Sep 2016",
       highlights: [
         "Pioneered AR try-on for NARS, one of the first of its kind: compiled OpenCV to JavaScript via Emscripten for client-side computer vision over getUserMedia, with Pixi.js and Three.js, years ahead of mainstream WebAR.",
         "Shipped the NARS virtual try-on web app (~$400K/month revenue lift) backed by a real-time CMS on Firebase Realtime Database; owned the full lifecycle end-to-end."
@@ -78,7 +78,7 @@ export const RESUME_SECTIONS: ResumeContent = {
     {
       title: "ForgeKit Figma MCP",
       detail:
-        "MCP server extracting Figma variables and design tokens; generates typed theme configs for Chakra UI, Tailwind, and shadcn — enabling AI-driven design-to-code workflows."
+        "MCP server extracting Figma variables and design tokens; generates typed theme configs for Chakra UI, Tailwind, and shadcn, enabling AI-driven design-to-code workflows."
     },
     {
       title: "ForgeKit Storybook MCP",
@@ -88,7 +88,7 @@ export const RESUME_SECTIONS: ResumeContent = {
     {
       title: "Perch",
       detail:
-        "Open-source voice-assistant widget — Drop-in voice AI for any website (one script tag + React SDK) built on ElevenLabs Conversational AI: dependency-free Shadow-DOM core, React SDK, and a serverless signed-URL proxy that keeps the API key server-side. Built end-to-end with Claude Code."
+        "Open-source voice-assistant widget: Drop-in voice AI for any website (one script tag + React SDK) built on ElevenLabs Conversational AI: dependency-free Shadow-DOM core, React SDK, and a serverless signed-URL proxy that keeps the API key server-side. Built end-to-end with Claude Code."
     },
     {
       title: "Santa Chat AI",

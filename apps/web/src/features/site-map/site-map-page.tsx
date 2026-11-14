@@ -4,7 +4,7 @@ import { SiteMapScreen } from "@richtillman/ui/screens/site-map-screen.tsx"
 const SECTIONS: SiteMapSectionModel[] = [
   {
     id: "01",
-    label: "01 — Core Experience",
+    label: "01 · Core Experience",
     accent: "gold",
     links: [
       {
@@ -23,7 +23,7 @@ const SECTIONS: SiteMapSectionModel[] = [
   },
   {
     id: "02",
-    label: "02 — Engineering Showcase",
+    label: "02 · Engineering Showcase",
     accent: "cyan",
     links: [
       {
@@ -53,7 +53,7 @@ const SECTIONS: SiteMapSectionModel[] = [
   },
   {
     id: "03",
-    label: "03 — Trust & Credentials",
+    label: "03 · Trust & Credentials",
     accent: "gold",
     links: [
       { title: "Testimonials", href: "/testimonials", description: "Engineering leader quotes" },
@@ -62,7 +62,7 @@ const SECTIONS: SiteMapSectionModel[] = [
   },
   {
     id: "04",
-    label: "04 — Knowledge Base",
+    label: "04 · Knowledge Base",
     accent: "magenta",
     links: [
       {

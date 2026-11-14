@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router"
 import { getWritingEntries } from "#/features/content/queries/writing"
 import { WritingPage } from "#/features/writing/writing-page"
 
-const TITLE = "Writing — Rich Tillman"
+const TITLE = "Writing · Rich Tillman"
 const DESCRIPTION =
   "Long-form writing on design tokens, agent-native developer tooling, and the systems around them, published on DEV Community."
 

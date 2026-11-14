@@ -7,11 +7,11 @@ export const CASE_STUDY_DETAIL_SECTIONS: Record<string, CaseStudyDetailSection[]
   "nx-monorepo": [
     {
       label: "Role",
-      body: "Staff Frontend Engineer, promoted to Tech Lead and then Engineering Director from Jul 2022 to May 2024 — leading frontend strategy and coordinating delivery across three cross-functional teams (15+ people) on the Redesign Health Platform Portal."
+      body: "Staff Frontend Engineer, promoted to Tech Lead and then Engineering Director from Jul 2022 to May 2024, leading frontend strategy and coordinating delivery across three cross-functional teams (15+ people) on the Redesign Health Platform Portal."
     },
     {
       label: "Architecture",
-      body: "The Nx monorepo runs the Platform Portal frontend, a lightweight Express mock API server that replicates the real backend for local dev, and a shared design system consumed across every feature module — all under enforced module boundaries."
+      body: "The Nx monorepo runs the Platform Portal frontend, a lightweight Express mock API server that replicates the real backend for local dev, and a shared design system consumed across every feature module, all under enforced module boundaries."
     },
     {
       label: "Scope",
@@ -35,7 +35,7 @@ export const CASE_STUDY_DETAIL_SECTIONS: Record<string, CaseStudyDetailSection[]
   tokencast: [
     {
       label: "What it does",
-      body: "Paste design tokens — a Figma variables export, CSS custom properties, or a Tailwind config — get a live preview and exportable code for Tailwind, Chakra, or shadcn/ui. Save a conversion and get back a real, server-rendered shareable link."
+      body: "Paste design tokens (a Figma variables export, CSS custom properties, or a Tailwind config), get a live preview and exportable code for Tailwind, Chakra, or shadcn/ui. Save a conversion and get back a real, server-rendered shareable link."
     },
     {
       label: "Architecture",
@@ -43,17 +43,17 @@ export const CASE_STUDY_DETAIL_SECTIONS: Record<string, CaseStudyDetailSection[]
     },
     {
       label: "Security",
-      body: "Token names and values are stripped of `<>\"'` before persistence — defense in depth on top of React's JSX escaping, so a token literally named with a script tag stays inert in storage, in the live preview, and in every generated export string."
+      body: "Token names and values are stripped of `<>\"'` before persistence: defense in depth on top of React's JSX escaping, so a token literally named with a script tag stays inert in storage, in the live preview, and in every generated export string."
     }
   ],
   "mcp-atlas": [
     {
       label: "What it does",
-      body: "A curated directory of Model Context Protocol servers, official and community. Every entry is sourced and link-checked before it's added — nothing in the directory is invented."
+      body: "A curated directory of Model Context Protocol servers, official and community. Every entry is sourced and link-checked before it's added. Nothing in the directory is invented."
     },
     {
       label: "Architecture",
-      body: "Built with Astro's content collections (Zod-validated) and islands architecture, shipping JavaScript only where the page actually needs interactivity — search and filtering — rather than hydrating the whole page."
+      body: "Built with Astro's content collections (Zod-validated) and islands architecture, shipping JavaScript only where the page actually needs interactivity (search and filtering) rather than hydrating the whole page."
     },
     {
       label: "Result",
@@ -63,7 +63,7 @@ export const CASE_STUDY_DETAIL_SECTIONS: Record<string, CaseStudyDetailSection[]
   "design-system-scale": [
     {
       label: "Freebird (2016–2021)",
-      body: "Built one of the earliest production React UI libraries on Storybook — 200 components across B2B, B2C, and React Native from a single system. That library removed the need for separate iOS and Android frontend teams."
+      body: "Built one of the earliest production React UI libraries on Storybook: 200 components across B2B, B2C, and React Native from a single system. That library removed the need for separate iOS and Android frontend teams."
     },
     {
       label: "Redesign Health (2022–2024)",
